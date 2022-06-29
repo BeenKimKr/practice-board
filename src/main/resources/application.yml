@@ -1,0 +1,17 @@
+server:
+  port: 8001
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enable: true
+      force: true
+
+spring:
+  data:
+    mongodb:
+      url: mongodb+srv://kb:GnczgSmnxxaqgnNr@kb.hxqadrl.mongodb.net/practice-board
+  security:
+    user:
+      name: user
+      password: 1ada4ec9-3637-4d6e-bfba-93fc0c35770a
