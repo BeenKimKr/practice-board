@@ -1,6 +1,5 @@
 package kb.practiceboard.controller;
 
-import com.mongodb.client.result.UpdateResult;
 import kb.practiceboard.domain.Comment;
 import kb.practiceboard.domain.User;
 import kb.practiceboard.domain.UserDto;
@@ -87,9 +86,8 @@ public class UserController {
           });
       model.addAttribute("message", "닉네임 변경에 실패하였습니다.");
     } else {
-      UpdateResult updatedResult = userService.updateNickName(userId, toUpdateUserDto);
-      model.addAttribute("message", "닉네임 변경이 완료되었습니다.");
-      model.addAttribute("updateResult", updatedResult);
+      String message = userService.updateNickName(userId, toUpdateUserDto);
+      model.addAttribute("message", message);
     }
     return String.format("my-account/%s/nickname", userId);
   }
@@ -108,9 +106,8 @@ public class UserController {
           });
       model.addAttribute("message", "비밀번호 변경에 실패하였습니다.");
     } else {
-      UpdateResult updatedResult = userService.updatePassword(userId, toUpdateUserDto);
-      model.addAttribute("message", "비밀번호 변경이 완료되었습니다.");
-      model.addAttribute(updatedResult);
+      String message = userService.updatePassword(userId, toUpdateUserDto);
+      model.addAttribute("message", message);
     }
     return String.format("my-account/%s/pwd", userId);
   }

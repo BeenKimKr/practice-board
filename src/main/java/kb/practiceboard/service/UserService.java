@@ -1,6 +1,5 @@
 package kb.practiceboard.service;
 
-import com.mongodb.client.result.UpdateResult;
 import kb.practiceboard.domain.User;
 import kb.practiceboard.domain.UserDto;
 import kb.practiceboard.handler.AlreadyExistEmailException;
@@ -123,18 +122,18 @@ public class UserService {
     return user;
   }
 
-  public UpdateResult updateNickName(String userId, UserDto toUpdateUserDto) {
+  public String updateNickName(String userId, UserDto toUpdateUserDto) {
     // 닉네임 중복 검사 추가
     Query query = new Query();
     query.addCriteria(Criteria.where("userId").is(userId));
 
     Update update = new Update();
     update.set("nickname", toUpdateUserDto.getNickname());
-    UpdateResult updateResult = mongoTemplate.upsert(query, update, "user");
-    return updateResult;
+    mongoTemplate.upsert(query, update, "user");
+    return "닉네임이 변경되었습니다.";
   }
 
-  public UpdateResult updatePassword(String userId, UserDto toUpdateUserDto) {
+  public String updatePassword(String userId, UserDto toUpdateUserDto) {
     Query query = new Query();
     query.addCriteria(Criteria.where("userId").is(userId));
 
@@ -144,9 +143,8 @@ public class UserService {
     Update update = new Update();
     update.set("password", encodedNewPassword);
     update.set("updatedDateTime", newUpdatedDateTime);
-    UpdateResult updatedResult = mongoTemplate.updateMulti(query, update, "user");
-
-    return updatedResult;
+    mongoTemplate.updateMulti(query, update, "user");
+    return "비밀번호가 변경되었습니다.";
   }
 
   public String delete(String userId) {
