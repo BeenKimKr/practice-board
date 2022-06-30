@@ -2,7 +2,6 @@ package kb.practiceboard.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "board")
@@ -10,7 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 public class Board {
 
-  @Id
   private String boardId;
   private String boardName;
   private String tag;
