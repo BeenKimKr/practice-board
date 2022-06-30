@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -20,12 +19,10 @@ public class UserDto {
   private String userId;
 
   @JsonInclude(JsonInclude.Include.NON_NULL)
-  @NotBlank(message = "이메일 주소를 입력해주세요.")
   @Email
   private String email;
 
   @JsonInclude(JsonInclude.Include.NON_NULL)
-  @NotBlank(message = "이름을 입력해주세요.")
   @Size(min = 2, max = 20, message = "이름은 2자 이상 20자 이하로 입력해주세요.")
   private String userName;
 
@@ -34,7 +31,6 @@ public class UserDto {
   private String nickname;
 
   @JsonInclude(JsonInclude.Include.NON_NULL)
-  @NotBlank
   @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*\\W).{8,20}$", message = "비밀번호는 영문과 특수문자를 포함해 8자 이상 20자 이하여야 합니다.")
   private String password;
 

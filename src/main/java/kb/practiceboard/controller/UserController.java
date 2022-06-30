@@ -63,12 +63,13 @@ public class UserController {
   public String myAccount(UserDto userDto,
                           Model model) {
     User user = userService.getUserInfo(userDto);
-    model.addAttribute(user);
+    model.addAttribute("user", user);
     return "my-account";
   }
 
-  @PutMapping("/my-account/nickname")
-  public String updateUserName(@Valid UserDto toUpdateUserDto,
+  @PutMapping("/my-account/{userId}/nickname")
+  public String updateUserName(@PathVariable String userId,
+                               @RequestBody @Valid UserDto toUpdateUserDto,
                                Model model,
                                BindingResult bindingResult) {
 
@@ -81,15 +82,16 @@ public class UserController {
           });
       model.addAttribute("message", "닉네임 변경에 실패하였습니다.");
     } else {
-      UpdateResult updatedResult = userService.updateNickName(toUpdateUserDto);
+      UpdateResult updatedResult = userService.updateNickName(userId, toUpdateUserDto);
       model.addAttribute("message", "닉네임 변경이 완료되었습니다.");
-      model.addAttribute(updatedResult);
+      model.addAttribute("updateResult", updatedResult);
     }
-    return "my-account/nickname";
+    return String.format("my-account/%s/nickname", userId);
   }
 
-  @PutMapping("/my-account/pwd")
-  public String updatePasswordUser(@Valid UserDto toUpdateUserDto,
+  @PutMapping("/my-account/{userId}/pwd")
+  public String updatePasswordUser(@PathVariable String userId,
+                                   @RequestBody @Valid UserDto toUpdateUserDto,
                                    Model model,
                                    BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
@@ -101,11 +103,11 @@ public class UserController {
           });
       model.addAttribute("message", "비밀번호 변경에 실패하였습니다.");
     } else {
-      UpdateResult updatedResult = userService.updatePassword(toUpdateUserDto);
+      UpdateResult updatedResult = userService.updatePassword(userId, toUpdateUserDto);
       model.addAttribute("message", "비밀번호 변경이 완료되었습니다.");
       model.addAttribute(updatedResult);
     }
-    return "my-account/pwd";
+    return String.format("my-account/%s/pwd", userId);
   }
 
   @DeleteMapping("/my-account/deletion")
@@ -113,6 +115,6 @@ public class UserController {
                            Model model) {
     String removeStatus = userService.delete(userId);
     model.addAttribute("message", removeStatus);
-    return "main";
+    return "my-account/deletion";
   }
 }

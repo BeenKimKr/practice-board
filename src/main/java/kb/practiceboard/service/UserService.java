@@ -14,7 +14,6 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -29,11 +28,13 @@ public class UserService {
 
   private MongoTemplate mongoTemplate;
   private PasswordEncoder passwordEncoder;
+  private PostingService postingService;
 
   @Autowired
-  public UserService(MongoTemplate mongoTemplate, PasswordEncoder passwordEncoder) {
+  public UserService(MongoTemplate mongoTemplate, PasswordEncoder passwordEncoder, PostingService postingService) {
     this.mongoTemplate = mongoTemplate;
     this.passwordEncoder = passwordEncoder;
+    this.postingService = postingService;
   }
 
   @Autowired
@@ -87,6 +88,7 @@ public class UserService {
   }
 
   // SecurityContextHolder
+  @Transactional
   public User login(UserDto userDto) {
     String email = userDto.getEmail();
     Optional<User> user = Optional.ofNullable(findByEmail(email));
@@ -95,7 +97,7 @@ public class UserService {
     }
 
     User loginUser = findByEmail(email);
-    if (passwordEncoder.matches(userDto.getPassword(), loginUser.getPassword())) {
+    if (!passwordEncoder.matches(userDto.getPassword(), loginUser.getPassword())) {
       throw new WrongPasswordException();
     }
 
@@ -121,23 +123,23 @@ public class UserService {
     return user;
   }
 
-  public UpdateResult updateNickName(UserDto toUpdateUserDto) {
+  public UpdateResult updateNickName(String userId, UserDto toUpdateUserDto) {
+    // 닉네임 중복 검사 추가
     Query query = new Query();
-    query.addCriteria(Criteria.where("userId").is(toUpdateUserDto.getUserId()));
+    query.addCriteria(Criteria.where("userId").is(userId));
 
     Update update = new Update();
     update.set("nickname", toUpdateUserDto.getNickname());
-    // cannotfindexception
     UpdateResult updateResult = mongoTemplate.upsert(query, update, "user");
     return updateResult;
   }
 
-  public UpdateResult updatePassword(UserDto toUpdateUserDto) {
+  public UpdateResult updatePassword(String userId, UserDto toUpdateUserDto) {
+    Query query = new Query();
+    query.addCriteria(Criteria.where("userId").is(userId));
+
     String encodedNewPassword = passwordEncoder.encode(toUpdateUserDto.getPassword());
     String newUpdatedDatetime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-
-    Query query = new Query();
-    query.addCriteria(Criteria.where("userId").is(toUpdateUserDto.getUserId()));
 
     Update update = new Update();
     update.set("password", encodedNewPassword);
@@ -147,11 +149,11 @@ public class UserService {
     return updatedResult;
   }
 
-  public String delete(@RequestBody String userId) {
+  public String delete(String userId) {
     Query query = new Query();
     query.addCriteria(Criteria.where("userId").is(userId));
+    postingService.deleteAll(userId);
     mongoTemplate.remove(query, User.class, "user");
-
     return "회원 탈퇴가 완료되었습니다.";
   }
 }
