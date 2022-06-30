@@ -1,8 +1,10 @@
 package kb.practiceboard.controller;
 
 import com.mongodb.client.result.UpdateResult;
+import kb.practiceboard.domain.Comment;
 import kb.practiceboard.domain.User;
 import kb.practiceboard.domain.UserDto;
+import kb.practiceboard.service.CommentService;
 import kb.practiceboard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -10,15 +12,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 public class UserController {
 
   private UserService userService;
+  private CommentService commentService;
 
   @Autowired
-  public UserController(UserService userService) {
+  public UserController(UserService userService, CommentService commentService) {
     this.userService = userService;
+    this.commentService = commentService;
   }
 
   @PostMapping("/register")
@@ -108,6 +113,14 @@ public class UserController {
       model.addAttribute(updatedResult);
     }
     return String.format("my-account/%s/pwd", userId);
+  }
+
+  @GetMapping("/my-account/comment-list")
+  public String myCommentList(@RequestBody String userId,
+                              Model model) {
+    List<Comment> commentList = commentService.findByWriterId(userId);
+    model.addAttribute("comment", commentList);
+    return "my-account/comment-list";
   }
 
   @DeleteMapping("/my-account/deletion")

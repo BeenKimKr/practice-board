@@ -37,8 +37,4 @@ public class Board {
     this.tag = tag;
   }
 
-  /*
-   * Setter Entity class 내에서 사용하게 되면, instance 값들이 언제 어디서 변하는지 명확하게 알 수 없다.
-   * 따라서 되도록 Builder 패턴을 사용해서 어떤 값을 어떤 필드에 넣는지 확인 -> Setter를 대체함.
-   */
 }
