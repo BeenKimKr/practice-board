@@ -15,19 +15,19 @@ public class User {
   private String userName;
   private String nickname;
   private String password;
-  private String registerDatetime;
-  private String updatedDatetime;
+  private String registerDateTime;
+  private String updatedDateTime;
   private Boolean updatePasswordRequired;
 
   @Builder
-  public User(String userId, String email, String userName, String nickname, String password, String registerDatetime, String updatedDatetime, Boolean updatePasswordRequired) {
+  public User(String userId, String email, String userName, String nickname, String password, String registerDateTime, String updatedDateTime, Boolean updatePasswordRequired) {
     this.userId = userId;
     this.email = email;
     this.userName = userName;
     this.nickname = nickname;
     this.password = password;
-    this.registerDatetime = registerDatetime;
-    this.updatedDatetime = updatedDatetime;
+    this.registerDateTime = registerDateTime;
+    this.updatedDateTime = updatedDateTime;
     this.updatePasswordRequired = updatePasswordRequired;
   }
 }

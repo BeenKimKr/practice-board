@@ -35,23 +35,23 @@ public class UserDto {
   private String password;
 
   @JsonInclude(JsonInclude.Include.NON_NULL)
-  private String registerDatetime;
+  private String registerDateTime;
 
   @JsonInclude(JsonInclude.Include.NON_NULL)
-  private String updatedDatetime;
+  private String updatedDateTime;
 
   private Boolean updatePasswordRequired;
 
   @Builder
-  public UserDto(String userId, String email, String userName, String nickname, String password, String registerDatetime, String updatedDatetime, Boolean updatePasswordRequired) {
+  public UserDto(String userId, String email, String userName, String nickname, String password, String registerDateTime, String updatedDateTime, Boolean updatePasswordRequired) {
 
     this.userId = userId;
     this.email = email;
     this.userName = userName;
     this.nickname = nickname;
     this.password = password;
-    this.registerDatetime = registerDatetime;
-    this.updatedDatetime = updatedDatetime;
+    this.registerDateTime = registerDateTime;
+    this.updatedDateTime = updatedDateTime;
     this.updatePasswordRequired = updatePasswordRequired;
   }
 }

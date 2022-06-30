@@ -8,7 +8,6 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Document(collection = "posting")
@@ -21,12 +20,10 @@ public class PostingDto {
   private ObjectId _id;
 
   @JsonInclude(JsonInclude.Include.NON_NULL)
-  @NotBlank(message = "제목을 입력해주세요.")
   @Size(min = 2, max = 16, message = "제목은 2자 이상 16자 이하로 입력 가능합니다.")
   private String title;
 
   @JsonInclude(JsonInclude.Include.NON_NULL)
-  @NotBlank(message = "제목을 입력해주세요.")
   @Size(min = 2, max = 16, message = "제목은 2자 이상 16자 이하로 입력 가능합니다.")
   private String contents;
 
