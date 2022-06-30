@@ -4,6 +4,8 @@ import com.mongodb.client.result.UpdateResult;
 import kb.practiceboard.domain.User;
 import kb.practiceboard.domain.UserDto;
 import kb.practiceboard.handler.AlreadyExistEmailException;
+import kb.practiceboard.handler.CannotFindEmailException;
+import kb.practiceboard.handler.WrongPasswordException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -12,6 +14,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
@@ -81,16 +84,20 @@ public class UserService {
   }
 
   // SecurityContextHolder
-  // 로그인시 updatedDatetime 3개월인지 체크 추가
   public User login(UserDto userDto) {
-    User loginUser = findByEmail(userDto.getEmail());
-    // email이 존재하지 않을 때 error
-    Boolean checkAuthentication = true;
+    String email = userDto.getEmail();
+    Optional<User> user = Optional.ofNullable(findByEmail(email));
+    if (user.isEmpty()) {
+      throw new CannotFindEmailException();
+    }
 
-//    if (!passwordEncoder.matches(user.getPassword(), user.getPassword())) {
-//      throw new Exception(PasswordWrongException);
-//       PasswordWrongException에서 비밀번호 error처리
-//    }
+    User loginUser = findByEmail(userDto.getEmail());
+    if (passwordEncoder.matches(userDto.getPassword(), loginUser.getPassword())) {
+      throw new WrongPasswordException();
+    }
+
+    // 로그인시 현재 DateTime - updatedDatetime = 3개월이 넘으면 updatePasswordRequired -> true
+
     return loginUser;
   }
 
@@ -112,7 +119,6 @@ public class UserService {
     return updateResult;
   }
 
-  // password validation 중복 체크
   public UpdateResult updatePassword(UserDto toUpdateUserDto) {
     String encodedNewPassword = passwordEncoder.encode(toUpdateUserDto.getPassword());
     String newUpdatedDatetime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
@@ -123,13 +129,12 @@ public class UserService {
     Update update = new Update();
     update.set("password", encodedNewPassword);
     update.set("updatedDatetime", newUpdatedDatetime);
-    // cannotfindexception
     UpdateResult updatedResult = mongoTemplate.updateMulti(query, update, "user");
 
     return updatedResult;
   }
 
-  public String delete(String userId) {
+  public String delete(@RequestBody String userId) {
     Query query = new Query();
     query.addCriteria(Criteria.where("userId").is(userId));
     mongoTemplate.remove(query, User.class, "user");
