@@ -60,24 +60,21 @@ public class PostingService {
     return postingList;
   }
 
-  public Posting create(PostingDto postingDto,
-                        String boardId,
-                        String boardName) {
+  public Posting create(PostingDto postingDto) {
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-    Posting posting = Posting.builder()
-        ._id(postingDto.get_id())
+    Posting newPosting = Posting.builder()
         .title(postingDto.getTitle())
         .contents(postingDto.getContents())
         .author(postingDto.getAuthor())
         .authorId(postingDto.getAuthorId())
         .createdDateTime(currentDateTime)
         .updatedDateTime(currentDateTime)
-        .boardId(boardId)
-        .boardName(boardName)
+        .boardId(postingDto.getBoardId())
+        .boardName(postingDto.getBoardName())
         .build();
 
-    return posting;
+    return mongoTemplate.insert(newPosting, "posting");
   }
 
   public UpdateResult update(String _id, PostingDto postingDto) {

@@ -22,10 +22,8 @@ public class PostingController {
 
   @PostMapping("/posting/creation")
   public String createPosting(@RequestBody PostingDto postingDto,
-                              @RequestBody String boardId,
-                              @RequestBody String boardName,
                               Model model) {
-    Posting newPosting = postingService.create(postingDto, boardId, boardName);
+    Posting newPosting = postingService.create(postingDto);
     model.addAttribute("posting", newPosting);
     return "posting/creation";
   }
@@ -54,32 +52,22 @@ public class PostingController {
     return "posting/list";
   }
 
-  @GetMapping("/posting/{author}/list")
-  public String listByAuthorPosting(@PathVariable String author,
+  @GetMapping("/posting/list/{criterion}/{keyword}")
+  public String listByAuthorPosting(@PathVariable String criterion,
+                                    @PathVariable String keyword,
                                     Model model) {
-    List<Posting> postingList = postingService.findByAuthor(author);
-    model.addAttribute("posting", postingList);
-    return String.format("posting/%s/list", author);
-  }
-
-  @GetMapping("/posting/{title}/list")
-  public String listByTitlePosting(@PathVariable String title,
-                                   Model model) {
-    List<Posting> postingList = postingService.findByTitle(title);
-    model.addAttribute("posting", postingList);
-    return String.format("posting/%s/list", title);
-  }
-
-  @GetMapping("/posting/{contents}/list")
-  public String listByContentsPosting(@PathVariable String contents,
-                                      Model model) {
-    List<Posting> postingList = postingService.findByContents(contents);
-    model.addAttribute("posting", postingList);
-    return String.format("posting/%s/list", contents);
+    if (criterion == "author") {
+      model.addAttribute("posting", postingService.findByAuthor(keyword));
+    } else if (criterion == "title") {
+      model.addAttribute("posting", postingService.findByTitle(keyword));
+    } else {
+      model.addAttribute("posting", postingService.findByContents(keyword));
+    }
+    return String.format("posting/list/%s/%s", criterion, keyword);
   }
 
   @DeleteMapping("/posting/{_id}/deletion")
-  public String deleteByIdPosting(@RequestBody String _id,
+  public String deleteByIdPosting(@PathVariable String _id,
                                   Model model) {
     String deletionMessage = postingService.deleteOne(_id);
     model.addAttribute("message", deletionMessage);
