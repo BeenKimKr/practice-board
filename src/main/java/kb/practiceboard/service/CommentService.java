@@ -1,6 +1,5 @@
 package kb.practiceboard.service;
 
-import com.mongodb.client.result.UpdateResult;
 import kb.practiceboard.domain.Comment;
 import kb.practiceboard.domain.CommentDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +26,10 @@ public class CommentService {
     this.mongoTemplate = mongoTemplate;
   }
 
-  public List<Comment> findAll() {
-    List<Comment> commentList = mongoTemplate.findAll(Comment.class, "comment");
+  public List<Comment> findByPostingId(String postingId) {
+    Query query = new Query();
+    query.addCriteria(Criteria.where("_id").is(postingId));
+    List<Comment> commentList = mongoTemplate.find(query, Comment.class, "comment");
     return commentList;
   }
 
@@ -39,25 +40,24 @@ public class CommentService {
     return commentList;
   }
 
-  public Comment create(CommentDto commentDto,
-                        String postingId) {
+  public Comment create(String postingId,
+                        CommentDto commentDto) {
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
     Comment comment = Comment.builder()
-        ._id(commentDto.get_id())
         .writer(commentDto.getWriter())
         .writerId(commentDto.getWriterId())
         .contents(commentDto.getContents())
         .postingId(postingId)
-        .createdDateTime(commentDto.getCreatedDateTime())
-        .updatedDateTime(commentDto.getUpdatedDateTime())
+        .createdDateTime(currentDateTime)
+        .updatedDateTime(currentDateTime)
         .build();
 
-    return comment;
+    return mongoTemplate.insert(comment, "comment");
   }
 
-  public UpdateResult update(String _id,
-                             CommentDto commentDto) {
+  public String update(String _id,
+                       CommentDto commentDto) {
     Query query = new Query();
     query.addCriteria(Criteria.where("_id").is(_id));
 
@@ -67,14 +67,14 @@ public class CommentService {
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     update.set("updatedDateTime", currentDateTime);
 
-    UpdateResult updateResult = mongoTemplate.updateMulti(query, update, "comment");
-    return updateResult;
+    mongoTemplate.updateMulti(query, update, "comment");
+    return "댓글이 수정되었습니다.";
   }
 
   public String delete(String commentId) {
     Query query = new Query();
-    query.addCriteria(Criteria.where(commentId).is(commentId));
-    mongoTemplate.remove(query, Comment.class, "comment");
+    query.addCriteria(Criteria.where("_id").is(commentId));
+    mongoTemplate.findAndRemove(query, Comment.class, "comment");
     return "댓글이 삭제되었습니다.";
   }
 }

@@ -1,6 +1,5 @@
 package kb.practiceboard.service;
 
-import com.mongodb.client.result.UpdateResult;
 import kb.practiceboard.domain.Posting;
 import kb.practiceboard.domain.PostingDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +76,7 @@ public class PostingService {
     return mongoTemplate.insert(newPosting, "posting");
   }
 
-  public UpdateResult update(String _id, PostingDto postingDto) {
+  public String update(String _id, PostingDto postingDto) {
     Query query = new Query();
     query.addCriteria(Criteria.where("_id").is(_id));
 
@@ -88,9 +87,9 @@ public class PostingService {
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     update.set("updatedDateTime", currentDateTime);
 
-    UpdateResult updateResult = mongoTemplate.updateMulti(query, update, "posting");
+    mongoTemplate.updateMulti(query, update, "posting");
 
-    return updateResult;
+    return "게시글 수정이 완료되었습니다.";
   }
 
   public String deleteOne(String _id) {
