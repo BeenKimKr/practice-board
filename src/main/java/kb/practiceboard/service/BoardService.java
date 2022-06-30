@@ -1,13 +1,13 @@
 package kb.practiceboard.service;
 
 import kb.practiceboard.domain.Board;
+import kb.practiceboard.domain.BoardDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class BoardService {
@@ -19,18 +19,15 @@ public class BoardService {
     this.mongoTemplate = mongoTemplate;
   }
 
-  public List<Board> getBoardList() {
-    return mongoTemplate.findAll(Board.class, "board");
-  }
+  public Board createBoard(BoardDto boardDto) {
+    String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-  public List<Board> getBoardListByBoardName(String keyword) {
-    Query query = new Query();
-    query.addCriteria(Criteria.where("boardName").regex(keyword));
-    return mongoTemplate.find(query, Board.class, "board");
-  }
+    Board newBoard = Board.builder()
+        .boardName(boardDto.getBoardName())
+        .tag(boardDto.getTag())
+        .lastPostingDateTime(currentDateTime)
+        .build();
 
-
-  public Board createBoard(Board board) {
-    return mongoTemplate.insert(board);
+    return mongoTemplate.insert(newBoard, "board");
   }
 }

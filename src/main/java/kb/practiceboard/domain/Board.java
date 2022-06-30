@@ -1,40 +1,30 @@
 package kb.practiceboard.domain;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+
 @Document(collection = "board")
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
 public class Board {
 
-  private String boardId;
+  @Id
+  private ObjectId _id;
   private String boardName;
-  private String tag;
+  private ArrayList<String> tag;
+  private String lastPostingDateTime;
 
-  public String getBoardId() {
-    return boardId;
-  }
-
-  public void setBoardId(String boardId) {
-    this.boardId = boardId;
-  }
-
-  public String getBoardName() {
-    return boardName;
-  }
-
-  public void setBoardName(String title) {
+  @Builder
+  public Board(ObjectId _id, String boardName, ArrayList<String> tag, String lastPostingDateTime) {
+    this._id = _id;
     this.boardName = boardName;
-  }
-
-  public String getTag() {
-    return tag;
-  }
-
-  public void setTag(String tag) {
     this.tag = tag;
+    this.lastPostingDateTime = lastPostingDateTime;
   }
-
 }
