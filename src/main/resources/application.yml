@@ -10,7 +10,7 @@ server:
 spring:
   data:
     mongodb:
-      url: mongodb+srv://kb:GnczgSmnxxaqgnNr@kb.hxqadrl.mongodb.net/practice-board
+      uri: mongodb+srv://kb:GnczgSmnxxaqgnNr@kb.hxqadrl.mongodb.net/practice-board
   security:
     user:
       name: user
