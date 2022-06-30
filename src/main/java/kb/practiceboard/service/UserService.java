@@ -17,8 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -37,6 +39,25 @@ public class UserService {
   @Autowired
   public void setMongoTemplate(MongoTemplate mongoTemplate) {
     this.mongoTemplate = mongoTemplate;
+  }
+
+  public User findByUserId(String id) {
+    User user = mongoTemplate.findById(id, User.class, "user");
+    return user;
+  }
+
+  public User findByEmail(String email) {
+    Query query = new Query();
+    query.addCriteria(Criteria.where("email").is(email));
+    User user = mongoTemplate.findOne(query, User.class, "user");
+    return user;
+  }
+
+  public User findByUserName(String userName) {
+    Query query = new Query();
+    query.addCriteria(Criteria.where("userName").is(userName));
+    User user = mongoTemplate.findOne(query, User.class, "user");
+    return user;
   }
 
   // email 중복 체크
@@ -59,28 +80,10 @@ public class UserService {
         .password(encodedPassword)
         .registerDatetime(datetime)
         .updatedDatetime(datetime)
+        .updatePasswordRequired(false)
         .build();
 
     return mongoTemplate.insert(newUser, "user");
-  }
-
-  public User findByUserId(String id) {
-    User user = mongoTemplate.findById(id, User.class, "user");
-    return user;
-  }
-
-  public User findByEmail(String email) {
-    Query query = new Query();
-    query.addCriteria(Criteria.where("email").is(email));
-    User user = mongoTemplate.findOne(query, User.class, "user");
-    return user;
-  }
-
-  public User findByUserName(String userName) {
-    Query query = new Query();
-    query.addCriteria(Criteria.where("userName").is(userName));
-    User user = mongoTemplate.findOne(query, User.class, "user");
-    return user;
   }
 
   // SecurityContextHolder
@@ -91,13 +94,23 @@ public class UserService {
       throw new CannotFindEmailException();
     }
 
-    User loginUser = findByEmail(userDto.getEmail());
+    User loginUser = findByEmail(email);
     if (passwordEncoder.matches(userDto.getPassword(), loginUser.getPassword())) {
       throw new WrongPasswordException();
     }
 
-    // 로그인시 현재 DateTime - updatedDatetime = 3개월이 넘으면 updatePasswordRequired -> true
+    // 로그인시 현재 DateTime - updatedDatetime = 90일이 넘으면 updatePasswordRequired -> true
+    LocalDate currentDate = LocalDate.now();
+    LocalDate updatedDate = LocalDate.parse(loginUser.getUpdatedDatetime().split(" ")[0]);
+    long days = ChronoUnit.DAYS.between(currentDate, updatedDate);
+    if (days > 90) {
+      Query query = new Query();
+      query.addCriteria(Criteria.where("userId").is(loginUser.getUserId()));
 
+      Update update = new Update();
+      update.set("updatePasswordRequired", true);
+      mongoTemplate.updateMulti(query, update, "user");
+    }
     return loginUser;
   }
 

@@ -44,8 +44,10 @@ public class UserDto {
   @JsonInclude(JsonInclude.Include.NON_NULL)
   private String updatedDatetime;
 
+  private Boolean updatePasswordRequired;
+
   @Builder
-  public UserDto(String userId, String email, String userName, String nickname, String password, String registerDatetime, String updatedDatetime) {
+  public UserDto(String userId, String email, String userName, String nickname, String password, String registerDatetime, String updatedDatetime, Boolean updatePasswordRequired) {
 
     this.userId = userId;
     this.email = email;
@@ -54,6 +56,7 @@ public class UserDto {
     this.password = password;
     this.registerDatetime = registerDatetime;
     this.updatedDatetime = updatedDatetime;
+    this.updatePasswordRequired = updatePasswordRequired;
   }
 }
 
