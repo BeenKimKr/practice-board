@@ -72,15 +72,15 @@ public class UserService {
 
     String uuid = UUID.randomUUID().toString();
     String encodedPassword = passwordEncoder.encode(userDto.getPassword());
-    String datetime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
     User newUser = User.builder()
         .userId(uuid)
         .email(userDto.getEmail())
         .userName(userDto.getUserName())
         .password(encodedPassword)
-        .registerDatetime(datetime)
-        .updatedDatetime(datetime)
+        .registerDateTime(dateTime)
+        .updatedDateTime(dateTime)
         .updatePasswordRequired(false)
         .build();
 
@@ -103,7 +103,7 @@ public class UserService {
 
     // 로그인시 현재 DateTime - updatedDatetime = 90일이 넘으면 updatePasswordRequired -> true
     LocalDate currentDate = LocalDate.now();
-    LocalDate updatedDate = LocalDate.parse(loginUser.getUpdatedDatetime().split(" ")[0]);
+    LocalDate updatedDate = LocalDate.parse(loginUser.getUpdatedDateTime().split(" ")[0]);
     long days = ChronoUnit.DAYS.between(currentDate, updatedDate);
     if (days > 90) {
       Query query = new Query();
@@ -139,11 +139,11 @@ public class UserService {
     query.addCriteria(Criteria.where("userId").is(userId));
 
     String encodedNewPassword = passwordEncoder.encode(toUpdateUserDto.getPassword());
-    String newUpdatedDatetime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    String newUpdatedDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
     Update update = new Update();
     update.set("password", encodedNewPassword);
-    update.set("updatedDatetime", newUpdatedDatetime);
+    update.set("updatedDateTime", newUpdatedDateTime);
     UpdateResult updatedResult = mongoTemplate.updateMulti(query, update, "user");
 
     return updatedResult;
