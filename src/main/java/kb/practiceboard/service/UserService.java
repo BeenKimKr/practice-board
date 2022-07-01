@@ -50,7 +50,6 @@ public class UserService {
 
   @Transactional
   public User create(@Valid UserDto userDto) {
-    String email = userDto.getEmail();
     String uuid = UUID.randomUUID().toString();
     String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 

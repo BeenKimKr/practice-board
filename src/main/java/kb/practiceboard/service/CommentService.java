@@ -44,9 +44,7 @@ public class CommentService {
   @Transactional
   public Comment create(CommentDto commentDto) {
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-
     Comment comment = Comment.builder()
-        .writer(commentDto.getWriter())
         .writerId(commentDto.getWriterId())
         .contents(commentDto.getContents())
         .postingId(commentDto.getPostingId())

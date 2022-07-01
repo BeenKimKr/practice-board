@@ -76,12 +76,10 @@ public class PostingService {
     Posting newPosting = Posting.builder()
         .title(postingDto.getTitle())
         .contents(postingDto.getContents())
-        .author(postingDto.getAuthor())
         .authorId(postingDto.getAuthorId())
         .createdDateTime(currentDateTime)
         .updatedDateTime(currentDateTime)
         .boardId(postingDto.getBoardId())
-        .boardName(postingDto.getBoardName())
         .build();
 
     boardService.updateLastPostingDateTime(postingDto.getBoardId(), currentDateTime);
@@ -118,5 +116,4 @@ public class PostingService {
     query.addCriteria(Criteria.where("authorId").is(authorId));
     mongoTemplate.findAndRemove(query, Posting.class, "posting");
   }
-
 }

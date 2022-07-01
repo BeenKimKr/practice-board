@@ -28,9 +28,6 @@ public class PostingDto {
   private String contents;
 
   @JsonInclude(JsonInclude.Include.NON_NULL)
-  private String author;
-
-  @JsonInclude(JsonInclude.Include.NON_NULL)
   private String authorId;
 
   @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -42,19 +39,14 @@ public class PostingDto {
   @JsonInclude(JsonInclude.Include.NON_NULL)
   private String boardId;
 
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-  private String boardName;
-
   @Builder
-  public PostingDto(ObjectId _id, String title, String contents, String author, String authorId, String createdDateTime, String updatedDateTime, String boardId, String boardName) {
+  public PostingDto(ObjectId _id, String title, String contents, String authorId, String createdDateTime, String updatedDateTime, String boardId) {
     this._id = _id;
     this.title = title;
     this.contents = contents;
-    this.author = author;
     this.authorId = authorId;
     this.createdDateTime = createdDateTime;
     this.updatedDateTime = updatedDateTime;
     this.boardId = boardId;
-    this.boardName = boardName;
   }
 }

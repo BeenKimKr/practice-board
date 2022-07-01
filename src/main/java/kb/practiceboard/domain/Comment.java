@@ -13,7 +13,6 @@ public class Comment {
 
   @Id
   private String _id;
-  private String writer;
   private String writerId;
   private String contents;
   private String postingId;
@@ -21,9 +20,8 @@ public class Comment {
   private String updatedDateTime;
 
   @Builder
-  public Comment(String _id, String writer, String writerId, String contents, String postingId, String createdDateTime, String updatedDateTime) {
+  public Comment(String _id, String writerId, String contents, String postingId, String createdDateTime, String updatedDateTime) {
     this._id = _id;
-    this.writer = writer;
     this.writerId = writerId;
     this.contents = contents;
     this.postingId = postingId;

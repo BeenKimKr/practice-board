@@ -16,23 +16,19 @@ public class Posting {
   private ObjectId _id;
   private String title;
   private String contents;
-  private String author;
   private String authorId;
   private String createdDateTime;
   private String updatedDateTime;
   private String boardId;
-  private String boardName;
 
   @Builder
-  public Posting(ObjectId _id, String title, String contents, String author, String authorId, String createdDateTime, String updatedDateTime, String boardId, String boardName) {
+  public Posting(ObjectId _id, String title, String contents, String authorId, String createdDateTime, String updatedDateTime, String boardId) {
     this._id = _id;
     this.title = title;
     this.contents = contents;
-    this.author = author;
     this.authorId = authorId;
     this.createdDateTime = createdDateTime;
     this.updatedDateTime = updatedDateTime;
     this.boardId = boardId;
-    this.boardName = boardName;
   }
 }

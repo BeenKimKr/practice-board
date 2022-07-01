@@ -19,9 +19,6 @@ public class CommentDto {
   private String _id;
 
   @JsonInclude(JsonInclude.Include.NON_NULL)
-  private String writer;
-
-  @JsonInclude(JsonInclude.Include.NON_NULL)
   private String writerId;
 
   @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -39,9 +36,8 @@ public class CommentDto {
   private String updatedDateTime;
 
   @Builder
-  public CommentDto(String _id, String writer, String writerId, String contents, String postingId, String createdDateTime, String updatedDateTime) {
+  public CommentDto(String _id, String writerId, String contents, String postingId, String createdDateTime, String updatedDateTime) {
     this._id = _id;
-    this.writer = writer;
     this.writerId = writerId;
     this.contents = contents;
     this.postingId = postingId;
