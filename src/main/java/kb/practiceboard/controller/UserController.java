@@ -1,17 +1,14 @@
 package kb.practiceboard.controller;
 
-import kb.practiceboard.domain.Comment;
 import kb.practiceboard.domain.User;
 import kb.practiceboard.domain.UserDto;
 import kb.practiceboard.service.CommentService;
 import kb.practiceboard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 public class UserController {
@@ -25,10 +22,9 @@ public class UserController {
     this.commentService = commentService;
   }
 
-  @PostMapping("/register")
-  public String registerUser(@Valid @RequestBody UserDto userDto,
-                             BindingResult bindingResult,
-                             Model model) {
+  @PostMapping("/user")
+  public User registerUser(@Valid @RequestBody UserDto userDto,
+                           BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       bindingResult.getAllErrors()
           .forEach(objectError -> {
@@ -36,18 +32,13 @@ public class UserController {
                 + "defaultMessage : " + objectError.getDefaultMessage() + "\n"
                 + "objectName : " + objectError.getObjectName());
           });
-      model.addAttribute("message", "잘못된 형식의 회원 정보입니다.");
-    } else {
-      User newUser = userService.create(userDto);
-      model.addAttribute("user", newUser);
     }
-    return "register";
+    return userService.create(userDto);
   }
 
-  @PostMapping("/login")
-  public String loginUser(@Valid @RequestBody UserDto userDto,
-                          Model model,
-                          BindingResult bindingResult) {
+  @PostMapping("/user/login")
+  public User loginUser(@Valid @RequestBody UserDto userDto,
+                        BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       bindingResult.getAllErrors()
           .forEach(objectError -> {
@@ -55,26 +46,17 @@ public class UserController {
                 + "defaultMessage : " + objectError.getDefaultMessage() + "\n"
                 + "objectName : " + objectError.getObjectName());
           });
-      model.addAttribute("message", "잘못된 형식의 회원 정보입니다.");
-    } else {
-      User logindUser = userService.login(userDto);
-      model.addAttribute("user", logindUser);
     }
-    return "login";
+    return userService.login(userDto);
   }
 
-  @GetMapping("/my-account")
-  public String myAccount(UserDto userDto,
-                          Model model) {
-    User user = userService.getUserInfo(userDto);
-    model.addAttribute("user", user);
-    return "my-account";
+  @GetMapping("/user/{userId}")
+  public User myAccount(@RequestBody UserDto userDto) {
+    return userService.findUserByUserId(userDto);
   }
 
-  @PutMapping("/my-account/{userId}/nickname")
-  public String updateUserName(@PathVariable String userId,
-                               @RequestBody @Valid UserDto toUpdateUserDto,
-                               Model model,
+  @PatchMapping("/user/nickname")
+  public String updateUserName(@RequestBody @Valid UserDto toUpdateUserDto,
                                BindingResult bindingResult) {
 
     if (bindingResult.hasErrors()) {
@@ -84,18 +66,12 @@ public class UserController {
                 + "defaultMessage : " + objectError.getDefaultMessage() + "\n"
                 + "objectName : " + objectError.getObjectName());
           });
-      model.addAttribute("message", "닉네임 변경에 실패하였습니다.");
-    } else {
-      String message = userService.updateNickName(userId, toUpdateUserDto);
-      model.addAttribute("message", message);
     }
-    return String.format("my-account/%s/nickname", userId);
+    return userService.updateNickName(toUpdateUserDto);
   }
 
-  @PutMapping("/my-account/{userId}/pwd")
-  public String updatePasswordUser(@PathVariable String userId,
-                                   @RequestBody @Valid UserDto toUpdateUserDto,
-                                   Model model,
+  @PatchMapping("/user/pwd")
+  public String updatePasswordUser(@RequestBody @Valid UserDto toUpdateUserDto,
                                    BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       bindingResult.getAllErrors()
@@ -104,27 +80,12 @@ public class UserController {
                 + "defaultMessage : " + objectError.getDefaultMessage() + "\n"
                 + "objectName : " + objectError.getObjectName());
           });
-      model.addAttribute("message", "비밀번호 변경에 실패하였습니다.");
-    } else {
-      String message = userService.updatePassword(userId, toUpdateUserDto);
-      model.addAttribute("message", message);
     }
-    return String.format("my-account/%s/pwd", userId);
+    return userService.updatePassword(toUpdateUserDto);
   }
 
-  @GetMapping("/my-account/comment-list")
-  public String myCommentList(@RequestBody String userId,
-                              Model model) {
-    List<Comment> commentList = commentService.findByWriterId(userId);
-    model.addAttribute("comment", commentList);
-    return "my-account/comment-list";
-  }
-
-  @DeleteMapping("/my-account/deletion")
-  public String deleteUser(@RequestBody String userId,
-                           Model model) {
-    String removeStatus = userService.delete(userId);
-    model.addAttribute("message", removeStatus);
-    return "my-account/deletion";
+  @DeleteMapping("/user")
+  public String deleteUser(@RequestBody String userId) {
+    return userService.delete(userId);
   }
 }

@@ -25,8 +25,8 @@ public class CommentDto {
   private String writerId;
 
   @JsonInclude(JsonInclude.Include.NON_NULL)
-  @Size(min = 1, message = "입력된 내용이 없습니다.")
-  @Size(max = 50, message = "50자 이하로 작성해주세요.")
+  @Size(min = 1, message = "댓글 내용을 입력해주세요.")
+  @Size(max = 100, message = "100자 이하로만 작성 가능합니다.")
   private String contents;
 
   @JsonInclude(JsonInclude.Include.NON_NULL)

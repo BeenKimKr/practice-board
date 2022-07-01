@@ -2,15 +2,11 @@ package kb.practiceboard.service;
 
 import kb.practiceboard.domain.User;
 import kb.practiceboard.domain.UserDto;
-import kb.practiceboard.handler.AlreadyExistEmailException;
-import kb.practiceboard.handler.CannotFindEmailException;
-import kb.practiceboard.handler.WrongPasswordException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,20 +15,17 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class UserService {
 
   private MongoTemplate mongoTemplate;
-  private PasswordEncoder passwordEncoder;
   private PostingService postingService;
 
   @Autowired
-  public UserService(MongoTemplate mongoTemplate, PasswordEncoder passwordEncoder, PostingService postingService) {
+  public UserService(MongoTemplate mongoTemplate, PostingService postingService) {
     this.mongoTemplate = mongoTemplate;
-    this.passwordEncoder = passwordEncoder;
     this.postingService = postingService;
   }
 
@@ -41,8 +34,10 @@ public class UserService {
     this.mongoTemplate = mongoTemplate;
   }
 
-  public User findByUserId(String id) {
-    User user = mongoTemplate.findById(id, User.class, "user");
+  public User findUserByUserId(UserDto userDto) {
+    Query query = new Query();
+    query.addCriteria(Criteria.where("userId").is(userDto.getUserId()));
+    User user = mongoTemplate.findOne(query, User.class, "user");
     return user;
   }
 
@@ -53,31 +48,17 @@ public class UserService {
     return user;
   }
 
-  public User findByUserName(String userName) {
-    Query query = new Query();
-    query.addCriteria(Criteria.where("userName").is(userName));
-    User user = mongoTemplate.findOne(query, User.class, "user");
-    return user;
-  }
-
-  // email 중복 체크
   @Transactional
   public User create(@Valid UserDto userDto) {
     String email = userDto.getEmail();
-    Optional<User> user = Optional.ofNullable(findByEmail(email));
-    if (!user.isEmpty()) {
-      throw new AlreadyExistEmailException();
-    }
-
     String uuid = UUID.randomUUID().toString();
-    String encodedPassword = passwordEncoder.encode(userDto.getPassword());
     String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
     User newUser = User.builder()
         .userId(uuid)
         .email(userDto.getEmail())
         .userName(userDto.getUserName())
-        .password(encodedPassword)
+        .password(userDto.getPassword())
         .registerDateTime(dateTime)
         .updatedDateTime(dateTime)
         .updatePasswordRequired(false)
@@ -85,20 +66,11 @@ public class UserService {
 
     return mongoTemplate.insert(newUser, "user");
   }
-
-  // SecurityContextHolder
+  
   @Transactional
   public User login(UserDto userDto) {
     String email = userDto.getEmail();
-    Optional<User> user = Optional.ofNullable(findByEmail(email));
-    if (user.isEmpty()) {
-      throw new CannotFindEmailException();
-    }
-
     User loginUser = findByEmail(email);
-    if (!passwordEncoder.matches(userDto.getPassword(), loginUser.getPassword())) {
-      throw new WrongPasswordException();
-    }
 
     // 로그인시 현재 DateTime - updatedDatetime = 90일이 넘으면 updatePasswordRequired -> true
     LocalDate currentDate = LocalDate.now();
@@ -115,38 +87,32 @@ public class UserService {
     return loginUser;
   }
 
-  public User getUserInfo(UserDto userDto) {
-    Query query = new Query();
-    query.addCriteria(Criteria.where("userId").is(userDto.getUserId()));
-    User user = mongoTemplate.findOne(query, User.class, "user");
-    return user;
-  }
-
-  public String updateNickName(String userId, UserDto toUpdateUserDto) {
+  @Transactional
+  public String updateNickName(UserDto toUpdateUserDto) {
     // 닉네임 중복 검사 추가
     Query query = new Query();
-    query.addCriteria(Criteria.where("userId").is(userId));
+    query.addCriteria(Criteria.where("userId").is(toUpdateUserDto.getUserId()));
 
     Update update = new Update();
     update.set("nickname", toUpdateUserDto.getNickname());
-    mongoTemplate.upsert(query, update, "user");
+    mongoTemplate.updateFirst(query, update, "user");
     return "닉네임이 변경되었습니다.";
   }
 
-  public String updatePassword(String userId, UserDto toUpdateUserDto) {
+  @Transactional
+  public String updatePassword(UserDto toUpdateUserDto) {
     Query query = new Query();
-    query.addCriteria(Criteria.where("userId").is(userId));
+    query.addCriteria(Criteria.where("userId").is(toUpdateUserDto.getUserId()));
 
-    String encodedNewPassword = passwordEncoder.encode(toUpdateUserDto.getPassword());
     String newUpdatedDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-
     Update update = new Update();
-    update.set("password", encodedNewPassword);
+    update.set("password", toUpdateUserDto.getPassword());
     update.set("updatedDateTime", newUpdatedDateTime);
     mongoTemplate.updateMulti(query, update, "user");
     return "비밀번호가 변경되었습니다.";
   }
 
+  @Transactional
   public String delete(String userId) {
     Query query = new Query();
     query.addCriteria(Criteria.where("userId").is(userId));

@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,9 +17,11 @@ import java.util.List;
 @Service
 public class PostingService {
   private MongoTemplate mongoTemplate;
+  private BoardService boardService;
 
-  public PostingService(MongoTemplate mongoTemplate) {
+  public PostingService(MongoTemplate mongoTemplate, BoardService boardService) {
     this.mongoTemplate = mongoTemplate;
+    this.boardService = boardService;
   }
 
   @Autowired
@@ -59,6 +62,14 @@ public class PostingService {
     return postingList;
   }
 
+  public List<Posting> findByBoardId(String keyword) {
+    Query query = new Query();
+    query.addCriteria(Criteria.where("boardId").is(keyword));
+    List<Posting> postingList = mongoTemplate.find(query, Posting.class, "posting");
+    return postingList;
+  }
+
+  @Transactional
   public Posting create(PostingDto postingDto) {
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
@@ -73,9 +84,11 @@ public class PostingService {
         .boardName(postingDto.getBoardName())
         .build();
 
+    boardService.updateLastPostingDateTime(postingDto.getBoardId(), currentDateTime);
     return mongoTemplate.insert(newPosting, "posting");
   }
 
+  @Transactional
   public String update(String _id, PostingDto postingDto) {
     Query query = new Query();
     query.addCriteria(Criteria.where("_id").is(_id));
@@ -88,10 +101,10 @@ public class PostingService {
     update.set("updatedDateTime", currentDateTime);
 
     mongoTemplate.updateMulti(query, update, "posting");
-
     return "게시글 수정이 완료되었습니다.";
   }
 
+  @Transactional
   public String deleteOne(String _id) {
     Query query = new Query();
     query.addCriteria(Criteria.where("_id").is(_id));
@@ -99,6 +112,7 @@ public class PostingService {
     return "게시글 삭제가 완료되었습니다.";
   }
 
+  @Transactional
   public void deleteAll(String authorId) {
     Query query = new Query();
     query.addCriteria(Criteria.where("authorId").is(authorId));

@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -40,15 +41,15 @@ public class CommentService {
     return commentList;
   }
 
-  public Comment create(String postingId,
-                        CommentDto commentDto) {
+  @Transactional
+  public Comment create(CommentDto commentDto) {
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
     Comment comment = Comment.builder()
         .writer(commentDto.getWriter())
         .writerId(commentDto.getWriterId())
         .contents(commentDto.getContents())
-        .postingId(postingId)
+        .postingId(commentDto.getPostingId())
         .createdDateTime(currentDateTime)
         .updatedDateTime(currentDateTime)
         .build();
@@ -56,6 +57,7 @@ public class CommentService {
     return mongoTemplate.insert(comment, "comment");
   }
 
+  @Transactional
   public String update(String _id,
                        CommentDto commentDto) {
     Query query = new Query();
@@ -71,6 +73,7 @@ public class CommentService {
     return "댓글이 수정되었습니다.";
   }
 
+  @Transactional
   public String delete(String commentId) {
     Query query = new Query();
     query.addCriteria(Criteria.where("_id").is(commentId));

@@ -14,7 +14,6 @@ public class Posting {
 
   @Id
   private ObjectId _id;
-  private String postingId;
   private String title;
   private String contents;
   private String author;
@@ -25,9 +24,8 @@ public class Posting {
   private String boardName;
 
   @Builder
-  public Posting(ObjectId _id, String postingId, String title, String contents, String author, String authorId, String createdDateTime, String updatedDateTime, String boardId, String boardName) {
+  public Posting(ObjectId _id, String title, String contents, String author, String authorId, String createdDateTime, String updatedDateTime, String boardId, String boardName) {
     this._id = _id;
-    this.postingId = postingId;
     this.title = title;
     this.contents = contents;
     this.author = author;

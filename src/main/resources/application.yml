@@ -11,7 +11,3 @@ spring:
   data:
     mongodb:
       uri: mongodb+srv://kb:GnczgSmnxxaqgnNr@kb.hxqadrl.mongodb.net/practice-board
-  security:
-    user:
-      name: user
-      password: 1ada4ec9-3637-4d6e-bfba-93fc0c35770a
