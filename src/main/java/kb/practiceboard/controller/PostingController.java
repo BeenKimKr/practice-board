@@ -7,6 +7,7 @@ import kb.practiceboard.service.PostingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,7 +23,7 @@ public class PostingController {
   }
 
   @PostMapping("/posting")
-  public Posting createPosting(@RequestBody PostingDto postingDto) {
+  public Posting createPosting(@RequestBody @Valid PostingDto postingDto) {
     return postingService.create(postingDto);
   }
 
@@ -33,7 +34,7 @@ public class PostingController {
 
   @PatchMapping("/posting/{postingId}")
   public String editPosting(@PathVariable String postingId,
-                            @RequestBody PostingDto postingDto) {
+                            @RequestBody @Valid PostingDto postingDto) {
     return postingService.update(postingId, postingDto);
   }
 
