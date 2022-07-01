@@ -9,7 +9,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
+import java.util.List;
 
 @Document(collection = "board")
 @Getter
@@ -28,13 +28,13 @@ public class BoardDto {
   @JsonInclude(JsonInclude.Include.NON_NULL)
   @Size(min = 1, message = "태그는 최소 1개 이상 입력해주셔야 합니다.")
   @Size(max = 5, message = "태그는 최대 5개까지 입력 가능합니다.")
-  private ArrayList<String> tag;
+  private List<String> tag;
 
   @JsonInclude(JsonInclude.Include.NON_NULL)
   private String lastPostingDateTime;
 
   @Builder
-  public BoardDto(ObjectId _id, String boardName, ArrayList<String> tag, String lastPostingDateTime) {
+  public BoardDto(ObjectId _id, String boardName, List<String> tag, String lastPostingDateTime) {
     this._id = _id;
     this.boardName = boardName;
     this.tag = tag;

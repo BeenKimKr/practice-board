@@ -7,7 +7,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Document(collection = "board")
 @Getter
@@ -17,11 +17,11 @@ public class Board {
   @Id
   private ObjectId _id;
   private String boardName;
-  private ArrayList<String> tag;
+  private List<String> tag;
   private String lastPostingDateTime;
 
   @Builder
-  public Board(ObjectId _id, String boardName, ArrayList<String> tag, String lastPostingDateTime) {
+  public Board(ObjectId _id, String boardName, List<String> tag, String lastPostingDateTime) {
     this._id = _id;
     this.boardName = boardName;
     this.tag = tag;

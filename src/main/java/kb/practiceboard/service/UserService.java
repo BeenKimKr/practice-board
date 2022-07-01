@@ -34,9 +34,9 @@ public class UserService {
     this.mongoTemplate = mongoTemplate;
   }
 
-  public User findUserByUserId(UserDto userDto) {
+  public User findUserByUserId(String userId) {
     Query query = new Query();
-    query.addCriteria(Criteria.where("userId").is(userDto.getUserId()));
+    query.addCriteria(Criteria.where("userId").is(userId));
     User user = mongoTemplate.findOne(query, User.class, "user");
     return user;
   }
@@ -66,30 +66,29 @@ public class UserService {
 
     return mongoTemplate.insert(newUser, "user");
   }
-  
+
   @Transactional
   public User login(UserDto userDto) {
-    String email = userDto.getEmail();
-    User loginUser = findByEmail(email);
+    User user = findByEmail(userDto.getEmail());
 
     // 로그인시 현재 DateTime - updatedDatetime = 90일이 넘으면 updatePasswordRequired -> true
     LocalDate currentDate = LocalDate.now();
-    LocalDate updatedDate = LocalDate.parse(loginUser.getUpdatedDateTime().split(" ")[0]);
-    long days = ChronoUnit.DAYS.between(currentDate, updatedDate);
+    LocalDate updatedDate = LocalDate.parse(user.getUpdatedDateTime().split(" ")[0]);
+    long days = ChronoUnit.DAYS.between(updatedDate, currentDate);
     if (days > 90) {
       Query query = new Query();
-      query.addCriteria(Criteria.where("userId").is(loginUser.getUserId()));
+      query.addCriteria(Criteria.where("userId").is(user.getUserId()));
 
       Update update = new Update();
       update.set("updatePasswordRequired", true);
-      mongoTemplate.updateMulti(query, update, "user");
+      mongoTemplate.updateFirst(query, update, "user");
+      return findUserByUserId(user.getUserId());
     }
-    return loginUser;
+    return user;
   }
 
   @Transactional
   public String updateNickName(UserDto toUpdateUserDto) {
-    // 닉네임 중복 검사 추가
     Query query = new Query();
     query.addCriteria(Criteria.where("userId").is(toUpdateUserDto.getUserId()));
 

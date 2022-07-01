@@ -36,7 +36,7 @@ public class UserController {
     return userService.create(userDto);
   }
 
-  @PostMapping("/user/login")
+  @PatchMapping("/user/login")
   public User loginUser(@Valid @RequestBody UserDto userDto,
                         BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
@@ -51,14 +51,13 @@ public class UserController {
   }
 
   @GetMapping("/user/{userId}")
-  public User myAccount(@RequestBody UserDto userDto) {
-    return userService.findUserByUserId(userDto);
+  public User myAccount(@PathVariable String userId) {
+    return userService.findUserByUserId(userId);
   }
 
   @PatchMapping("/user/nickname")
   public String updateUserName(@RequestBody @Valid UserDto toUpdateUserDto,
                                BindingResult bindingResult) {
-
     if (bindingResult.hasErrors()) {
       bindingResult.getAllErrors()
           .forEach(objectError -> {

@@ -26,15 +26,15 @@ public class PostingController {
     return postingService.create(postingDto);
   }
 
-  @GetMapping("/posting/{_id}")
-  public Posting viewPosting(@PathVariable String _id) {
-    return postingService.findById(_id);
+  @GetMapping("/posting/{postingId}")
+  public Posting viewPosting(@PathVariable String postingId) {
+    return postingService.findById(postingId);
   }
 
-  @PatchMapping("/posting/{_id}")
-  public String editPosting(@PathVariable String _id,
+  @PatchMapping("/posting/{postingId}")
+  public String editPosting(@PathVariable String postingId,
                             @RequestBody PostingDto postingDto) {
-    return postingService.update(_id, postingDto);
+    return postingService.update(postingId, postingDto);
   }
 
   @GetMapping("/postings")
@@ -45,17 +45,22 @@ public class PostingController {
   @GetMapping("/postings/{criterion}/{keyword}")
   public List<Posting> listByKeyword(@PathVariable String criterion,
                                      @PathVariable String keyword) {
-    if (criterion == "author") {
+    if (criterion.equals("author")) {
       return postingService.findByAuthor(keyword);
-    } else if (criterion == "title") {
+    } else if (criterion.equals("title")) {
       return postingService.findByTitle(keyword);
     } else {
       return postingService.findByContents(keyword);
     }
   }
 
-  @DeleteMapping("/posting/{_id}")
-  public String deleteByIdPosting(@PathVariable String _id) {
-    return postingService.deleteOne(_id);
+  @DeleteMapping("/posting/{postingId}")
+  public String deleteByIdPosting(@PathVariable String postingId) {
+    return postingService.deleteOne(postingId);
+  }
+
+  @GetMapping("/board/{boardId}/postings")
+  public List<Posting> listByBoardId(@PathVariable String boardId) {
+    return postingService.findByBoardId(boardId);
   }
 }

@@ -29,7 +29,7 @@ public class CommentService {
 
   public List<Comment> findByPostingId(String postingId) {
     Query query = new Query();
-    query.addCriteria(Criteria.where("_id").is(postingId));
+    query.addCriteria(Criteria.where("postingId").is(postingId));
     List<Comment> commentList = mongoTemplate.find(query, Comment.class, "comment");
     return commentList;
   }

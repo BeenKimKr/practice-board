@@ -33,7 +33,7 @@ public class CommentController {
     return commentService.delete(commentId);
   }
 
-  @GetMapping("comments/{postingId}")
+  @GetMapping("/comments/{postingId}")
   public List<Comment> viewComment(@PathVariable String postingId) {
     return commentService.findByPostingId(postingId);
   }
