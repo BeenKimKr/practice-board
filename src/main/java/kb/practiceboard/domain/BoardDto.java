@@ -8,7 +8,8 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @Document(collection = "board")
@@ -21,13 +22,13 @@ public class BoardDto {
   private ObjectId _id;
 
   @JsonInclude(JsonInclude.Include.NON_NULL)
-  @Size(min = 1, message = "게시판명을 입력해주세요.")
-  @Size(max = 8, message = "게시판명은 8자 이하로 입력 가능합니다.")
+  @Min(value = 1, message = "게시판명을 입력해주세요.")
+  @Max(value = 8, message = "게시판명은 8자 이하로 입력 가능합니다.")
   private String boardName;
 
   @JsonInclude(JsonInclude.Include.NON_NULL)
-  @Size(min = 1, message = "태그는 최소 1개 이상 입력해주셔야 합니다.")
-  @Size(max = 5, message = "태그는 최대 5개까지 입력 가능합니다.")
+  @Min(value = 1, message = "태그는 최소 1개 이상 입력해주셔야 합니다.")
+  @Max(value = 5, message = "태그는 최대 5개까지 입력 가능합니다.")
   private List<String> tag;
 
   @JsonInclude(JsonInclude.Include.NON_NULL)

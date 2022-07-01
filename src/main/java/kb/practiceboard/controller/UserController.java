@@ -5,7 +5,6 @@ import kb.practiceboard.domain.UserDto;
 import kb.practiceboard.service.CommentService;
 import kb.practiceboard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,30 +22,12 @@ public class UserController {
   }
 
   @PostMapping("/user")
-  public User registerUser(@Valid @RequestBody UserDto userDto,
-                           BindingResult bindingResult) {
-    if (bindingResult.hasErrors()) {
-      bindingResult.getAllErrors()
-          .forEach(objectError -> {
-            System.err.println("code : " + objectError.getCode() + "\n"
-                + "defaultMessage : " + objectError.getDefaultMessage() + "\n"
-                + "objectName : " + objectError.getObjectName());
-          });
-    }
+  public User registerUser(@Valid @RequestBody UserDto userDto) {
     return userService.create(userDto);
   }
 
   @PatchMapping("/user/login")
-  public User loginUser(@Valid @RequestBody UserDto userDto,
-                        BindingResult bindingResult) {
-    if (bindingResult.hasErrors()) {
-      bindingResult.getAllErrors()
-          .forEach(objectError -> {
-            System.err.println("code : " + objectError.getCode() + "\n"
-                + "defaultMessage : " + objectError.getDefaultMessage() + "\n"
-                + "objectName : " + objectError.getObjectName());
-          });
-    }
+  public User loginUser(@Valid @RequestBody UserDto userDto) {
     return userService.login(userDto);
   }
 
@@ -56,30 +37,12 @@ public class UserController {
   }
 
   @PatchMapping("/user/nickname")
-  public String updateUserName(@RequestBody @Valid UserDto toUpdateUserDto,
-                               BindingResult bindingResult) {
-    if (bindingResult.hasErrors()) {
-      bindingResult.getAllErrors()
-          .forEach(objectError -> {
-            System.err.println("code : " + objectError.getCode() + "\n"
-                + "defaultMessage : " + objectError.getDefaultMessage() + "\n"
-                + "objectName : " + objectError.getObjectName());
-          });
-    }
+  public String updateUserName(@RequestBody @Valid UserDto toUpdateUserDto) {
     return userService.updateNickName(toUpdateUserDto);
   }
 
   @PatchMapping("/user/pwd")
-  public String updatePasswordUser(@RequestBody @Valid UserDto toUpdateUserDto,
-                                   BindingResult bindingResult) {
-    if (bindingResult.hasErrors()) {
-      bindingResult.getAllErrors()
-          .forEach(objectError -> {
-            System.err.println("code : " + objectError.getCode() + "\n"
-                + "defaultMessage : " + objectError.getDefaultMessage() + "\n"
-                + "objectName : " + objectError.getObjectName());
-          });
-    }
+  public String updatePasswordUser(@RequestBody @Valid UserDto toUpdateUserDto) {
     return userService.updatePassword(toUpdateUserDto);
   }
 

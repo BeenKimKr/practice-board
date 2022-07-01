@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 @Document(collection = "comment")
 @Getter
@@ -22,8 +23,8 @@ public class CommentDto {
   private String writerId;
 
   @JsonInclude(JsonInclude.Include.NON_NULL)
-  @Size(min = 1, message = "댓글 내용을 입력해주세요.")
-  @Size(max = 100, message = "100자 이하로만 작성 가능합니다.")
+  @Min(value = 1, message = "댓글 내용을 입력해주세요.")
+  @Max(value = 100, message = "100자 이하로만 작성 가능합니다.")
   private String contents;
 
   @JsonInclude(JsonInclude.Include.NON_NULL)
