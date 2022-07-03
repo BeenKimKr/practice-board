@@ -18,10 +18,12 @@ import java.util.List;
 public class PostingService {
   private MongoTemplate mongoTemplate;
   private BoardService boardService;
+  private FileService fileService;
 
-  public PostingService(MongoTemplate mongoTemplate, BoardService boardService) {
+  public PostingService(MongoTemplate mongoTemplate, BoardService boardService, FileService fileService) {
     this.mongoTemplate = mongoTemplate;
     this.boardService = boardService;
+    this.fileService = fileService;
   }
 
   @Autowired
@@ -98,6 +100,7 @@ public class PostingService {
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     update.set("updatedDateTime", currentDateTime);
 
+    fileService.deleteByPostingId(postingDto.get_id().toString());
     mongoTemplate.updateMulti(query, update, "posting");
     return "게시글 수정이 완료되었습니다.";
   }
