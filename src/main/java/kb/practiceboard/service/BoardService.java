@@ -65,4 +65,16 @@ public class BoardService {
 
     mongoTemplate.updateFirst(query, update, BoardEntity.class, "board");
   }
+
+  @Transactional
+  public String updateTag(BoardDto boardDto) {
+    Query query = new Query();
+    query.addCriteria(Criteria.where("boardName").is(boardDto.getBoardName()));
+
+    Update update = new Update();
+    update.set("tag", boardDto.getTag());
+
+    mongoTemplate.updateFirst(query, update, BoardEntity.class, "board");
+    return "태그 수정이 완료되었습니다.";
+  }
 }

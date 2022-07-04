@@ -29,6 +29,11 @@ public class BoardController {
     return boardService.findAll();
   }
 
+  @PatchMapping("/board")
+  public String updateTag(BoardDto boardDto) {
+    return boardService.updateTag(boardDto);
+  }
+
   @GetMapping("/boards/{criterion}/{keyword}")
   public List<BoardEntity> listByKeyword(@PathVariable String criterion,
                                          @PathVariable String keyword) {
