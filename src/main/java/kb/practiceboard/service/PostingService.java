@@ -1,7 +1,8 @@
 package kb.practiceboard.service;
 
 import kb.practiceboard.domain.PostingEntity;
-import kb.practiceboard.dto.PostingDto;
+import kb.practiceboard.dto.posting.PostingCreateDto;
+import kb.practiceboard.dto.posting.PostingUpdateContentsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -72,37 +73,51 @@ public class PostingService {
   }
 
   @Transactional
-  public PostingEntity create(PostingDto postingDto) {
+  public PostingEntity create(PostingCreateDto postingCreateDto) {
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
     PostingEntity newPosting = PostingEntity.builder()
-        .title(postingDto.getTitle())
-        .contents(postingDto.getContents())
-        .authorId(postingDto.getAuthorId())
+        .title(postingCreateDto.getTitle())
+        .contents(postingCreateDto.getContents())
+        .authorId(postingCreateDto.getAuthorId())
         .createdDateTime(currentDateTime)
         .updatedDateTime(currentDateTime)
-        .boardId(postingDto.getBoardId())
+        .boardId(postingCreateDto.getBoardId())
         .build();
 
-    boardService.updateLastPostingDateTime(postingDto.getBoardId(), currentDateTime);
+    boardService.updateLastPostingDateTime(postingCreateDto.getBoardId(), currentDateTime);
     return mongoTemplate.insert(newPosting, "posting");
   }
 
   @Transactional
-  public String update(String postingId, PostingDto postingDto) {
+  public String updateContents(String postingId, PostingUpdateContentsDto postingUpdateDto) {
     Query query = new Query();
     query.addCriteria(Criteria.where("_id").is(postingId));
 
     Update update = new Update();
-    update.set("title", postingDto.getTitle());
-    update.set("contents", postingDto.getContents());
+    update.set("title", postingUpdateDto.getTitle());
+    update.set("contents", postingUpdateDto.getContents());
 
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     update.set("updatedDateTime", currentDateTime);
 
-    fileService.deleteByPostingId(postingId);
     mongoTemplate.updateMulti(query, update, "posting");
     return "게시글 수정이 완료되었습니다.";
+  }
+
+  @Transactional
+  public void updateFiles(String postingId, String oldFileId, String newFileId) {
+    List<String> files = findById(postingId).getFileId();
+    files.remove(oldFileId);
+    files.add(newFileId);
+
+    Query query = new Query();
+    query.addCriteria(Criteria.where("_id").regex(postingId));
+
+    Update update = new Update();
+    update.set("files", files);
+    mongoTemplate.updateFirst(query, update, PostingEntity.class, "posting");
+    return;
   }
 
   @Transactional
@@ -110,6 +125,7 @@ public class PostingService {
     Query query = new Query();
     query.addCriteria(Criteria.where("_id").is(_id));
     mongoTemplate.remove(query, PostingEntity.class, "posting");
+    fileService.deleteByPostingId(_id);
     return "게시글 삭제가 완료되었습니다.";
   }
 

@@ -1,7 +1,8 @@
 package kb.practiceboard.controller;
 
 import kb.practiceboard.domain.PostingEntity;
-import kb.practiceboard.dto.PostingDto;
+import kb.practiceboard.dto.posting.PostingCreateDto;
+import kb.practiceboard.dto.posting.PostingUpdateContentsDto;
 import kb.practiceboard.service.CommentService;
 import kb.practiceboard.service.PostingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,8 @@ public class PostingController {
   }
 
   @PostMapping("/posting")
-  public PostingEntity createPosting(@RequestBody @Valid PostingDto postingDto) {
-    return postingService.create(postingDto);
+  public PostingEntity createPosting(@RequestBody @Valid PostingCreateDto postingCreateDto) {
+    return postingService.create(postingCreateDto);
   }
 
   @GetMapping("/posting/{postingId}")
@@ -34,8 +35,8 @@ public class PostingController {
 
   @PatchMapping("/posting/{postingId}")
   public String editPosting(@PathVariable String postingId,
-                            @RequestBody @Valid PostingDto postingDto) {
-    return postingService.update(postingId, postingDto);
+                            @RequestBody @Valid PostingUpdateContentsDto postingUpdateDto) {
+    return postingService.updateContents(postingId, postingUpdateDto);
   }
 
   @GetMapping("/postings")

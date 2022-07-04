@@ -1,7 +1,8 @@
 package kb.practiceboard.service;
 
 import kb.practiceboard.domain.CommentEntity;
-import kb.practiceboard.dto.CommentDto;
+import kb.practiceboard.dto.comment.CommentCreateDto;
+import kb.practiceboard.dto.comment.CommentUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -42,12 +43,12 @@ public class CommentService {
   }
 
   @Transactional
-  public CommentEntity create(CommentDto commentDto) {
+  public CommentEntity create(CommentCreateDto commentCreateDto) {
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     CommentEntity comment = CommentEntity.builder()
-        .writerId(commentDto.getWriterId())
-        .contents(commentDto.getContents())
-        .postingId(commentDto.getPostingId())
+        .writerId(commentCreateDto.getWriterId())
+        .contents(commentCreateDto.getContents())
+        .postingId(commentCreateDto.getPostingId())
         .createdDateTime(currentDateTime)
         .updatedDateTime(currentDateTime)
         .build();
@@ -57,12 +58,12 @@ public class CommentService {
 
   @Transactional
   public String update(String _id,
-                       CommentDto commentDto) {
+                       CommentUpdateDto commentUpdateDto) {
     Query query = new Query();
     query.addCriteria(Criteria.where("_id").is(_id));
 
     Update update = new Update();
-    update.set("contents", commentDto.getContents());
+    update.set("contents", commentUpdateDto.getContents());
 
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     update.set("updatedDateTime", currentDateTime);

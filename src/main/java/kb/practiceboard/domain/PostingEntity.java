@@ -7,6 +7,8 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document(collection = "posting")
 @Getter
 @NoArgsConstructor
@@ -20,9 +22,10 @@ public class PostingEntity {
   private String createdDateTime;
   private String updatedDateTime;
   private String boardId;
+  private List<String> fileId;
 
   @Builder
-  public PostingEntity(ObjectId _id, String title, String contents, String authorId, String createdDateTime, String updatedDateTime, String boardId) {
+  public PostingEntity(ObjectId _id, String title, String contents, String authorId, String createdDateTime, String updatedDateTime, String boardId, List<String> fileId) {
     this._id = _id;
     this.title = title;
     this.contents = contents;
@@ -30,5 +33,6 @@ public class PostingEntity {
     this.createdDateTime = createdDateTime;
     this.updatedDateTime = updatedDateTime;
     this.boardId = boardId;
+    this.fileId = fileId;
   }
 }

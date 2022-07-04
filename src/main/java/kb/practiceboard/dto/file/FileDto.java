@@ -1,4 +1,4 @@
-package kb.practiceboard.dto;
+package kb.practiceboard.dto.file;
 
 import lombok.Builder;
 import lombok.Getter;

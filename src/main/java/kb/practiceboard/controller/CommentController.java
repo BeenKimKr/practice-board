@@ -1,7 +1,8 @@
 package kb.practiceboard.controller;
 
 import kb.practiceboard.domain.CommentEntity;
-import kb.practiceboard.dto.CommentDto;
+import kb.practiceboard.dto.comment.CommentCreateDto;
+import kb.practiceboard.dto.comment.CommentUpdateDto;
 import kb.practiceboard.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,14 +20,14 @@ public class CommentController {
   }
 
   @PostMapping("/comment")
-  public CommentEntity createComment(@RequestBody @Valid CommentDto commentDto) {
-    return commentService.create(commentDto);
+  public CommentEntity createComment(@RequestBody @Valid CommentCreateDto commentCreateDto) {
+    return commentService.create(commentCreateDto);
   }
 
   @PatchMapping("/comment/{commentId}")
   public String modifyComment(@PathVariable String commentId,
-                              @RequestBody @Valid CommentDto commentDto) {
-    return commentService.update(commentId, commentDto);
+                              @RequestBody @Valid CommentUpdateDto commentUpdateDto) {
+    return commentService.update(commentId, commentUpdateDto);
   }
 
   @DeleteMapping("/comment/{commentId}")

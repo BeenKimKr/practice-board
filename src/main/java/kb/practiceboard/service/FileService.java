@@ -1,7 +1,6 @@
 package kb.practiceboard.service;
 
 import kb.practiceboard.domain.FileEntity;
-import kb.practiceboard.dto.FileDto;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -14,13 +13,20 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 @Service
 public class FileService {
 
   private MongoTemplate mongoTemplate;
   private MultipartFile multipartFile;
+  private PostingService postingService;
+
+
+  @Autowired
+  public FileService(MultipartFile multipartFile, PostingService postingService) {
+    this.multipartFile = multipartFile;
+    this.postingService = postingService;
+  }
 
   @Autowired
   public void setMongoTemplate(MongoTemplate mongoTemplate) {
@@ -44,13 +50,20 @@ public class FileService {
     return mongoTemplate.insert(newFile, "file");
   }
 
-  public List<FileEntity> findByPostingId(FileDto fileDto) {
+  public FileEntity findByPostingId(String postingId) {
     Query query = new Query();
-    query.addCriteria(Criteria.where("postingId").is(fileDto.getPostingId()));
-    return mongoTemplate.find(query, FileEntity.class, "file");
+    query.addCriteria(Criteria.where("postingId").is(postingId));
+    return mongoTemplate.findOne(query, FileEntity.class, "file");
   }
 
-  public void update(MultipartFile files) {
+  public FileEntity findByOriginalName(String originalName) {
+    Query query = new Query();
+    query.addCriteria(Criteria.where("originalName").is(originalName));
+    return mongoTemplate.findOne(query, FileEntity.class, "file");
+  }
+
+  public void update(String postingId, String oldFileName, MultipartFile files) {
+
     Query query = new Query();
     query.addCriteria(Criteria.where("id").is("442fb8e9-5850-4d16-81be-e2d1e260ff78"));
 
@@ -63,6 +76,10 @@ public class FileService {
         .set("postingId", "62be722927bc640846e4a62b")
         .set("uploadDateTime", currentDateTime);
     mongoTemplate.updateMulti(query, update, "file");
+
+    String oldFileId = findByOriginalName(oldFileName).get_id().toString();
+    String newFileId = findByOriginalName(files.getOriginalFilename()).get_id().toString();
+    postingService.updateFiles(postingId, oldFileId, newFileId);
     return;
   }
 
