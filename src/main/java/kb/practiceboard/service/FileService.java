@@ -3,6 +3,7 @@ package kb.practiceboard.service;
 import kb.practiceboard.domain.FileEntity;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -23,8 +24,7 @@ public class FileService {
 
 
   @Autowired
-  public FileService(MultipartFile multipartFile, PostingService postingService) {
-    this.multipartFile = multipartFile;
+  public FileService(@Lazy PostingService postingService) {
     this.postingService = postingService;
   }
 
