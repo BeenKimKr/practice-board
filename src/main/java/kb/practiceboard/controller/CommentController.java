@@ -1,7 +1,7 @@
 package kb.practiceboard.controller;
 
-import kb.practiceboard.domain.Comment;
-import kb.practiceboard.domain.CommentDto;
+import kb.practiceboard.domain.CommentEntity;
+import kb.practiceboard.dto.CommentDto;
 import kb.practiceboard.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class CommentController {
   }
 
   @PostMapping("/comment")
-  public Comment createComment(@RequestBody @Valid CommentDto commentDto) {
+  public CommentEntity createComment(@RequestBody @Valid CommentDto commentDto) {
     return commentService.create(commentDto);
   }
 
@@ -35,12 +35,12 @@ public class CommentController {
   }
 
   @GetMapping("/comments/{postingId}")
-  public List<Comment> viewComment(@PathVariable String postingId) {
+  public List<CommentEntity> viewComment(@PathVariable String postingId) {
     return commentService.findByPostingId(postingId);
   }
 
   @GetMapping("/comments/my/{userId}")
-  public List<Comment> commentListByUserId(@PathVariable String userId) {
+  public List<CommentEntity> commentListByUserId(@PathVariable String userId) {
     return commentService.findByWriterId(userId);
   }
 }

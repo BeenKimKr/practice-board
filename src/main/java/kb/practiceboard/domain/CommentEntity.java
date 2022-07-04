@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "comment")
 @Getter
 @NoArgsConstructor
-public class Comment {
+public class CommentEntity {
 
   @Id
   private String _id;
@@ -20,7 +20,7 @@ public class Comment {
   private String updatedDateTime;
 
   @Builder
-  public Comment(String _id, String writerId, String contents, String postingId, String createdDateTime, String updatedDateTime) {
+  public CommentEntity(String _id, String writerId, String contents, String postingId, String createdDateTime, String updatedDateTime) {
     this._id = _id;
     this.writerId = writerId;
     this.contents = contents;

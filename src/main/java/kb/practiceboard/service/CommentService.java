@@ -1,7 +1,7 @@
 package kb.practiceboard.service;
 
-import kb.practiceboard.domain.Comment;
-import kb.practiceboard.domain.CommentDto;
+import kb.practiceboard.domain.CommentEntity;
+import kb.practiceboard.dto.CommentDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -27,24 +27,24 @@ public class CommentService {
     this.mongoTemplate = mongoTemplate;
   }
 
-  public List<Comment> findByPostingId(String postingId) {
+  public List<CommentEntity> findByPostingId(String postingId) {
     Query query = new Query();
     query.addCriteria(Criteria.where("postingId").is(postingId));
-    List<Comment> commentList = mongoTemplate.find(query, Comment.class, "comment");
+    List<CommentEntity> commentList = mongoTemplate.find(query, CommentEntity.class, "comment");
     return commentList;
   }
 
-  public List<Comment> findByWriterId(String writerId) {
+  public List<CommentEntity> findByWriterId(String writerId) {
     Query query = new Query();
     query.addCriteria(Criteria.where("writerId").is(writerId));
-    List<Comment> commentList = mongoTemplate.find(query, Comment.class, "comment");
+    List<CommentEntity> commentList = mongoTemplate.find(query, CommentEntity.class, "comment");
     return commentList;
   }
 
   @Transactional
-  public Comment create(CommentDto commentDto) {
+  public CommentEntity create(CommentDto commentDto) {
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-    Comment comment = Comment.builder()
+    CommentEntity comment = CommentEntity.builder()
         .writerId(commentDto.getWriterId())
         .contents(commentDto.getContents())
         .postingId(commentDto.getPostingId())
@@ -75,7 +75,7 @@ public class CommentService {
   public String delete(String commentId) {
     Query query = new Query();
     query.addCriteria(Criteria.where("_id").is(commentId));
-    mongoTemplate.findAndRemove(query, Comment.class, "comment");
+    mongoTemplate.findAndRemove(query, CommentEntity.class, "comment");
     return "댓글이 삭제되었습니다.";
   }
 }

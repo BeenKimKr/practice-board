@@ -1,4 +1,4 @@
-package kb.practiceboard.domain;
+package kb.practiceboard.dto;
 
 import lombok.Builder;
 import lombok.Getter;

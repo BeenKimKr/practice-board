@@ -1,7 +1,7 @@
 package kb.practiceboard.controller;
 
-import kb.practiceboard.domain.Board;
-import kb.practiceboard.domain.BoardDto;
+import kb.practiceboard.domain.BoardEntity;
+import kb.practiceboard.dto.BoardDto;
 import kb.practiceboard.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,18 +20,18 @@ public class BoardController {
   }
 
   @PostMapping("/board")
-  public Board createBoard(@RequestBody @Valid BoardDto boardDto) {
+  public BoardEntity createBoard(@RequestBody @Valid BoardDto boardDto) {
     return boardService.createBoard(boardDto);
   }
 
   @GetMapping("/boards")
-  public List<Board> allBoardList() {
+  public List<BoardEntity> allBoardList() {
     return boardService.findAll();
   }
 
   @GetMapping("/boards/{criterion}/{keyword}")
-  public List<Board> listByKeyword(@PathVariable String criterion,
-                                   @PathVariable String keyword) {
+  public List<BoardEntity> listByKeyword(@PathVariable String criterion,
+                                         @PathVariable String keyword) {
     if (criterion.equals("boardName")) {
       return boardService.findByName(keyword);
     } else {

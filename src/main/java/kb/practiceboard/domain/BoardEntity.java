@@ -12,7 +12,7 @@ import java.util.List;
 @Document(collection = "board")
 @Getter
 @NoArgsConstructor
-public class Board {
+public class BoardEntity {
 
   @Id
   private ObjectId _id;
@@ -21,7 +21,7 @@ public class Board {
   private String lastPostingDateTime;
 
   @Builder
-  public Board(ObjectId _id, String boardName, List<String> tag, String lastPostingDateTime) {
+  public BoardEntity(ObjectId _id, String boardName, List<String> tag, String lastPostingDateTime) {
     this._id = _id;
     this.boardName = boardName;
     this.tag = tag;

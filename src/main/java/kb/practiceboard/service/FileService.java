@@ -1,7 +1,7 @@
 package kb.practiceboard.service;
 
-import kb.practiceboard.domain.File;
-import kb.practiceboard.domain.FileDto;
+import kb.practiceboard.domain.FileEntity;
+import kb.practiceboard.dto.FileDto;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -28,11 +28,11 @@ public class FileService {
   }
 
   @Transactional
-  public File upload(MultipartFile files) {
+  public FileEntity upload(MultipartFile files) {
     String originalName = files.getOriginalFilename();
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-    File newFile = File.builder()
+    FileEntity newFile = FileEntity.builder()
         .originalName(originalName)
         .size(files.getSize())
         .mimeType(files.getContentType())
@@ -44,10 +44,10 @@ public class FileService {
     return mongoTemplate.insert(newFile, "file");
   }
 
-  public List<File> findByPostingId(FileDto fileDto) {
+  public List<FileEntity> findByPostingId(FileDto fileDto) {
     Query query = new Query();
     query.addCriteria(Criteria.where("postingId").is(fileDto.getPostingId()));
-    return mongoTemplate.find(query, File.class, "file");
+    return mongoTemplate.find(query, FileEntity.class, "file");
   }
 
   public void update(MultipartFile files) {
@@ -69,14 +69,14 @@ public class FileService {
   public String delete(ObjectId fileId) {
     Query query = new Query();
     query.addCriteria(Criteria.where("_id").is(fileId));
-    mongoTemplate.remove(query, File.class, "file");
+    mongoTemplate.remove(query, FileEntity.class, "file");
     return "파일이 삭제되었습니다.";
   }
 
   public void deleteByPostingId(String postingId) {
     Query query = new Query();
     query.addCriteria(Criteria.where("postingId").is(postingId));
-    mongoTemplate.findAllAndRemove(query, File.class, "file");
+    mongoTemplate.findAllAndRemove(query, FileEntity.class, "file");
     return;
   }
 }

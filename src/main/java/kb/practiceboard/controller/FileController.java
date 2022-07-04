@@ -1,7 +1,7 @@
 package kb.practiceboard.controller;
 
-import kb.practiceboard.domain.File;
-import kb.practiceboard.domain.FileDto;
+import kb.practiceboard.domain.FileEntity;
+import kb.practiceboard.dto.FileDto;
 import kb.practiceboard.service.FileService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +21,12 @@ public class FileController {
   }
 
   @PostMapping(value = "/file", consumes = {"multipart/form-data"})
-  public File uploadFile(@RequestPart("files") MultipartFile files) {
+  public FileEntity uploadFile(@RequestPart("files") MultipartFile files) {
     return fileService.upload(files);
   }
 
   @GetMapping("/file")
-  public List<File> findFile(@RequestBody FileDto fileDto) {
+  public List<FileEntity> findFile(@RequestBody FileDto fileDto) {
     return fileService.findByPostingId(fileDto);
   }
 

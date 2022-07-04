@@ -1,7 +1,7 @@
 package kb.practiceboard.service;
 
-import kb.practiceboard.domain.User;
-import kb.practiceboard.domain.UserDto;
+import kb.practiceboard.domain.UserEntity;
+import kb.practiceboard.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -34,26 +34,26 @@ public class UserService {
     this.mongoTemplate = mongoTemplate;
   }
 
-  public User findUserByUserId(String userId) {
+  public UserEntity findUserByUserId(String userId) {
     Query query = new Query();
     query.addCriteria(Criteria.where("userId").is(userId));
-    User user = mongoTemplate.findOne(query, User.class, "user");
+    UserEntity user = mongoTemplate.findOne(query, UserEntity.class, "user");
     return user;
   }
 
-  public User findByEmail(String email) {
+  public UserEntity findByEmail(String email) {
     Query query = new Query();
     query.addCriteria(Criteria.where("email").is(email));
-    User user = mongoTemplate.findOne(query, User.class, "user");
+    UserEntity user = mongoTemplate.findOne(query, UserEntity.class, "user");
     return user;
   }
 
   @Transactional
-  public User create(@Valid UserDto userDto) {
+  public UserEntity create(@Valid UserDto userDto) {
     String uuid = UUID.randomUUID().toString();
     String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-    User newUser = User.builder()
+    UserEntity newUser = UserEntity.builder()
         .userId(uuid)
         .email(userDto.getEmail())
         .userName(userDto.getUserName())
@@ -67,8 +67,8 @@ public class UserService {
   }
 
   @Transactional
-  public User login(UserDto userDto) {
-    User user = findByEmail(userDto.getEmail());
+  public UserEntity login(UserDto userDto) {
+    UserEntity user = findByEmail(userDto.getEmail());
 
     // 로그인시 현재 DateTime - updatedDatetime = 90일이 넘으면 updatePasswordRequired -> true
     LocalDate currentDate = LocalDate.now();
@@ -121,7 +121,7 @@ public class UserService {
     Query query = new Query();
     query.addCriteria(Criteria.where("userId").is(userId));
     postingService.deleteAll(userId);
-    mongoTemplate.remove(query, User.class, "user");
+    mongoTemplate.remove(query, UserEntity.class, "user");
     return "회원 탈퇴가 완료되었습니다.";
   }
 }

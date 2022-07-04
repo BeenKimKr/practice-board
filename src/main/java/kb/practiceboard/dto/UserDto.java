@@ -1,15 +1,13 @@
-package kb.practiceboard.domain;
+package kb.practiceboard.dto;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-@Document(collection = "user")
 @Getter
 @NoArgsConstructor
 public class UserDto {

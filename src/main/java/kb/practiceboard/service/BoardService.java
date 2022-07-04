@@ -1,7 +1,7 @@
 package kb.practiceboard.service;
 
-import kb.practiceboard.domain.Board;
-import kb.practiceboard.domain.BoardDto;
+import kb.practiceboard.domain.BoardEntity;
+import kb.practiceboard.dto.BoardDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -24,29 +24,29 @@ public class BoardService {
     this.mongoTemplate = mongoTemplate;
   }
 
-  public List<Board> findAll() {
-    return mongoTemplate.findAll(Board.class, "board");
+  public List<BoardEntity> findAll() {
+    return mongoTemplate.findAll(BoardEntity.class, "board");
   }
 
-  public List<Board> findByName(String keyword) {
+  public List<BoardEntity> findByName(String keyword) {
     Query query = new Query();
     query.addCriteria(Criteria.where("boardName").regex(keyword));
 
-    return mongoTemplate.find(query, Board.class, "board");
+    return mongoTemplate.find(query, BoardEntity.class, "board");
   }
 
-  public List<Board> findByTag(String keyword) {
+  public List<BoardEntity> findByTag(String keyword) {
     Query query = new Query();
     query.addCriteria(Criteria.where("tag").regex(keyword));
 
-    return mongoTemplate.find(query, Board.class, "board");
+    return mongoTemplate.find(query, BoardEntity.class, "board");
   }
 
   @Transactional
-  public Board createBoard(BoardDto boardDto) {
+  public BoardEntity createBoard(BoardDto boardDto) {
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-    Board newBoard = Board.builder()
+    BoardEntity newBoard = BoardEntity.builder()
         .boardName(boardDto.getBoardName() + "게시판")
         .tag(boardDto.getTag())
         .lastPostingDateTime(currentDateTime)
@@ -63,6 +63,6 @@ public class BoardService {
     Update update = new Update();
     update.set("lastUpdatedDateTime", updatedDateTime);
 
-    mongoTemplate.updateFirst(query, update, Board.class, "board");
+    mongoTemplate.updateFirst(query, update, BoardEntity.class, "board");
   }
 }

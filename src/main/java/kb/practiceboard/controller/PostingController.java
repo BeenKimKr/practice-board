@@ -1,7 +1,7 @@
 package kb.practiceboard.controller;
 
-import kb.practiceboard.domain.Posting;
-import kb.practiceboard.domain.PostingDto;
+import kb.practiceboard.domain.PostingEntity;
+import kb.practiceboard.dto.PostingDto;
 import kb.practiceboard.service.CommentService;
 import kb.practiceboard.service.PostingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +23,12 @@ public class PostingController {
   }
 
   @PostMapping("/posting")
-  public Posting createPosting(@RequestBody @Valid PostingDto postingDto) {
+  public PostingEntity createPosting(@RequestBody @Valid PostingDto postingDto) {
     return postingService.create(postingDto);
   }
 
   @GetMapping("/posting/{postingId}")
-  public Posting viewPosting(@PathVariable String postingId) {
+  public PostingEntity viewPosting(@PathVariable String postingId) {
     return postingService.findById(postingId);
   }
 
@@ -39,13 +39,13 @@ public class PostingController {
   }
 
   @GetMapping("/postings")
-  public List<Posting> listAllPosting() {
+  public List<PostingEntity> listAllPosting() {
     return postingService.findAll();
   }
 
   @GetMapping("/postings/{criterion}/{keyword}")
-  public List<Posting> listByKeyword(@PathVariable String criterion,
-                                     @PathVariable String keyword) {
+  public List<PostingEntity> listByKeyword(@PathVariable String criterion,
+                                           @PathVariable String keyword) {
     if (criterion.equals("author")) {
       return postingService.findByAuthor(keyword);
     } else if (criterion.equals("title")) {
@@ -61,7 +61,7 @@ public class PostingController {
   }
 
   @GetMapping("/board/{boardId}/postings")
-  public List<Posting> listByBoardId(@PathVariable String boardId) {
+  public List<PostingEntity> listByBoardId(@PathVariable String boardId) {
     return postingService.findByBoardId(boardId);
   }
 }

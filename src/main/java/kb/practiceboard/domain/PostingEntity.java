@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "posting")
 @Getter
 @NoArgsConstructor
-public class Posting {
+public class PostingEntity {
 
   @Id
   private ObjectId _id;
@@ -22,7 +22,7 @@ public class Posting {
   private String boardId;
 
   @Builder
-  public Posting(ObjectId _id, String title, String contents, String authorId, String createdDateTime, String updatedDateTime, String boardId) {
+  public PostingEntity(ObjectId _id, String title, String contents, String authorId, String createdDateTime, String updatedDateTime, String boardId) {
     this._id = _id;
     this.title = title;
     this.contents = contents;

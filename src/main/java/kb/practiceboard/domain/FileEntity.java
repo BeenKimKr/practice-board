@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "file")
 @Getter
 @NoArgsConstructor
-public class File {
+public class FileEntity {
 
   @Id
   private ObjectId _id;
@@ -22,7 +22,7 @@ public class File {
   private String uploadDateTime;
 
   @Builder
-  public File(ObjectId _id, String originalName, long size, String mimeType, String uploaderId, String postingId, String uploadDateTime) {
+  public FileEntity(ObjectId _id, String originalName, long size, String mimeType, String uploaderId, String postingId, String uploadDateTime) {
     this._id = _id;
     this.originalName = originalName;
     this.size = size;

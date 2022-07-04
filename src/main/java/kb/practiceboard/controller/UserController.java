@@ -1,7 +1,7 @@
 package kb.practiceboard.controller;
 
-import kb.practiceboard.domain.User;
-import kb.practiceboard.domain.UserDto;
+import kb.practiceboard.domain.UserEntity;
+import kb.practiceboard.dto.UserDto;
 import kb.practiceboard.service.CommentService;
 import kb.practiceboard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +22,17 @@ public class UserController {
   }
 
   @PostMapping("/user")
-  public User registerUser(@Valid @RequestBody UserDto userDto) {
+  public UserEntity registerUser(@Valid @RequestBody UserDto userDto) {
     return userService.create(userDto);
   }
 
   @PatchMapping("/user/login")
-  public User loginUser(@Valid @RequestBody UserDto userDto) {
+  public UserEntity loginUser(@Valid @RequestBody UserDto userDto) {
     return userService.login(userDto);
   }
 
   @GetMapping("/user/{userId}")
-  public User myAccount(@PathVariable String userId) {
+  public UserEntity myAccount(@PathVariable String userId) {
     return userService.findUserByUserId(userId);
   }
 

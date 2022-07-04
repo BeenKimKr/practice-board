@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "user")
 @Getter
 @NoArgsConstructor
-public class User {
+public class UserEntity {
 
   @Id
   private String userId;
@@ -22,7 +22,7 @@ public class User {
   private Boolean updatePasswordRequired;
 
   @Builder
-  public User(String userId, String email, String userName, String nickname, String password, String registerDateTime, String passwordUpdatedDateTime, Boolean updatePasswordRequired) {
+  public UserEntity(String userId, String email, String userName, String nickname, String password, String registerDateTime, String passwordUpdatedDateTime, Boolean updatePasswordRequired) {
     this.userId = userId;
     this.email = email;
     this.userName = userName;
