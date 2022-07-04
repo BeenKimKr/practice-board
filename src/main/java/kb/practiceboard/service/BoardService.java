@@ -1,7 +1,8 @@
 package kb.practiceboard.service;
 
 import kb.practiceboard.domain.BoardEntity;
-import kb.practiceboard.dto.BoardDto;
+import kb.practiceboard.dto.board.BoardCreateDto;
+import kb.practiceboard.dto.board.BoardTagDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -43,12 +44,12 @@ public class BoardService {
   }
 
   @Transactional
-  public BoardEntity createBoard(BoardDto boardDto) {
+  public BoardEntity createBoard(BoardCreateDto boardCreateDto) {
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
     BoardEntity newBoard = BoardEntity.builder()
-        .boardName(boardDto.getBoardName() + "게시판")
-        .tag(boardDto.getTag())
+        .boardName(boardCreateDto.getBoardName() + "게시판")
+        .tag(boardCreateDto.getTag())
         .lastPostingDateTime(currentDateTime)
         .build();
 
@@ -67,12 +68,12 @@ public class BoardService {
   }
 
   @Transactional
-  public String updateTag(BoardDto boardDto) {
+  public String updateTag(String boardId, BoardTagDto boardTagDto) {
     Query query = new Query();
-    query.addCriteria(Criteria.where("boardName").is(boardDto.getBoardName()));
+    query.addCriteria(Criteria.where("boardName").is(boardId));
 
     Update update = new Update();
-    update.set("tag", boardDto.getTag());
+    update.set("tag", boardTagDto.getTag());
 
     mongoTemplate.updateFirst(query, update, BoardEntity.class, "board");
     return "태그 수정이 완료되었습니다.";

@@ -1,7 +1,10 @@
 package kb.practiceboard.controller;
 
 import kb.practiceboard.domain.UserEntity;
-import kb.practiceboard.dto.UserDto;
+import kb.practiceboard.dto.user.UserLoginDto;
+import kb.practiceboard.dto.user.UserNicknameDto;
+import kb.practiceboard.dto.user.UserPasswordDto;
+import kb.practiceboard.dto.user.UserRegisterDto;
 import kb.practiceboard.service.CommentService;
 import kb.practiceboard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +25,13 @@ public class UserController {
   }
 
   @PostMapping("/user")
-  public UserEntity registerUser(@Valid @RequestBody UserDto userDto) {
-    return userService.create(userDto);
+  public UserEntity registerUser(@RequestBody @Valid UserRegisterDto userRegisterDto) {
+    return userService.create(userRegisterDto);
   }
 
   @PatchMapping("/user/login")
-  public UserEntity loginUser(@Valid @RequestBody UserDto userDto) {
-    return userService.login(userDto);
+  public UserEntity loginUser(@RequestBody @Valid UserLoginDto userLoginDto) {
+    return userService.login(userLoginDto);
   }
 
   @GetMapping("/user/{userId}")
@@ -37,15 +40,15 @@ public class UserController {
   }
 
   @PatchMapping("/user/nickname")
-  public String updateUserName(@RequestBody @Valid UserDto toUpdateUserDto,
+  public String updateUserName(@RequestBody @Valid UserNicknameDto userNicknameDto,
                                @RequestParam String userId) {
-    return userService.updateNickName(userId, toUpdateUserDto);
+    return userService.updateNickName(userId, userNicknameDto);
   }
 
   @PatchMapping("/user/pwd")
-  public String updatePasswordUser(@RequestBody @Valid UserDto toUpdateUserDto,
+  public String updatePasswordUser(@RequestBody @Valid UserPasswordDto userPasswordDto,
                                    @RequestParam String userId) {
-    return userService.updatePassword(userId, toUpdateUserDto);
+    return userService.updatePassword(userId, userPasswordDto);
   }
 
   @DeleteMapping("/user")

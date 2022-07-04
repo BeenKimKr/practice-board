@@ -1,7 +1,10 @@
 package kb.practiceboard.service;
 
 import kb.practiceboard.domain.UserEntity;
-import kb.practiceboard.dto.UserDto;
+import kb.practiceboard.dto.user.UserLoginDto;
+import kb.practiceboard.dto.user.UserNicknameDto;
+import kb.practiceboard.dto.user.UserPasswordDto;
+import kb.practiceboard.dto.user.UserRegisterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -49,15 +52,15 @@ public class UserService {
   }
 
   @Transactional
-  public UserEntity create(@Valid UserDto userDto) {
+  public UserEntity create(@Valid UserRegisterDto userRegisterDto) {
     String uuid = UUID.randomUUID().toString();
     String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
     UserEntity newUser = UserEntity.builder()
         .userId(uuid)
-        .email(userDto.getEmail())
-        .userName(userDto.getUserName())
-        .password(userDto.getPassword())
+        .email(userRegisterDto.getEmail())
+        .userName(userRegisterDto.getUserName())
+        .password(userRegisterDto.getPassword())
         .registerDateTime(dateTime)
         .passwordUpdatedDateTime(dateTime)
         .updatePasswordRequired(false)
@@ -67,8 +70,8 @@ public class UserService {
   }
 
   @Transactional
-  public UserEntity login(UserDto userDto) {
-    UserEntity user = findByEmail(userDto.getEmail());
+  public UserEntity login(UserLoginDto userLoginDto) {
+    UserEntity user = findByEmail(userLoginDto.getEmail());
 
     // 로그인시 현재 DateTime - updatedDatetime = 90일이 넘으면 updatePasswordRequired -> true
     LocalDate currentDate = LocalDate.now();
@@ -93,24 +96,24 @@ public class UserService {
   }
 
   @Transactional
-  public String updateNickName(String userId, UserDto toUpdateUserDto) {
+  public String updateNickName(String userId, UserNicknameDto userNicknameDto) {
     Query query = new Query();
     query.addCriteria(Criteria.where("userId").is(userId));
 
     Update update = new Update();
-    update.set("nickname", toUpdateUserDto.getNickname());
+    update.set("nickname", userNicknameDto.getNickname());
     mongoTemplate.updateFirst(query, update, "user");
     return "닉네임이 변경되었습니다.";
   }
 
   @Transactional
-  public String updatePassword(String userId, UserDto toUpdateUserDto) {
+  public String updatePassword(String userId, UserPasswordDto userPasswordDto) {
     Query query = new Query();
     query.addCriteria(Criteria.where("userId").is(userId));
 
     String newUpdatedDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     Update update = new Update();
-    update.set("password", toUpdateUserDto.getPassword());
+    update.set("password", userPasswordDto.getPassword());
     update.set("updatedDateTime", newUpdatedDateTime);
     mongoTemplate.updateMulti(query, update, "user");
     return "비밀번호가 변경되었습니다.";

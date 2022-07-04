@@ -1,7 +1,8 @@
 package kb.practiceboard.controller;
 
 import kb.practiceboard.domain.BoardEntity;
-import kb.practiceboard.dto.BoardDto;
+import kb.practiceboard.dto.board.BoardCreateDto;
+import kb.practiceboard.dto.board.BoardTagDto;
 import kb.practiceboard.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +21,8 @@ public class BoardController {
   }
 
   @PostMapping("/board")
-  public BoardEntity createBoard(@RequestBody @Valid BoardDto boardDto) {
-    return boardService.createBoard(boardDto);
+  public BoardEntity createBoard(@RequestBody @Valid BoardCreateDto boardCreateDto) {
+    return boardService.createBoard(boardCreateDto);
   }
 
   @GetMapping("/boards")
@@ -30,8 +31,9 @@ public class BoardController {
   }
 
   @PatchMapping("/board")
-  public String updateTag(BoardDto boardDto) {
-    return boardService.updateTag(boardDto);
+  public String updateTag(@RequestBody @Valid BoardTagDto boardTagDto,
+                          @RequestParam String boardId) {
+    return boardService.updateTag(boardId, boardTagDto);
   }
 
   @GetMapping("/boards/{criterion}/{keyword}")
