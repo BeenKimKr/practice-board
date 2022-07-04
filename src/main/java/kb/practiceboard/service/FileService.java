@@ -2,6 +2,7 @@ package kb.practiceboard.service;
 
 import kb.practiceboard.domain.File;
 import kb.practiceboard.domain.FileDto;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -14,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class FileService {
@@ -29,12 +29,10 @@ public class FileService {
 
   @Transactional
   public File upload(MultipartFile files) {
-    String id = UUID.randomUUID().toString();
     String originalName = files.getOriginalFilename();
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
     File newFile = File.builder()
-        .id(id)
         .originalName(originalName)
         .size(files.getSize())
         .mimeType(files.getContentType())
@@ -56,11 +54,9 @@ public class FileService {
     Query query = new Query();
     query.addCriteria(Criteria.where("id").is("442fb8e9-5850-4d16-81be-e2d1e260ff78"));
 
-    String newId = UUID.randomUUID().toString();
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     Update update = new Update();
     update
-        .set("id", newId)
         .set("originalName", files.getOriginalFilename())
         .set("mineType", files.getContentType())
         .set("uploaderId", "c0da61d6-f259-412b-b6d6-2c0a890c7744")
@@ -70,9 +66,9 @@ public class FileService {
     return;
   }
 
-  public String delete(FileDto fileDto) {
+  public String delete(ObjectId fileId) {
     Query query = new Query();
-    query.addCriteria(Criteria.where("id").is(fileDto.getId()));
+    query.addCriteria(Criteria.where("_id").is(fileId));
     mongoTemplate.remove(query, File.class, "file");
     return "파일이 삭제되었습니다.";
   }

@@ -3,6 +3,7 @@ package kb.practiceboard.domain;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class File {
 
   @Id
-  private String id;
+  private ObjectId _id;
   private String originalName;
   private long size;
   private String mimeType;
@@ -21,8 +22,8 @@ public class File {
   private String uploadDateTime;
 
   @Builder
-  public File(String id, String originalName, long size, String mimeType, String uploaderId, String postingId, String uploadDateTime) {
-    this.id = id;
+  public File(ObjectId _id, String originalName, long size, String mimeType, String uploaderId, String postingId, String uploadDateTime) {
+    this._id = _id;
     this.originalName = originalName;
     this.size = size;
     this.mimeType = mimeType;

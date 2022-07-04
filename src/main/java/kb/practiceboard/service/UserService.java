@@ -59,7 +59,7 @@ public class UserService {
         .userName(userDto.getUserName())
         .password(userDto.getPassword())
         .registerDateTime(dateTime)
-        .updatedDateTime(dateTime)
+        .passwordUpdatedDateTime(dateTime)
         .updatePasswordRequired(false)
         .build();
 
@@ -72,24 +72,30 @@ public class UserService {
 
     // 로그인시 현재 DateTime - updatedDatetime = 90일이 넘으면 updatePasswordRequired -> true
     LocalDate currentDate = LocalDate.now();
-    LocalDate updatedDate = LocalDate.parse(user.getUpdatedDateTime().split(" ")[0]);
+    LocalDate updatedDate = LocalDate.parse(user.getPasswordUpdatedDateTime().split(" ")[0]);
     long days = ChronoUnit.DAYS.between(updatedDate, currentDate);
-    if (days > 90) {
-      Query query = new Query();
-      query.addCriteria(Criteria.where("userId").is(user.getUserId()));
+    Query query = new Query();
+    query.addCriteria(Criteria.where("userId").is(user.getUserId()));
 
-      Update update = new Update();
+    Update update = new Update();
+    if (days > 90) {
       update.set("updatePasswordRequired", true);
       mongoTemplate.updateFirst(query, update, "user");
       return findUserByUserId(user.getUserId());
+    } else {
+      user.builder()
+          .updatePasswordRequired(false)
+          .build();
+      update.set("updatePasswordRequired", false);
+      mongoTemplate.updateFirst(query, update, "user");
+      return user;
     }
-    return user;
   }
 
   @Transactional
-  public String updateNickName(UserDto toUpdateUserDto) {
+  public String updateNickName(String userId, UserDto toUpdateUserDto) {
     Query query = new Query();
-    query.addCriteria(Criteria.where("userId").is(toUpdateUserDto.getUserId()));
+    query.addCriteria(Criteria.where("userId").is(userId));
 
     Update update = new Update();
     update.set("nickname", toUpdateUserDto.getNickname());
@@ -98,9 +104,9 @@ public class UserService {
   }
 
   @Transactional
-  public String updatePassword(UserDto toUpdateUserDto) {
+  public String updatePassword(String userId, UserDto toUpdateUserDto) {
     Query query = new Query();
-    query.addCriteria(Criteria.where("userId").is(toUpdateUserDto.getUserId()));
+    query.addCriteria(Criteria.where("userId").is(userId));
 
     String newUpdatedDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     Update update = new Update();

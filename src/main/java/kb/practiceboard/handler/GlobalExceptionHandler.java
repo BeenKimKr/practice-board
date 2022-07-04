@@ -3,6 +3,7 @@ package kb.practiceboard.handler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -23,6 +24,14 @@ public class GlobalExceptionHandler {
    */
   @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
   protected ResponseEntity<ErrorResponse> handleHttpRequestMethodNotSupportedException(final HttpRequestMethodNotSupportedException e) {
+    log.error("handleHttpRequestMethodNotSupportedException: {}", e.getMessage());
+    return ResponseEntity
+        .status(ErrorCode.METHOD_NOT_ALLOWED.getStatus().value())
+        .body(new ErrorResponse(ErrorCode.METHOD_NOT_ALLOWED));
+  }
+
+  @ExceptionHandler(MethodArgumentNotValidException.class)
+  protected ResponseEntity<ErrorResponse> handleMethodException(final MethodArgumentNotValidException e) {
     log.error("handleHttpRequestMethodNotSupportedException: {}", e.getMessage());
     return ResponseEntity
         .status(ErrorCode.METHOD_NOT_ALLOWED.getStatus().value())

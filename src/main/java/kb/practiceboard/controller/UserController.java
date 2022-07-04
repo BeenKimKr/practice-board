@@ -37,13 +37,15 @@ public class UserController {
   }
 
   @PatchMapping("/user/nickname")
-  public String updateUserName(@RequestBody @Valid UserDto toUpdateUserDto) {
-    return userService.updateNickName(toUpdateUserDto);
+  public String updateUserName(@RequestBody @Valid UserDto toUpdateUserDto,
+                               @RequestParam String userId) {
+    return userService.updateNickName(userId, toUpdateUserDto);
   }
 
   @PatchMapping("/user/pwd")
-  public String updatePasswordUser(@RequestBody @Valid UserDto toUpdateUserDto) {
-    return userService.updatePassword(toUpdateUserDto);
+  public String updatePasswordUser(@RequestBody @Valid UserDto toUpdateUserDto,
+                                   @RequestParam String userId) {
+    return userService.updatePassword(userId, toUpdateUserDto);
   }
 
   @DeleteMapping("/user")

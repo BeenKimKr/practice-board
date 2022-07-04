@@ -89,9 +89,9 @@ public class PostingService {
   }
 
   @Transactional
-  public String update(String _id, PostingDto postingDto) {
+  public String update(String postingId, PostingDto postingDto) {
     Query query = new Query();
-    query.addCriteria(Criteria.where("_id").is(_id));
+    query.addCriteria(Criteria.where("_id").is(postingId));
 
     Update update = new Update();
     update.set("title", postingDto.getTitle());
@@ -100,7 +100,7 @@ public class PostingService {
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     update.set("updatedDateTime", currentDateTime);
 
-    fileService.deleteByPostingId(postingDto.get_id().toString());
+    fileService.deleteByPostingId(postingId);
     mongoTemplate.updateMulti(query, update, "posting");
     return "게시글 수정이 완료되었습니다.";
   }
