@@ -1,8 +1,7 @@
 package kb.practiceboard.service;
 
 import kb.practiceboard.domain.CommentEntity;
-import kb.practiceboard.dto.comment.CommentCreateDto;
-import kb.practiceboard.dto.comment.CommentUpdateDto;
+import kb.practiceboard.dto.comment.CommentDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -28,6 +27,13 @@ public class CommentService {
     this.mongoTemplate = mongoTemplate;
   }
 
+  public CommentEntity findByCommentId(String commentId) {
+    Query query = new Query();
+    query.addCriteria(Criteria.where("_id").is(commentId));
+    CommentEntity comment = mongoTemplate.findOne(query, CommentEntity.class, "comment");
+    return comment;
+  }
+
   public List<CommentEntity> findByPostingId(String postingId) {
     Query query = new Query();
     query.addCriteria(Criteria.where("postingId").is(postingId));
@@ -43,12 +49,12 @@ public class CommentService {
   }
 
   @Transactional
-  public CommentEntity create(CommentCreateDto commentCreateDto) {
+  public CommentEntity create(CommentDto commentDto) {
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     CommentEntity comment = CommentEntity.builder()
-        .writerId(commentCreateDto.getWriterId())
-        .contents(commentCreateDto.getContents())
-        .postingId(commentCreateDto.getPostingId())
+        .writerId(commentDto.getWriterId())
+        .contents(commentDto.getContents())
+        .postingId(commentDto.getPostingId())
         .createdDateTime(currentDateTime)
         .updatedDateTime(currentDateTime)
         .build();
@@ -58,12 +64,12 @@ public class CommentService {
 
   @Transactional
   public String update(String _id,
-                       CommentUpdateDto commentUpdateDto) {
+                       CommentDto commentDto) {
     Query query = new Query();
     query.addCriteria(Criteria.where("_id").is(_id));
 
     Update update = new Update();
-    update.set("contents", commentUpdateDto.getContents());
+    update.set("contents", commentDto.getContents());
 
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     update.set("updatedDateTime", currentDateTime);

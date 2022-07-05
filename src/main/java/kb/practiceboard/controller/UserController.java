@@ -2,8 +2,8 @@ package kb.practiceboard.controller;
 
 import kb.practiceboard.domain.UserEntity;
 import kb.practiceboard.dto.user.UserLoginDto;
-import kb.practiceboard.dto.user.UserNicknameDto;
-import kb.practiceboard.dto.user.UserPasswordDto;
+import kb.practiceboard.dto.user.UserPatchNicknameDto;
+import kb.practiceboard.dto.user.UserPatchPasswordDto;
 import kb.practiceboard.dto.user.UserRegisterDto;
 import kb.practiceboard.service.CommentService;
 import kb.practiceboard.service.UserService;
@@ -25,28 +25,40 @@ public class UserController {
   }
 
   @PostMapping("/user")
-  public UserEntity registerUser(@RequestBody @Valid UserRegisterDto userRegisterDto) {
-    return userService.create(userRegisterDto);
+  public UserRegisterDto registerUser(@RequestBody @Valid UserRegisterDto userRegisterDto) {
+    UserEntity newUser = userService.create(userRegisterDto);
+    UserRegisterDto user = UserRegisterDto.builder()
+        .email(newUser.getEmail())
+        .build();
+    return user;
   }
 
   @PatchMapping("/user/login")
-  public UserEntity loginUser(@RequestBody @Valid UserLoginDto userLoginDto) {
-    return userService.login(userLoginDto);
+  public UserLoginDto loginUser(@RequestBody @Valid UserLoginDto userLoginDto) {
+    UserEntity loginUser = userService.login(userLoginDto);
+    UserLoginDto user = UserLoginDto.builder()
+        .nickname(loginUser.getNickname())
+        .build();
+    return user;
   }
 
-  @GetMapping("/user/{userId}")
-  public UserEntity myAccount(@PathVariable String userId) {
-    return userService.findUserByUserId(userId);
+  @GetMapping("/user")
+  public String myAccount(@RequestBody String userId) {
+    return userService.findUserByUserId(userId).getNickname();
   }
 
   @PatchMapping("/user/nickname")
-  public String updateUserName(@RequestBody @Valid UserNicknameDto userNicknameDto,
-                               @RequestParam String userId) {
-    return userService.updateNickName(userId, userNicknameDto);
+  public UserPatchNicknameDto updateUserName(@RequestBody @Valid UserPatchNicknameDto userNicknameDto,
+                                             @RequestParam String userId) {
+    userService.updateNickName(userId, userNicknameDto);
+    UserPatchNicknameDto user = UserPatchNicknameDto.builder()
+        .nickname(userService.findUserByUserId(userId).getNickname())
+        .build();
+    return user;
   }
 
   @PatchMapping("/user/pwd")
-  public String updatePasswordUser(@RequestBody @Valid UserPasswordDto userPasswordDto,
+  public String updatePasswordUser(@RequestBody @Valid UserPatchPasswordDto userPasswordDto,
                                    @RequestParam String userId) {
     return userService.updatePassword(userId, userPasswordDto);
   }

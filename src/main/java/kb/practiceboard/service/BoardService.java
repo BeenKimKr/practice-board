@@ -1,7 +1,7 @@
 package kb.practiceboard.service;
 
 import kb.practiceboard.domain.BoardEntity;
-import kb.practiceboard.dto.board.BoardCreateDto;
+import kb.practiceboard.dto.board.BoardDto;
 import kb.practiceboard.dto.board.BoardTagDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -29,6 +29,13 @@ public class BoardService {
     return mongoTemplate.findAll(BoardEntity.class, "board");
   }
 
+  public BoardEntity findById(String boardId) {
+    Query query = new Query();
+    query.addCriteria(Criteria.where("_id").is(boardId));
+
+    return mongoTemplate.findOne(query, BoardEntity.class, "board");
+  }
+
   public List<BoardEntity> findByName(String keyword) {
     Query query = new Query();
     query.addCriteria(Criteria.where("boardName").regex(keyword));
@@ -44,7 +51,7 @@ public class BoardService {
   }
 
   @Transactional
-  public BoardEntity createBoard(BoardCreateDto boardCreateDto) {
+  public BoardEntity createBoard(BoardDto boardCreateDto) {
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
     BoardEntity newBoard = BoardEntity.builder()

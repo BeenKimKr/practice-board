@@ -2,8 +2,8 @@ package kb.practiceboard.service;
 
 import kb.practiceboard.domain.UserEntity;
 import kb.practiceboard.dto.user.UserLoginDto;
-import kb.practiceboard.dto.user.UserNicknameDto;
-import kb.practiceboard.dto.user.UserPasswordDto;
+import kb.practiceboard.dto.user.UserPatchNicknameDto;
+import kb.practiceboard.dto.user.UserPatchPasswordDto;
 import kb.practiceboard.dto.user.UserRegisterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -60,6 +60,7 @@ public class UserService {
         .userId(uuid)
         .email(userRegisterDto.getEmail())
         .userName(userRegisterDto.getUserName())
+        .nickname("")
         .password(userRegisterDto.getPassword())
         .registerDateTime(dateTime)
         .passwordUpdatedDateTime(dateTime)
@@ -96,7 +97,7 @@ public class UserService {
   }
 
   @Transactional
-  public String updateNickName(String userId, UserNicknameDto userNicknameDto) {
+  public String updateNickName(String userId, UserPatchNicknameDto userNicknameDto) {
     Query query = new Query();
     query.addCriteria(Criteria.where("userId").is(userId));
 
@@ -107,7 +108,7 @@ public class UserService {
   }
 
   @Transactional
-  public String updatePassword(String userId, UserPasswordDto userPasswordDto) {
+  public String updatePassword(String userId, UserPatchPasswordDto userPasswordDto) {
     Query query = new Query();
     query.addCriteria(Criteria.where("userId").is(userId));
 

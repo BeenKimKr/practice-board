@@ -1,11 +1,15 @@
 package kb.practiceboard.controller;
 
 import kb.practiceboard.domain.FileEntity;
+import kb.practiceboard.dto.file.FileDto;
 import kb.practiceboard.service.FileService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class FileController {
@@ -18,13 +22,29 @@ public class FileController {
   }
 
   @PostMapping(value = "/file", consumes = {"multipart/form-data"})
-  public FileEntity uploadFile(@RequestPart("files") MultipartFile files) {
-    return fileService.upload(files);
+  public FileDto uploadFile(@RequestPart("files") MultipartFile files) {
+    FileEntity newFile = fileService.upload(files);
+    FileDto file = FileDto.builder()
+        .originalName(newFile.getOriginalName())
+        .size(newFile.getSize())
+        .mimeType(newFile.getMimeType())
+        .build();
+    return file;
   }
 
   @GetMapping("/file")
-  public FileEntity findFile(@RequestBody String postingId) {
-    return fileService.findByPostingId(postingId);
+  public List<FileDto> findFile(@RequestBody String postingId) {
+    List<FileEntity> fileList = fileService.findByPostingId(postingId);
+    List<FileDto> files = new ArrayList<FileDto>();
+    for (FileEntity f : fileList) {
+      files.add(FileDto.builder()
+          .originalName(f.getOriginalName())
+          .size(f.getSize())
+          .mimeType(f.getMimeType())
+          .uploaderId(f.getUploaderId())
+          .build());
+    }
+    return files;
   }
 
   @PatchMapping(value = "/file", consumes = {"multipart/form-data"})

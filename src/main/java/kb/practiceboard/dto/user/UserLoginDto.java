@@ -1,5 +1,6 @@
 package kb.practiceboard.dto.user;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,9 +17,12 @@ public class UserLoginDto {
   @Min(value = 1, message = "비밀번호를 입력해주세요.")
   private String password;
 
+  private String nickname;
 
-  public UserLoginDto(String email, String password) {
+  @Builder
+  public UserLoginDto(String email, String password, String nickname) {
     this.email = email;
     this.password = password;
+    this.nickname = nickname;
   }
 }

@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Service
 public class FileService {
@@ -50,10 +51,10 @@ public class FileService {
     return mongoTemplate.insert(newFile, "file");
   }
 
-  public FileEntity findByPostingId(String postingId) {
+  public List<FileEntity> findByPostingId(String postingId) {
     Query query = new Query();
     query.addCriteria(Criteria.where("postingId").is(postingId));
-    return mongoTemplate.findOne(query, FileEntity.class, "file");
+    return mongoTemplate.find(query, FileEntity.class, "file");
   }
 
   public FileEntity findByOriginalName(String originalName) {

@@ -2,13 +2,14 @@ package kb.practiceboard.controller;
 
 import kb.practiceboard.domain.PostingEntity;
 import kb.practiceboard.dto.posting.PostingCreateDto;
-import kb.practiceboard.dto.posting.PostingUpdateContentsDto;
+import kb.practiceboard.dto.posting.PostingGetDto;
 import kb.practiceboard.service.CommentService;
 import kb.practiceboard.service.PostingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,36 +25,82 @@ public class PostingController {
   }
 
   @PostMapping("/posting")
-  public PostingEntity createPosting(@RequestBody @Valid PostingCreateDto postingCreateDto) {
-    return postingService.create(postingCreateDto);
+  public PostingGetDto createPosting(@RequestBody @Valid PostingCreateDto postingCreateDto) {
+    PostingEntity newPosting = postingService.create(postingCreateDto);
+    PostingGetDto posting = PostingGetDto.builder()
+        .title(newPosting.getTitle())
+        .contents(newPosting.getContents())
+        .authorId(newPosting.getAuthorId())
+        .updatedDateTime(newPosting.getUpdatedDateTime())
+        .build();
+    return posting;
   }
 
   @GetMapping("/posting/{postingId}")
-  public PostingEntity viewPosting(@PathVariable String postingId) {
-    return postingService.findById(postingId);
+  public PostingGetDto viewPosting(@PathVariable String postingId) {
+    PostingEntity selectedPosting = postingService.findById(postingId);
+    PostingGetDto posting = PostingGetDto.builder()
+        .title(selectedPosting.getTitle())
+        .contents(selectedPosting.getContents())
+        .authorId(selectedPosting.getAuthorId())
+        .updatedDateTime(selectedPosting.getUpdatedDateTime())
+        .fileId(selectedPosting.getFileId())
+        .build();
+    return posting;
   }
 
   @PatchMapping("/posting/{postingId}")
-  public String editPosting(@PathVariable String postingId,
-                            @RequestBody @Valid PostingUpdateContentsDto postingUpdateDto) {
-    return postingService.updateContents(postingId, postingUpdateDto);
+  public PostingGetDto editPosting(@PathVariable String postingId,
+                                   @RequestBody @Valid PostingGetDto postingGetDto) {
+    postingService.updateContents(postingId, postingGetDto);
+    PostingEntity updatedPosting = postingService.findById(postingId);
+    PostingGetDto posting = PostingGetDto.builder()
+        .title(updatedPosting.getTitle())
+        .contents(updatedPosting.getContents())
+        .authorId(updatedPosting.getAuthorId())
+        .updatedDateTime(updatedPosting.getUpdatedDateTime())
+        .fileId(updatedPosting.getFileId())
+        .build();
+    return posting;
   }
 
   @GetMapping("/postings")
-  public List<PostingEntity> listAllPosting() {
-    return postingService.findAll();
+  public List<PostingGetDto> listAllPosting() {
+    List<PostingEntity> postingList = postingService.findAll();
+    List<PostingGetDto> postings = new ArrayList<PostingGetDto>();
+    for (PostingEntity p : postingList) {
+      postings.add(PostingGetDto.builder()
+          .title(p.getTitle())
+          .contents(p.getContents())
+          .authorId(p.getAuthorId())
+          .updatedDateTime(p.getUpdatedDateTime())
+          .build());
+    }
+    return postings;
   }
 
   @GetMapping("/postings/{criterion}/{keyword}")
-  public List<PostingEntity> listByKeyword(@PathVariable String criterion,
+  public List<PostingGetDto> listByKeyword(@PathVariable String criterion,
                                            @PathVariable String keyword) {
+    List<PostingEntity> postingList;
     if (criterion.equals("author")) {
-      return postingService.findByAuthor(keyword);
+      postingList = postingService.findByAuthor(keyword);
     } else if (criterion.equals("title")) {
-      return postingService.findByTitle(keyword);
+      postingList = postingService.findByTitle(keyword);
     } else {
-      return postingService.findByContents(keyword);
+      postingList = postingService.findByContents(keyword);
     }
+
+    List<PostingGetDto> postings = new ArrayList<PostingGetDto>();
+    for (PostingEntity p : postingList) {
+      postings.add(PostingGetDto.builder()
+          .title(p.getTitle())
+          .contents(p.getContents())
+          .authorId(p.getAuthorId())
+          .updatedDateTime(p.getUpdatedDateTime())
+          .build());
+    }
+    return postings;
   }
 
   @DeleteMapping("/posting/{postingId}")
@@ -62,7 +109,17 @@ public class PostingController {
   }
 
   @GetMapping("/board/{boardId}/postings")
-  public List<PostingEntity> listByBoardId(@PathVariable String boardId) {
-    return postingService.findByBoardId(boardId);
+  public List<PostingGetDto> listByBoardId(@PathVariable String boardId) {
+    List<PostingEntity> postingList = postingService.findByBoardId(boardId);
+    List<PostingGetDto> postings = new ArrayList<PostingGetDto>();
+    for (PostingEntity p : postingList) {
+      postings.add(PostingGetDto.builder()
+          .title(p.getTitle())
+          .contents(p.getContents())
+          .authorId(p.getAuthorId())
+          .updatedDateTime(p.getUpdatedDateTime())
+          .build());
+    }
+    return postings;
   }
 }

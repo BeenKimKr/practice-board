@@ -2,7 +2,7 @@ package kb.practiceboard.service;
 
 import kb.practiceboard.domain.PostingEntity;
 import kb.practiceboard.dto.posting.PostingCreateDto;
-import kb.practiceboard.dto.posting.PostingUpdateContentsDto;
+import kb.practiceboard.dto.posting.PostingGetDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -90,13 +90,13 @@ public class PostingService {
   }
 
   @Transactional
-  public String updateContents(String postingId, PostingUpdateContentsDto postingUpdateDto) {
+  public String updateContents(String postingId, PostingGetDto postingGetDto) {
     Query query = new Query();
     query.addCriteria(Criteria.where("_id").is(postingId));
 
     Update update = new Update();
-    update.set("title", postingUpdateDto.getTitle());
-    update.set("contents", postingUpdateDto.getContents());
+    update.set("title", postingGetDto.getTitle());
+    update.set("contents", postingGetDto.getContents());
 
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     update.set("updatedDateTime", currentDateTime);
