@@ -1,10 +1,7 @@
 package kb.practiceboard.controller;
 
 import kb.practiceboard.domain.UserEntity;
-import kb.practiceboard.dto.user.UserLoginDto;
-import kb.practiceboard.dto.user.UserPatchNicknameDto;
-import kb.practiceboard.dto.user.UserPatchPasswordDto;
-import kb.practiceboard.dto.user.UserRegisterDto;
+import kb.practiceboard.dto.user.*;
 import kb.practiceboard.service.CommentService;
 import kb.practiceboard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,33 +31,33 @@ public class UserController {
   }
 
   @PatchMapping("/user/login")
-  public UserLoginDto loginUser(@RequestBody @Valid UserLoginDto userLoginDto) {
+  public UserLoginResponseDto loginUser(@RequestBody @Valid UserLoginRequestDto userLoginDto) {
     UserEntity loginUser = userService.login(userLoginDto);
-    UserLoginDto user = UserLoginDto.builder()
+    UserLoginResponseDto user = UserLoginResponseDto.builder()
+        .userId(loginUser.getUserId())
         .nickname(loginUser.getNickname())
+        .updatePasswordRequired(loginUser.getUpdatePasswordRequired())
         .build();
     return user;
   }
 
   @GetMapping("/user")
-  public String myAccount(@RequestBody String userId) {
+  public String myaccount(@RequestBody String userId) {
     return userService.findUserByUserId(userId).getNickname();
   }
 
   @PatchMapping("/user/nickname")
-  public UserPatchNicknameDto updateUserName(@RequestBody @Valid UserPatchNicknameDto userNicknameDto,
-                                             @RequestParam String userId) {
-    userService.updateNickName(userId, userNicknameDto);
+  public UserPatchNicknameDto updateNickname(@RequestBody @Valid UserPatchNicknameDto userNicknameDto) {
+    userService.updateNickName(userNicknameDto);
     UserPatchNicknameDto user = UserPatchNicknameDto.builder()
-        .nickname(userService.findUserByUserId(userId).getNickname())
+        .nickname(userService.findUserByUserId(userNicknameDto.getUserId()).getNickname())
         .build();
     return user;
   }
 
   @PatchMapping("/user/pwd")
-  public String updatePasswordUser(@RequestBody @Valid UserPatchPasswordDto userPasswordDto,
-                                   @RequestParam String userId) {
-    return userService.updatePassword(userId, userPasswordDto);
+  public String updatePasswordUser(@RequestBody @Valid UserPatchPasswordDto userPasswordDto) {
+    return userService.updatePassword(userPasswordDto);
   }
 
   @DeleteMapping("/user")

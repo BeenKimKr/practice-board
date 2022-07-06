@@ -22,6 +22,7 @@ public class UserRegisterDto {
       message = "비밀번호는 영문과 특수문자를 포함해 8자 이상 20자 이하여야 합니다.")
   private String password;
 
+
   @Builder
   public UserRegisterDto(String email, String userName, String password) {
     this.email = email;

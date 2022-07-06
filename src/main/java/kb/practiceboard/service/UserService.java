@@ -1,7 +1,7 @@
 package kb.practiceboard.service;
 
 import kb.practiceboard.domain.UserEntity;
-import kb.practiceboard.dto.user.UserLoginDto;
+import kb.practiceboard.dto.user.UserLoginRequestDto;
 import kb.practiceboard.dto.user.UserPatchNicknameDto;
 import kb.practiceboard.dto.user.UserPatchPasswordDto;
 import kb.practiceboard.dto.user.UserRegisterDto;
@@ -71,35 +71,31 @@ public class UserService {
   }
 
   @Transactional
-  public UserEntity login(UserLoginDto userLoginDto) {
+  public UserEntity login(UserLoginRequestDto userLoginDto) {
     UserEntity user = findByEmail(userLoginDto.getEmail());
-
-    // 로그인시 현재 DateTime - updatedDatetime = 90일이 넘으면 updatePasswordRequired -> true
+    // 로그인시 현재 DateTime - passwordUpdatedDateTime = 90일이 넘으면 updatePasswordRequired -> true
     LocalDate currentDate = LocalDate.now();
     LocalDate updatedDate = LocalDate.parse(user.getPasswordUpdatedDateTime().split(" ")[0]);
     long days = ChronoUnit.DAYS.between(updatedDate, currentDate);
+    Boolean updatePasswordRequired = false;
+    if (days > 90) {
+      updatePasswordRequired = true;
+    }
+    user.builder()
+        .updatePasswordRequired(updatePasswordRequired)
+        .build();
     Query query = new Query();
     query.addCriteria(Criteria.where("userId").is(user.getUserId()));
-
     Update update = new Update();
-    if (days > 90) {
-      update.set("updatePasswordRequired", true);
-      mongoTemplate.updateFirst(query, update, "user");
-      return findUserByUserId(user.getUserId());
-    } else {
-      user.builder()
-          .updatePasswordRequired(false)
-          .build();
-      update.set("updatePasswordRequired", false);
-      mongoTemplate.updateFirst(query, update, "user");
-      return user;
-    }
+    update.set("updatePasswordRequired", updatePasswordRequired);
+    mongoTemplate.updateFirst(query, update, UserEntity.class, "user");
+    return findUserByUserId(user.getUserId());
   }
 
   @Transactional
-  public String updateNickName(String userId, UserPatchNicknameDto userNicknameDto) {
+  public String updateNickName(UserPatchNicknameDto userNicknameDto) {
     Query query = new Query();
-    query.addCriteria(Criteria.where("userId").is(userId));
+    query.addCriteria(Criteria.where("userId").is(userNicknameDto.getUserId()));
 
     Update update = new Update();
     update.set("nickname", userNicknameDto.getNickname());
@@ -108,9 +104,9 @@ public class UserService {
   }
 
   @Transactional
-  public String updatePassword(String userId, UserPatchPasswordDto userPasswordDto) {
+  public String updatePassword(UserPatchPasswordDto userPasswordDto) {
     Query query = new Query();
-    query.addCriteria(Criteria.where("userId").is(userId));
+    query.addCriteria(Criteria.where("userId").is(userPasswordDto.getUserId()));
 
     String newUpdatedDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     Update update = new Update();
