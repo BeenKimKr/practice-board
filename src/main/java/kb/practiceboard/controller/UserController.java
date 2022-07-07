@@ -1,7 +1,11 @@
 package kb.practiceboard.controller;
 
 import kb.practiceboard.domain.UserEntity;
-import kb.practiceboard.dto.user.*;
+import kb.practiceboard.dto.MessageDto;
+import kb.practiceboard.dto.user.UserLoginDto;
+import kb.practiceboard.dto.user.UserPatchNicknameDto;
+import kb.practiceboard.dto.user.UserPatchPasswordDto;
+import kb.practiceboard.dto.user.UserRegisterDto;
 import kb.practiceboard.service.CommentService;
 import kb.practiceboard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +35,9 @@ public class UserController {
   }
 
   @PatchMapping("/user/login")
-  public UserLoginResponseDto loginUser(@RequestBody @Valid UserLoginRequestDto userLoginDto) {
+  public UserLoginDto loginUser(@RequestBody @Valid UserLoginDto userLoginDto) {
     UserEntity loginUser = userService.login(userLoginDto);
-    UserLoginResponseDto user = UserLoginResponseDto.builder()
+    UserLoginDto user = UserLoginDto.builder()
         .userId(loginUser.getUserId())
         .nickname(loginUser.getNickname())
         .updatePasswordRequired(loginUser.getUpdatePasswordRequired())
@@ -56,12 +60,12 @@ public class UserController {
   }
 
   @PatchMapping("/user/pwd")
-  public String updatePasswordUser(@RequestBody @Valid UserPatchPasswordDto userPasswordDto) {
-    return userService.updatePassword(userPasswordDto);
+  public MessageDto updatePasswordUser(@RequestBody @Valid UserPatchPasswordDto userPasswordDto) {
+    return MessageDto.builder().message(userService.updatePassword(userPasswordDto)).build();
   }
 
   @DeleteMapping("/user")
-  public String deleteUser(@RequestBody String userId) {
-    return userService.delete(userId);
+  public MessageDto deleteUser(@RequestBody String userId) {
+    return MessageDto.builder().message(userService.delete(userId)).build();
   }
 }

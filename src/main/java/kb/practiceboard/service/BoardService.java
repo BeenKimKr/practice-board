@@ -2,7 +2,6 @@ package kb.practiceboard.service;
 
 import kb.practiceboard.domain.BoardEntity;
 import kb.practiceboard.dto.board.BoardDto;
-import kb.practiceboard.dto.board.BoardTagDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -32,6 +31,13 @@ public class BoardService {
   public BoardEntity findById(String boardId) {
     Query query = new Query();
     query.addCriteria(Criteria.where("_id").is(boardId));
+
+    return mongoTemplate.findOne(query, BoardEntity.class, "board");
+  }
+
+  public BoardEntity findOneByName(String boardName) {
+    Query query = new Query();
+    query.addCriteria(Criteria.where("boardName").is(boardName));
 
     return mongoTemplate.findOne(query, BoardEntity.class, "board");
   }
@@ -75,12 +81,12 @@ public class BoardService {
   }
 
   @Transactional
-  public String updateTag(String boardId, BoardTagDto boardTagDto) {
+  public String updateTag(BoardDto boardDto) {
     Query query = new Query();
-    query.addCriteria(Criteria.where("boardName").is(boardId));
+    query.addCriteria(Criteria.where("boardName").is(boardDto.getBoardName()));
 
     Update update = new Update();
-    update.set("tag", boardTagDto.getTag());
+    update.set("tag", boardDto.getTag());
 
     mongoTemplate.updateFirst(query, update, BoardEntity.class, "board");
     return "태그 수정이 완료되었습니다.";

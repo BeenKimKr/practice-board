@@ -55,7 +55,6 @@ public class CommentService {
         .writerId(commentDto.getWriterId())
         .contents(commentDto.getContents())
         .postingId(commentDto.getPostingId())
-        .createdDateTime(currentDateTime)
         .updatedDateTime(currentDateTime)
         .build();
 

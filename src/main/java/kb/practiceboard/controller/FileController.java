@@ -3,7 +3,6 @@ package kb.practiceboard.controller;
 import kb.practiceboard.domain.FileEntity;
 import kb.practiceboard.dto.file.FileDto;
 import kb.practiceboard.service.FileService;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -56,7 +55,7 @@ public class FileController {
   }
 
   @DeleteMapping("/file")
-  public String deleteFile(@RequestBody ObjectId fileId) {
+  public String deleteFile(@RequestBody String fileId) {
     return fileService.delete(fileId);
   }
 

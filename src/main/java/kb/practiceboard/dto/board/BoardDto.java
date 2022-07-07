@@ -20,9 +20,12 @@ public class BoardDto {
   @Max(value = 5, message = "태그는 최대 5개까지 입력 가능합니다.")
   private List<String> tag;
 
+  private String lastPostingDateTime;
+
   @Builder
-  public BoardDto(String boardName, List<String> tag) {
+  public BoardDto(String boardName, List<String> tag, String lastPostingDateTime) {
     this.boardName = boardName;
     this.tag = tag;
+    this.lastPostingDateTime = lastPostingDateTime;
   }
 }

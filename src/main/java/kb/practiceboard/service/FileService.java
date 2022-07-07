@@ -1,7 +1,6 @@
 package kb.practiceboard.service;
 
 import kb.practiceboard.domain.FileEntity;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -84,7 +83,7 @@ public class FileService {
     return;
   }
 
-  public String delete(ObjectId fileId) {
+  public String delete(String fileId) {
     Query query = new Query();
     query.addCriteria(Criteria.where("_id").is(fileId));
     mongoTemplate.remove(query, FileEntity.class, "file");

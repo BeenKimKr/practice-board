@@ -2,7 +2,6 @@ package kb.practiceboard.controller;
 
 import kb.practiceboard.domain.BoardEntity;
 import kb.practiceboard.dto.board.BoardDto;
-import kb.practiceboard.dto.board.BoardTagDto;
 import kb.practiceboard.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +26,7 @@ public class BoardController {
     BoardDto board = BoardDto.builder()
         .boardName(newBoard.getBoardName())
         .tag(newBoard.getTag())
+        .lastPostingDateTime(newBoard.getLastPostingDateTime())
         .build();
     return board;
   }
@@ -39,25 +39,25 @@ public class BoardController {
       boards.add(BoardDto.builder()
           .boardName(b.getBoardName())
           .tag(b.getTag())
+          .lastPostingDateTime(b.getLastPostingDateTime())
           .build());
     }
     return boards;
   }
 
   @PatchMapping("/board")
-  public BoardTagDto updateTag(@RequestBody @Valid BoardTagDto boardTagDto,
-                               @RequestParam String boardId) {
-    boardService.updateTag(boardId, boardTagDto);
-    BoardEntity boardList = boardService.findById(boardId);
-    BoardTagDto board = BoardTagDto.builder()
+  public BoardDto updateTag(@RequestBody @Valid BoardDto boardDto) {
+    boardService.updateTag(boardDto);
+    BoardEntity boardList = boardService.findOneByName(boardDto.getBoardName());
+    BoardDto board = BoardDto.builder()
         .tag(boardList.getTag())
         .build();
     return board;
   }
 
   @GetMapping("/boards/{criterion}/{keyword}")
-  public List<BoardDto> listByKeyword(@PathVariable String criterion,
-                                      @PathVariable String keyword) {
+  public List<BoardDto> listByKeywords(@PathVariable String criterion,
+                                       @PathVariable String keyword) {
     List<BoardEntity> boardList;
     if (criterion.equals("boardName")) {
       boardList = boardService.findByName(keyword);
@@ -70,6 +70,7 @@ public class BoardController {
       boards.add(BoardDto.builder()
           .boardName(b.getBoardName())
           .tag(b.getTag())
+          .lastPostingDateTime(b.getLastPostingDateTime())
           .build());
     }
     return boards;

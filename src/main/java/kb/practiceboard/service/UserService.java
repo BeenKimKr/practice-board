@@ -1,7 +1,7 @@
 package kb.practiceboard.service;
 
 import kb.practiceboard.domain.UserEntity;
-import kb.practiceboard.dto.user.UserLoginRequestDto;
+import kb.practiceboard.dto.user.UserLoginDto;
 import kb.practiceboard.dto.user.UserPatchNicknameDto;
 import kb.practiceboard.dto.user.UserPatchPasswordDto;
 import kb.practiceboard.dto.user.UserRegisterDto;
@@ -71,7 +71,7 @@ public class UserService {
   }
 
   @Transactional
-  public UserEntity login(UserLoginRequestDto userLoginDto) {
+  public UserEntity login(UserLoginDto userLoginDto) {
     UserEntity user = findByEmail(userLoginDto.getEmail());
     // 로그인시 현재 DateTime - passwordUpdatedDateTime = 90일이 넘으면 updatePasswordRequired -> true
     LocalDate currentDate = LocalDate.now();
