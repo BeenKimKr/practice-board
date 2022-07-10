@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -32,8 +33,7 @@ import java.util.List;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -49,7 +49,7 @@ public class BoardControllerTest {
   @Autowired
   private ObjectMapper objectMapper;
 
-  @MockBean
+  @InjectMocks
   private BoardController boardController;
 
   @MockBean
@@ -95,12 +95,12 @@ public class BoardControllerTest {
                     fieldWithPath("boardName").description("게시판 이름").type(JsonFieldType.STRING),
                     fieldWithPath("tag").description("게시판 태그").type(JsonFieldType.ARRAY)
                 )
-//                , responseFields(
-//                    subsectionWithPath("response").description("응답"),
-//                    fieldWithPath("response.[].boardName").description("게시판명").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].tag").description("태그").type(JsonFieldType.ARRAY),
-//                    fieldWithPath("response.[].lastUpdatedDateTime").description("마지막 게시물 생성 시간").type(JsonFieldType.STRING)
-//                )
+                , responseFields(
+                    subsectionWithPath("response").description("응답"),
+                    fieldWithPath("boardName").description("게시판명").type(JsonFieldType.STRING),
+                    fieldWithPath("tag").description("태그").type(JsonFieldType.ARRAY),
+                    fieldWithPath("lastUpdatedDateTime").description("마지막 게시물 생성 시간").type(JsonFieldType.STRING)
+                )
             )
         );
   }
@@ -119,12 +119,11 @@ public class BoardControllerTest {
         .andDo(
             document("allBoardList",
                 preprocessResponse(prettyPrint())
-//                , responseFields(
-//                    subsectionWithPath("response").description("응답"),
-//                    fieldWithPath("response.[].boardName").description("게시판명").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].tag").description("게시판 태그").type(JsonFieldType.ARRAY),
-//                    fieldWithPath("response.[].lastUpdatedDateTime").description("마지막 게시물 생성 시간").type(JsonFieldType.STRING)
-//                )
+                , responseFields(
+                    fieldWithPath("boardName").description("게시판명").type(JsonFieldType.STRING),
+                    fieldWithPath("tag").description("게시판 태그").type(JsonFieldType.ARRAY),
+                    fieldWithPath("lastUpdatedDateTime").description("마지막 게시물 생성 시간").type(JsonFieldType.STRING)
+                )
             )
         );
   }
@@ -158,10 +157,10 @@ public class BoardControllerTest {
                     fieldWithPath("boardName").description("게시판 이름").type(JsonFieldType.STRING),
                     fieldWithPath("tag").description("게시판 태그").type(JsonFieldType.ARRAY)
                 )
-//                , responseFields(
-//                    subsectionWithPath("response").description("응답"),
-//                    fieldWithPath("response.[].tag").description("게시판 태그").type(JsonFieldType.STRING)
-//                )
+                , responseFields(
+                    fieldWithPath("tag").description("게시판 태그").type(JsonFieldType.STRING),
+                    fieldWithPath("boardName").description("게시판 이름").type(JsonFieldType.STRING).optional()
+                )
             )
         );
   }
@@ -188,12 +187,11 @@ public class BoardControllerTest {
                     parameterWithName("criterion").description("검색 기준"),
                     parameterWithName("keyword").description("검색 단어")
                 )
-//                , responseFields(
-//                    subsectionWithPath("response").description("응답"),
-//                    fieldWithPath("response.[].boardName").description("게시판 이름").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].tag").description("게시판 태그").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].lastUpdatedDateTime").description("마지막 게시물 생성 시간").type(JsonFieldType.STRING)
-//                )
+                , responseFields(
+                    fieldWithPath("boardName").description("게시판 이름").type(JsonFieldType.STRING),
+                    fieldWithPath("tag").description("게시판 태그").type(JsonFieldType.STRING),
+                    fieldWithPath("lastUpdatedDateTime").description("마지막 게시물 생성 시간").type(JsonFieldType.STRING)
+                )
             )
         );
   }

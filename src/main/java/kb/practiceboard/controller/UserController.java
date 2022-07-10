@@ -2,10 +2,7 @@ package kb.practiceboard.controller;
 
 import kb.practiceboard.domain.UserEntity;
 import kb.practiceboard.dto.MessageDto;
-import kb.practiceboard.dto.user.UserLoginDto;
-import kb.practiceboard.dto.user.UserPatchNicknameDto;
-import kb.practiceboard.dto.user.UserPatchPasswordDto;
-import kb.practiceboard.dto.user.UserRegisterDto;
+import kb.practiceboard.dto.user.*;
 import kb.practiceboard.service.CommentService;
 import kb.practiceboard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +43,8 @@ public class UserController {
   }
 
   @GetMapping("/user")
-  public String myaccount(@RequestBody String userId) {
-    return userService.findUserByUserId(userId).getNickname();
+  public UserResponseDto myAccount(@RequestBody String userId) {
+    return UserResponseDto.builder().nickname(userService.findUserByUserId(userId).getNickname()).build();
   }
 
   @PatchMapping("/user/nickname")

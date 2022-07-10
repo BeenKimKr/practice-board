@@ -62,9 +62,9 @@ public class UserControllerTest {
   @Test
   void registerUser() throws Exception {
     UserRegisterDto user = UserRegisterDto.builder()
-        .email("aaaa123@test1.com")
-        .userName("noname123")
-        .password("aaa1234567!!")
+        .email("aaa@test1.com")
+        .userName("noname")
+        .password("aaa12345!!")
         .build();
 
     ResultActions result = mockMvc.perform(
@@ -110,7 +110,8 @@ public class UserControllerTest {
             .accept(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(user))
     );
-    result.andExpect(status().isOk())
+    result
+        .andExpect(status().isOk())
         .andDo(print())
         .andDo(
             document("loginUser",
@@ -122,8 +123,8 @@ public class UserControllerTest {
                     fieldWithPath("updatePasswordRequired").description("비밀번호 변경 필요 여부").type(JsonFieldType.BOOLEAN).optional(),
                     fieldWithPath("email").description("이메일").type(JsonFieldType.STRING),
                     fieldWithPath("password").description("비밀번호").type(JsonFieldType.STRING)
-                )
-                , responseFields(
+                ),
+                responseFields(
                     fieldWithPath("userId").description("ID").type(JsonFieldType.STRING),
                     fieldWithPath("nickname").description("닉네임").type(JsonFieldType.STRING),
                     fieldWithPath("updatePasswordRequired").description("비밀번호 변경 필요 여부").type(JsonFieldType.BOOLEAN),
@@ -149,7 +150,8 @@ public class UserControllerTest {
             .accept(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(user))
     );
-    result.andExpect(status().isOk())
+    result
+        .andExpect(status().isOk())
         .andDo(print())
         .andDo(
             document("updateNickname",
@@ -182,7 +184,8 @@ public class UserControllerTest {
             .accept(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(user))
     );
-    result.andExpect(status().isOk())
+    result
+        .andExpect(status().isOk())
         .andDo(
             print())
         .andDo(document("updatePasswordUser",
@@ -201,10 +204,7 @@ public class UserControllerTest {
 
   @DisplayName("유저 정보 조회")
   @Test
-  void myaccount() throws Exception {
-    String userId = "fc187b2f-0c34-4eea-8587-bd3b1f23dd05";
-    String nickname = "aaa";
-
+  void myAccount() throws Exception {
     String content = "{\r\n\"userId\": \"fc187b2f-0c34-4eea-8587-bd3b1f23dd05\"\r\n}";
 
     ResultActions result = mockMvc.perform(
@@ -214,18 +214,21 @@ public class UserControllerTest {
             .accept(MediaType.APPLICATION_JSON)
             .content(content)
     );
-    result.andExpect(status().isOk())
+    result
+        .andExpect(status().isOk())
         .andDo(print())
         .andDo(
-            document("myaccount",
+            document("myAccount",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint()),
                 requestFields(
                     fieldWithPath("userId").description("ID").type(JsonFieldType.STRING)
                 )
                 , responseFields(
-                    subsectionWithPath("response").description("응답"),
-                    fieldWithPath("response.[].nickname").description("닉네임").type(JsonFieldType.STRING)
+                    fieldWithPath("nickname").description("닉네임").type(JsonFieldType.STRING),
+                    fieldWithPath("userId").description("ID").type(JsonFieldType.STRING).optional(),
+                    fieldWithPath("email").description("이메일").type(JsonFieldType.STRING).optional(),
+                    fieldWithPath("updatePasswordRequired").description("비밀번호 변경 필요 여부").type(JsonFieldType.STRING).optional()
                 )
             )
         );
@@ -234,9 +237,6 @@ public class UserControllerTest {
   @DisplayName("회원탈퇴")
   @Test
   void deleteUser() throws Exception {
-    String userId = "fc187b2f-0c34-4eea-8587-bd3b1f23dd05";
-    String message = "회원 탈퇴가 완료되었습니다.";
-
     String content = "{\r\n\"userId\": \"fc187b2f-0c34-4eea-8587-bd3b1f23dd05\"\r\n}";
 
     ResultActions result = mockMvc.perform(
@@ -246,7 +246,8 @@ public class UserControllerTest {
             .accept(MediaType.APPLICATION_JSON)
             .content(content)
     );
-    result.andExpect(status().isOk())
+    result
+        .andExpect(status().isOk())
         .andDo(print())
         .andDo(
             document("deleteUser",
@@ -256,8 +257,7 @@ public class UserControllerTest {
                     fieldWithPath("userId").description("ID").type(JsonFieldType.STRING)
                 )
                 , responseFields(
-                    subsectionWithPath("response").description("응답"),
-                    fieldWithPath("response.[].message").description("메시지").type(JsonFieldType.STRING)
+                    fieldWithPath("message").description("메시지").type(JsonFieldType.STRING)
                 )
             )
         );

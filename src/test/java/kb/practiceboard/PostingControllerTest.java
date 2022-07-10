@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -41,7 +42,7 @@ public class PostingControllerTest {
   @Autowired
   private ObjectMapper objectMapper;
 
-  @MockBean
+  @InjectMocks
   private PostingController postingController;
 
   @MockBean
@@ -85,13 +86,12 @@ public class PostingControllerTest {
                     fieldWithPath("authorId").description("작성자 ID").type(JsonFieldType.STRING),
                     fieldWithPath("boardId").description("게시판 ID").type(JsonFieldType.STRING)
                 )
-//                , responseFields(
-//                    subsectionWithPath("response").description("응답"),
-//                    fieldWithPath("response.[].title").description("ID").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].contents").description("내용").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].authorId").description("작성자 ID").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].updatedDateTime").description("마지막 수정일시").type(JsonFieldType.STRING)
-//                )
+                , responseFields(
+                    fieldWithPath("title").description("ID").type(JsonFieldType.STRING),
+                    fieldWithPath("contents").description("내용").type(JsonFieldType.STRING),
+                    fieldWithPath("authorId").description("작성자 ID").type(JsonFieldType.STRING),
+                    fieldWithPath("updatedDateTime").description("마지막 수정일시").type(JsonFieldType.STRING)
+                )
             )
         );
   }
@@ -116,14 +116,14 @@ public class PostingControllerTest {
                 pathParameters(
                     parameterWithName("postingId").description("ID")
                 )
-//                , responseFields(
-//                    subsectionWithPath("response").description("응답"),
-//                    fieldWithPath("response.[].title").description("ID").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].contents").description("내용").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].authorId").description("작성자 ID").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].updatedDateTime").description("마지막 수정일시").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].fileId").description("첨부파일 목록").type(JsonFieldType.ARRAY)
-//                )
+                , responseFields(
+                    subsectionWithPath("response").description("응답"),
+                    fieldWithPath("title").description("ID").type(JsonFieldType.STRING),
+                    fieldWithPath("contents").description("내용").type(JsonFieldType.STRING),
+                    fieldWithPath("authorId").description("작성자 ID").type(JsonFieldType.STRING),
+                    fieldWithPath("updatedDateTime").description("마지막 수정일시").type(JsonFieldType.STRING),
+                    fieldWithPath("fileId").description("첨부파일 목록").type(JsonFieldType.ARRAY)
+                )
             )
         );
   }
@@ -158,14 +158,13 @@ public class PostingControllerTest {
                     fieldWithPath("title").description("제목").type(JsonFieldType.STRING),
                     fieldWithPath("contents").description("내용").type(JsonFieldType.STRING)
                 )
-//                , responseFields(
-//                    subsectionWithPath("response").description("응답"),
-//                    fieldWithPath("response.[].title").description("ID").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].contents").description("내용").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].authorId").description("작성자 ID").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].updatedDateTime").description("마지막 수정일시").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].fileId").description("첨부파일 목록").type(JsonFieldType.ARRAY)
-//                )
+                , responseFields(
+                    fieldWithPath("title").description("ID").type(JsonFieldType.STRING),
+                    fieldWithPath("contents").description("내용").type(JsonFieldType.STRING),
+                    fieldWithPath("authorId").description("작성자 ID").type(JsonFieldType.STRING),
+                    fieldWithPath("updatedDateTime").description("마지막 수정일시").type(JsonFieldType.STRING),
+                    fieldWithPath("fileId").description("첨부파일 목록").type(JsonFieldType.ARRAY)
+                )
             )
         );
   }
@@ -185,13 +184,12 @@ public class PostingControllerTest {
             document("listAllPosting",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint())
-//                , responseFields(
-//                    subsectionWithPath("response").description("응답"),
-//                    fieldWithPath("response.[].title").description("ID").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].contents").description("내용").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].authorId").description("작성자 ID").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].updatedDateTime").description("마지막 수정일시").type(JsonFieldType.STRING)
-//                )
+                , responseFields(
+                    fieldWithPath("title").description("ID").type(JsonFieldType.STRING),
+                    fieldWithPath("contents").description("내용").type(JsonFieldType.STRING),
+                    fieldWithPath("authorId").description("작성자 ID").type(JsonFieldType.STRING),
+                    fieldWithPath("updatedDateTime").description("마지막 수정일시").type(JsonFieldType.STRING)
+                )
             )
         );
   }
@@ -218,13 +216,12 @@ public class PostingControllerTest {
                     parameterWithName("criterion").description("검색 기준"),
                     parameterWithName("keyword").description("검색 단어")
                 )
-//                , responseFields(
-//                    subsectionWithPath("response").description("응답"),
-//                    fieldWithPath("response.[].title").description("제목").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].contents").description("내용").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].authorId").description("작성자 ID").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].updatedDateTime").description("마지막 수정일시").type(JsonFieldType.STRING)
-//                )
+                , responseFields(
+                    fieldWithPath("title").description("제목").type(JsonFieldType.STRING),
+                    fieldWithPath("contents").description("내용").type(JsonFieldType.STRING),
+                    fieldWithPath("authorId").description("작성자 ID").type(JsonFieldType.STRING),
+                    fieldWithPath("updatedDateTime").description("마지막 수정일시").type(JsonFieldType.STRING)
+                )
             )
         );
   }
@@ -235,9 +232,10 @@ public class PostingControllerTest {
     String postingId = "62be722927bc640846e4a62b";
 
     ResultActions result = mockMvc.perform(
-        delete("/boards/{postingId}", postingId)
+        delete("/boards/" + postingId)
             .contentType(MediaType.APPLICATION_JSON)
             .characterEncoding("UTF-8")
+            .accept(MediaType.APPLICATION_JSON)
     );
     result
         .andExpect(status().isOk())
@@ -250,8 +248,7 @@ public class PostingControllerTest {
                     parameterWithName("postingId").description("ID")
                 )
                 , responseFields(
-                    subsectionWithPath("response").description("응답"),
-                    fieldWithPath("response.[].message").description("메시지").type(JsonFieldType.STRING)
+                    fieldWithPath("message").description("메시지").type(JsonFieldType.STRING)
                 )
             )
         );
@@ -277,13 +274,12 @@ public class PostingControllerTest {
                 pathParameters(
                     parameterWithName("boardId").description("게시판 ID")
                 )
-//                , responseFields(
-//                    subsectionWithPath("response").description("응답"),
-//                    fieldWithPath("response.[].title").description("게시판 이름").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].contents").description("게시판 태그").type(JsonFieldType.ARRAY),
-//                    fieldWithPath("response.[].authorId").description("작성자 ID").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].updatedDateTime").description("마지막 수정일시").type(JsonFieldType.STRING)
-//                )
+                , responseFields(
+                    fieldWithPath("title").description("게시판 이름").type(JsonFieldType.STRING),
+                    fieldWithPath("contents").description("게시판 태그").type(JsonFieldType.ARRAY),
+                    fieldWithPath("authorId").description("작성자 ID").type(JsonFieldType.STRING),
+                    fieldWithPath("updatedDateTime").description("마지막 수정일시").type(JsonFieldType.STRING)
+                )
             )
         );
   }
