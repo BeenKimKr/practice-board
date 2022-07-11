@@ -2,10 +2,7 @@ package kb.practiceboard;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kb.practiceboard.controller.UserController;
-import kb.practiceboard.dto.user.UserLoginDto;
-import kb.practiceboard.dto.user.UserPatchNicknameDto;
-import kb.practiceboard.dto.user.UserPatchPasswordDto;
-import kb.practiceboard.dto.user.UserRegisterDto;
+import kb.practiceboard.dto.user.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,8 +10,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
@@ -46,9 +41,6 @@ public class UserControllerTest {
   @InjectMocks
   private UserController userController;
 
-  @MockBean
-  private MappingMongoConverter mappingMongoConverter;
-
   @BeforeEach
   public void setUp(WebApplicationContext webApplicationContext,
                     RestDocumentationContextProvider restDocumentationContextProvider) {
@@ -63,7 +55,7 @@ public class UserControllerTest {
   void registerUser() throws Exception {
     UserRegisterDto user = UserRegisterDto.builder()
         .email("aaa@test1.com")
-        .userName("noname")
+        .userName("aaaaaaaaa")
         .password("aaa12345!!")
         .build();
 
@@ -89,7 +81,8 @@ public class UserControllerTest {
                 responseFields(
                     fieldWithPath("email").description("이메일").type(JsonFieldType.STRING),
                     fieldWithPath("userName").description("이름").type(JsonFieldType.STRING).optional(),
-                    fieldWithPath("password").description("비밀번호").type(JsonFieldType.STRING).optional()
+                    fieldWithPath("password").description("비밀번호").type(JsonFieldType.STRING).optional(),
+                    fieldWithPath("updatedPasswordRequired").description("비밀번호 변경 필요 여부").type(JsonFieldType.BOOLEAN).optional()
                 )
             )
         );
@@ -128,8 +121,7 @@ public class UserControllerTest {
                     fieldWithPath("userId").description("ID").type(JsonFieldType.STRING),
                     fieldWithPath("nickname").description("닉네임").type(JsonFieldType.STRING),
                     fieldWithPath("updatePasswordRequired").description("비밀번호 변경 필요 여부").type(JsonFieldType.BOOLEAN),
-                    fieldWithPath("email").description("이메일").type(JsonFieldType.STRING).optional(),
-                    fieldWithPath("password").description("비밀번호").type(JsonFieldType.STRING).optional()
+                    fieldWithPath("email").description("이메일").type(JsonFieldType.STRING).optional()
                 )
             )
         );
@@ -160,10 +152,12 @@ public class UserControllerTest {
                 requestFields(
                     fieldWithPath("userId").description("ID").type(JsonFieldType.STRING),
                     fieldWithPath("nickname").description("닉네임").type(JsonFieldType.STRING)
-                )
-                , responseFields(
+                ),
+                responseFields(
                     fieldWithPath("nickname").description("닉네임").type(JsonFieldType.STRING),
-                    fieldWithPath("userId").description("ID").type(JsonFieldType.STRING).optional()
+                    fieldWithPath("userId").description("ID").type(JsonFieldType.STRING).optional(),
+                    fieldWithPath("updatePasswordRequired").description("비밀번호 변경 필요 여부").type(JsonFieldType.BOOLEAN).optional(),
+                    fieldWithPath("email").description("이메일").type(JsonFieldType.STRING).optional()
                 )
             )
         );
@@ -205,17 +199,19 @@ public class UserControllerTest {
   @DisplayName("유저 정보 조회")
   @Test
   void myAccount() throws Exception {
-    String content = "{\r\n\"userId\": \"fc187b2f-0c34-4eea-8587-bd3b1f23dd05\"\r\n}";
+    UserIdDto user = UserIdDto.builder()
+        .userId("fc187b2f-0c34-4eea-8587-bd3b1f23dd05")
+        .build();
 
-    ResultActions result = mockMvc.perform(
+    ResultActions result = this.mockMvc.perform(
         get("/user")
             .contentType(MediaType.APPLICATION_JSON)
             .characterEncoding("UTF-8")
             .accept(MediaType.APPLICATION_JSON)
-            .content(content)
+            .content(objectMapper.writeValueAsString(user))
     );
     result
-        .andExpect(status().isOk())
+//        .andExpect(status().isOk())
         .andDo(print())
         .andDo(
             document("myAccount",
@@ -223,12 +219,12 @@ public class UserControllerTest {
                 preprocessResponse(prettyPrint()),
                 requestFields(
                     fieldWithPath("userId").description("ID").type(JsonFieldType.STRING)
-                )
-                , responseFields(
+                ),
+                responseFields(
                     fieldWithPath("nickname").description("닉네임").type(JsonFieldType.STRING),
-                    fieldWithPath("userId").description("ID").type(JsonFieldType.STRING).optional(),
+                    fieldWithPath("updatePasswordRequired").description("비밀번호 변경 필요 여부").type(JsonFieldType.BOOLEAN),
                     fieldWithPath("email").description("이메일").type(JsonFieldType.STRING).optional(),
-                    fieldWithPath("updatePasswordRequired").description("비밀번호 변경 필요 여부").type(JsonFieldType.STRING).optional()
+                    fieldWithPath("userId").description("ID").type(JsonFieldType.STRING).optional()
                 )
             )
         );
@@ -237,14 +233,16 @@ public class UserControllerTest {
   @DisplayName("회원탈퇴")
   @Test
   void deleteUser() throws Exception {
-    String content = "{\r\n\"userId\": \"fc187b2f-0c34-4eea-8587-bd3b1f23dd05\"\r\n}";
+    UserIdDto user = UserIdDto.builder()
+        .userId("fc187b2f-0c34-4eea-8587-bd3b1f23dd05")
+        .build();
 
     ResultActions result = mockMvc.perform(
         delete("/user")
             .contentType(MediaType.APPLICATION_JSON)
             .characterEncoding("UTF-8")
             .accept(MediaType.APPLICATION_JSON)
-            .content(content)
+            .content(objectMapper.writeValueAsString(user))
     );
     result
         .andExpect(status().isOk())
@@ -255,8 +253,8 @@ public class UserControllerTest {
                 preprocessResponse(prettyPrint()),
                 requestFields(
                     fieldWithPath("userId").description("ID").type(JsonFieldType.STRING)
-                )
-                , responseFields(
+                ),
+                responseFields(
                     fieldWithPath("message").description("메시지").type(JsonFieldType.STRING)
                 )
             )

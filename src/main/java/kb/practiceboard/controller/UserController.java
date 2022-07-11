@@ -23,18 +23,18 @@ public class UserController {
   }
 
   @PostMapping("/user")
-  public UserRegisterDto registerUser(@RequestBody @Valid UserRegisterDto userRegisterDto) {
+  public UserResponseDto registerUser(@RequestBody @Valid UserRegisterDto userRegisterDto) {
     UserEntity newUser = userService.create(userRegisterDto);
-    UserRegisterDto user = UserRegisterDto.builder()
+    UserResponseDto user = UserResponseDto.builder()
         .email(newUser.getEmail())
         .build();
     return user;
   }
 
   @PatchMapping("/user/login")
-  public UserLoginDto loginUser(@RequestBody @Valid UserLoginDto userLoginDto) {
+  public UserResponseDto loginUser(@RequestBody @Valid UserLoginDto userLoginDto) {
     UserEntity loginUser = userService.login(userLoginDto);
-    UserLoginDto user = UserLoginDto.builder()
+    UserResponseDto user = UserResponseDto.builder()
         .userId(loginUser.getUserId())
         .nickname(loginUser.getNickname())
         .updatePasswordRequired(loginUser.getUpdatePasswordRequired())
@@ -43,14 +43,19 @@ public class UserController {
   }
 
   @GetMapping("/user")
-  public UserResponseDto myAccount(@RequestBody String userId) {
-    return UserResponseDto.builder().nickname(userService.findUserByUserId(userId).getNickname()).build();
+  public UserResponseDto myAccount(@RequestBody UserIdDto userIdDto) {
+    UserEntity myUser = userService.findUserByUserId(userIdDto.getUserId());
+    UserResponseDto user = UserResponseDto.builder()
+        .nickname(myUser.getNickname())
+        .updatePasswordRequired(myUser.getUpdatePasswordRequired())
+        .build();
+    return user;
   }
 
   @PatchMapping("/user/nickname")
-  public UserPatchNicknameDto updateNickname(@RequestBody @Valid UserPatchNicknameDto userNicknameDto) {
+  public UserResponseDto updateNickname(@RequestBody @Valid UserPatchNicknameDto userNicknameDto) {
     userService.updateNickName(userNicknameDto);
-    UserPatchNicknameDto user = UserPatchNicknameDto.builder()
+    UserResponseDto user = UserResponseDto.builder()
         .nickname(userService.findUserByUserId(userNicknameDto.getUserId()).getNickname())
         .build();
     return user;
@@ -62,7 +67,7 @@ public class UserController {
   }
 
   @DeleteMapping("/user")
-  public MessageDto deleteUser(@RequestBody String userId) {
-    return MessageDto.builder().message(userService.delete(userId)).build();
+  public MessageDto deleteUser(@RequestBody UserIdDto userIdDto) {
+    return MessageDto.builder().message(userService.delete(userIdDto.getUserId())).build();
   }
 }

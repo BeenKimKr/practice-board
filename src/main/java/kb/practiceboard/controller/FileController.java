@@ -1,6 +1,7 @@
 package kb.practiceboard.controller;
 
 import kb.practiceboard.domain.FileEntity;
+import kb.practiceboard.dto.MessageDto;
 import kb.practiceboard.dto.file.FileDto;
 import kb.practiceboard.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,10 @@ public class FileController {
     return file;
   }
 
-  @GetMapping("/file")
-  public List<FileDto> findFile(@RequestBody String postingId) {
-    List<FileEntity> fileList = fileService.findByPostingId(postingId);
-    List<FileDto> files = new ArrayList<FileDto>();
+  @GetMapping("/files")
+  public List<FileDto> fileListByPostingId(@RequestBody FileDto fileDto) {
+    List<FileEntity> fileList = fileService.findByPostingId(fileDto);
+    List<FileDto> files = new ArrayList<>();
     for (FileEntity f : fileList) {
       files.add(FileDto.builder()
           .originalName(f.getOriginalName())
@@ -55,8 +56,11 @@ public class FileController {
   }
 
   @DeleteMapping("/file")
-  public String deleteFile(@RequestBody String fileId) {
-    return fileService.delete(fileId);
+  public MessageDto deleteFile(@RequestBody String fileId) {
+    MessageDto message = MessageDto.builder()
+        .message(fileService.delete(fileId))
+        .build();
+    return message;
   }
 
 }

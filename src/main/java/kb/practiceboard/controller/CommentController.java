@@ -1,6 +1,7 @@
 package kb.practiceboard.controller;
 
 import kb.practiceboard.domain.CommentEntity;
+import kb.practiceboard.dto.MessageDto;
 import kb.practiceboard.dto.comment.CommentDto;
 import kb.practiceboard.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class CommentController {
     CommentDto comment = CommentDto.builder()
         .writerId(newComment.getWriterId())
         .contents(newComment.getContents())
+        .postingId(newComment.getPostingId())
         .updatedDateTime(newComment.getUpdatedDateTime())
         .build();
     return comment;
@@ -43,8 +45,8 @@ public class CommentController {
   }
 
   @DeleteMapping("/comment/{commentId}")
-  public String deleteComment(@PathVariable String commentId) {
-    return commentService.delete(commentId);
+  public MessageDto deleteComment(@PathVariable String commentId) {
+    return MessageDto.builder().message(commentService.delete(commentId)).build();
   }
 
   @GetMapping("/comments/{postingId}")

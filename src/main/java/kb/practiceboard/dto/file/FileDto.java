@@ -4,14 +4,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 
 @Getter
 @NoArgsConstructor
 public class FileDto {
 
   private String originalName;
-  @Max(value = 8388608, message = "파일은 최대 8MB까지 업로드 가능합니다. 파일 크기를 확인해주세요.")
+  @Size(max = 8388608, message = "파일은 최대 8MB까지 업로드 가능합니다. 파일 크기를 확인해주세요.")
   private long size;
   private String mimeType;
   private String uploaderId;

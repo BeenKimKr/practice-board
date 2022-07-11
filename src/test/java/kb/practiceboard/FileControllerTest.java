@@ -2,6 +2,7 @@ package kb.practiceboard;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kb.practiceboard.controller.FileController;
+import kb.practiceboard.dto.file.FileDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,8 +10,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
@@ -27,7 +26,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -43,9 +42,6 @@ public class FileControllerTest {
   @InjectMocks
   private FileController fileController;
 
-  @MockBean
-  private MappingMongoConverter mappingMongoConverter;
-
   @BeforeEach
   public void setUp(WebApplicationContext webApplicationContext,
                     RestDocumentationContextProvider restDocumentationContextProvider) {
@@ -57,28 +53,33 @@ public class FileControllerTest {
 
   @DisplayName("파일 목록")
   @Test
-  void findFile() throws Exception {
-    String postingId = "62bea9f0fb954b34b82cfd36";
+  void fileListByPostingId() throws Exception {
+    FileDto file = FileDto.builder()
+        .postingId("62bea9f0fb954b34b82cfd36")
+        .build();
 
     ResultActions result = mockMvc.perform(
-        patch("/file")
+        get("/files")
             .contentType(MediaType.APPLICATION_JSON)
             .characterEncoding("UTF-8")
-            .content(objectMapper.writeValueAsString(postingId))
+            .accept(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(file))
     );
     result
-        .andExpect(status().isOk())
+//        .andExpect(status().isOk())
         .andDo(print())
         .andDo(
-            document("findFile",
+            document("fileListByPostingId",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint()),
                 requestFields(
                     fieldWithPath("postingId").description("게시글 ID").type(JsonFieldType.STRING)
-                )
-                , responseFields(
-                    subsectionWithPath("response").description("응답"),
-                    fieldWithPath("response.[].message").description("메시지").type(JsonFieldType.STRING)
+                ),
+                responseFields(
+                    fieldWithPath("[].originalName").description("파일명").type(JsonFieldType.STRING),
+                    fieldWithPath("[].size").description("파일 크기").type(JsonFieldType.STRING).optional(),
+                    fieldWithPath("[].mimeType").description("MIME").type(JsonFieldType.STRING),
+                    fieldWithPath("[].uploaderId").description("업로더 ID").type(JsonFieldType.STRING)
                 )
             )
         );
@@ -93,6 +94,7 @@ public class FileControllerTest {
         delete("/file")
             .contentType(MediaType.APPLICATION_JSON)
             .characterEncoding("UTF-8")
+            .accept(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(fileId))
     );
     result
@@ -102,12 +104,8 @@ public class FileControllerTest {
             document("deleteFile",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint()),
-                requestFields(
-                    fieldWithPath("fileId").description("ID").type(JsonFieldType.STRING)
-                )
-                , responseFields(
-                    subsectionWithPath("response").description("응답"),
-                    fieldWithPath("response.[].message").description("메시지").type(JsonFieldType.STRING)
+                responseFields(
+                    fieldWithPath("message").description("메시지").type(JsonFieldType.STRING)
                 )
             )
         );

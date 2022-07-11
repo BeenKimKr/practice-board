@@ -3,6 +3,7 @@ package kb.practiceboard;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kb.practiceboard.controller.BoardController;
+import kb.practiceboard.dto.board.BoardCreateDto;
 import kb.practiceboard.dto.board.BoardDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,12 +12,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
-import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -34,8 +32,6 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -52,9 +48,6 @@ public class BoardControllerTest {
   @InjectMocks
   private BoardController boardController;
 
-  @MockBean
-  private MappingMongoConverter mappingMongoConverter;
-
   @BeforeEach
   public void setUp(WebApplicationContext webApplicationContext,
                     RestDocumentationContextProvider restDocumentationContextProvider) {
@@ -68,13 +61,12 @@ public class BoardControllerTest {
   @Test
   void createBoard() throws Exception {
     List<String> tag = new ArrayList<>();
-    tag.add("t");
-    tag.add("e");
+    tag.add("자유");
 
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-    BoardDto board = BoardDto.builder()
-        .boardName("test")
+    BoardCreateDto board = BoardCreateDto.builder()
+        .boardName("자유게시판")
         .tag(tag)
         .build();
 
@@ -94,12 +86,11 @@ public class BoardControllerTest {
                 requestFields(
                     fieldWithPath("boardName").description("게시판 이름").type(JsonFieldType.STRING),
                     fieldWithPath("tag").description("게시판 태그").type(JsonFieldType.ARRAY)
-                )
-                , responseFields(
-                    subsectionWithPath("response").description("응답"),
+                ),
+                responseFields(
                     fieldWithPath("boardName").description("게시판명").type(JsonFieldType.STRING),
                     fieldWithPath("tag").description("태그").type(JsonFieldType.ARRAY),
-                    fieldWithPath("lastUpdatedDateTime").description("마지막 게시물 생성 시간").type(JsonFieldType.STRING)
+                    fieldWithPath("lastPostingDateTime").description("마지막 게시물 생성 시간").type(JsonFieldType.STRING)
                 )
             )
         );
@@ -118,11 +109,11 @@ public class BoardControllerTest {
         .andDo(print())
         .andDo(
             document("allBoardList",
-                preprocessResponse(prettyPrint())
-                , responseFields(
-                    fieldWithPath("boardName").description("게시판명").type(JsonFieldType.STRING),
-                    fieldWithPath("tag").description("게시판 태그").type(JsonFieldType.ARRAY),
-                    fieldWithPath("lastUpdatedDateTime").description("마지막 게시물 생성 시간").type(JsonFieldType.STRING)
+                preprocessResponse(prettyPrint()),
+                responseFields(
+                    fieldWithPath("[].boardName").description("게시판명").type(JsonFieldType.STRING),
+                    fieldWithPath("[].tag").description("게시판 태그").type(JsonFieldType.ARRAY),
+                    fieldWithPath("[].lastPostingDateTime").description("마지막 게시물 생성 시간").type(JsonFieldType.STRING)
                 )
             )
         );
@@ -132,11 +123,12 @@ public class BoardControllerTest {
   @Test
   void updateTag() throws Exception {
     List<String> tag = new ArrayList<>();
-    tag.add("s");
     tag.add("t");
+    tag.add("e");
+    tag.add("s");
 
     BoardDto board = BoardDto.builder()
-        .boardName("test")
+        .boardName("자유게시판")
         .tag(tag)
         .build();
 
@@ -144,6 +136,7 @@ public class BoardControllerTest {
         patch("/board")
             .contentType(MediaType.APPLICATION_JSON)
             .characterEncoding("UTF-8")
+            .accept(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(board))
     );
     result
@@ -155,11 +148,11 @@ public class BoardControllerTest {
                 preprocessResponse(prettyPrint()),
                 requestFields(
                     fieldWithPath("boardName").description("게시판 이름").type(JsonFieldType.STRING),
+                    fieldWithPath("tag").description("게시판 태그").type(JsonFieldType.ARRAY),
+                    fieldWithPath("lastPostingDateTime").description("마지막 게시물 생성 시간").type(JsonFieldType.STRING).optional()
+                ),
+                responseFields(
                     fieldWithPath("tag").description("게시판 태그").type(JsonFieldType.ARRAY)
-                )
-                , responseFields(
-                    fieldWithPath("tag").description("게시판 태그").type(JsonFieldType.STRING),
-                    fieldWithPath("boardName").description("게시판 이름").type(JsonFieldType.STRING).optional()
                 )
             )
         );
@@ -169,10 +162,10 @@ public class BoardControllerTest {
   @Test
   void listByKeywords() throws Exception {
     String criterion = "boardName";
-    String keyword = "st";
+    String keyword = "자유게시판";
 
     ResultActions result = mockMvc.perform(
-        RestDocumentationRequestBuilders.get("/boards/{criterion}/{keyword}", criterion, keyword)
+        get("/boards/" + criterion + "/" + keyword)
             .contentType(MediaType.APPLICATION_JSON)
             .characterEncoding("UTF-8")
     );
@@ -183,14 +176,10 @@ public class BoardControllerTest {
             document("listByKeywords",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint()),
-                pathParameters(
-                    parameterWithName("criterion").description("검색 기준"),
-                    parameterWithName("keyword").description("검색 단어")
-                )
-                , responseFields(
-                    fieldWithPath("boardName").description("게시판 이름").type(JsonFieldType.STRING),
-                    fieldWithPath("tag").description("게시판 태그").type(JsonFieldType.STRING),
-                    fieldWithPath("lastUpdatedDateTime").description("마지막 게시물 생성 시간").type(JsonFieldType.STRING)
+                responseFields(
+                    fieldWithPath("[].boardName").description("게시판 이름").type(JsonFieldType.STRING),
+                    fieldWithPath("[].tag").description("게시판 태그").type(JsonFieldType.ARRAY),
+                    fieldWithPath("[].lastPostingDateTime").description("마지막 게시물 생성 시간").type(JsonFieldType.STRING)
                 )
             )
         );

@@ -10,8 +10,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
@@ -27,10 +25,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -46,9 +41,6 @@ public class CommentControllerTest {
 
   @InjectMocks
   private CommentController commentController;
-
-  @MockBean
-  private MappingMongoConverter mappingMongoConverter;
 
   @BeforeEach
   public void setUp(WebApplicationContext webApplicationContext,
@@ -72,6 +64,7 @@ public class CommentControllerTest {
         post("/comment")
             .contentType(MediaType.APPLICATION_JSON)
             .characterEncoding("UTF-8")
+            .accept(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(comment))
     );
     result
@@ -85,14 +78,12 @@ public class CommentControllerTest {
                     fieldWithPath("writerId").description("작성자 ID").type(JsonFieldType.STRING),
                     fieldWithPath("contents").description("내용").type(JsonFieldType.STRING),
                     fieldWithPath("postingId").description("게시글 ID").type(JsonFieldType.STRING)
+                ), responseFields(
+                    fieldWithPath("writerId").description("작성자 ID").type(JsonFieldType.STRING),
+                    fieldWithPath("contents").description("내용").type(JsonFieldType.STRING),
+                    fieldWithPath("postingId").description("게시글 ID").type(JsonFieldType.STRING),
+                    fieldWithPath("updatedDateTime").description("마지막 댓글 수정 시간").type(JsonFieldType.STRING)
                 )
-//                , responseFields(
-//                    subsectionWithPath("response").description("응답"),
-//                    fieldWithPath("response.[].writerId").description("작성자 ID").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].contents").description("내용").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].postingId").description("게시글 ID").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].updatedDateTime").description("마지막 댓글 수정 시간").type(JsonFieldType.STRING)
-//                )
             )
         );
   }
@@ -104,12 +95,13 @@ public class CommentControllerTest {
         .contents("댓글 수정 테스트입니다.")
         .build();
 
-    String commentId = "62beae1c80dc941dd609cdb9";
+    String commentId = "62c3ef21dd53f328381bea21";
 
     ResultActions result = mockMvc.perform(
-        patch("/comment/{commentId}", commentId)
+        patch("/comment/" + commentId)
             .contentType(MediaType.APPLICATION_JSON)
             .characterEncoding("UTF-8")
+            .accept(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(comment))
     );
     result
@@ -119,17 +111,13 @@ public class CommentControllerTest {
             document("modifyComment",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint()),
-                pathParameters(
-                    parameterWithName("commentId").description("ID")
-                ),
                 requestFields(
                     fieldWithPath("contents").description("내용").type(JsonFieldType.STRING)
                 )
-//                , responseFields(
-//                    subsectionWithPath("response").description("응답"),
-//                    fieldWithPath("response.[].contents").description("내용").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].updatedDateTime").description("마지막 댓글 수정 시간").type(JsonFieldType.STRING)
-//                )
+                , responseFields(
+                    fieldWithPath(".contents").description("내용").type(JsonFieldType.STRING),
+                    fieldWithPath("updatedDateTime").description("마지막 댓글 수정 시간").type(JsonFieldType.STRING)
+                )
             )
         );
   }
@@ -137,12 +125,13 @@ public class CommentControllerTest {
   @DisplayName("댓글 삭제")
   @Test
   void deleteComment() throws Exception {
-    String commentId = "62beae1c80dc941dd609cdb9";
+    String commentId = "62c3eec9bfcc5225c248ddaf";
 
     ResultActions result = mockMvc.perform(
-        delete("/comment/{commentId}", commentId)
+        delete("/comment/" + commentId)
             .contentType(MediaType.APPLICATION_JSON)
             .characterEncoding("UTF-8")
+            .accept(MediaType.APPLICATION_JSON)
     );
     result
         .andExpect(status().isOk())
@@ -151,13 +140,9 @@ public class CommentControllerTest {
             document("deleteComment",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint()),
-                pathParameters(
-                    parameterWithName("commentId").description("ID")
+                responseFields(
+                    fieldWithPath("message").description("메시지").type(JsonFieldType.STRING)
                 )
-//                , responseFields(
-//                    subsectionWithPath("response").description("응답"),
-//                    fieldWithPath("response.[].message").description("메시지").type(JsonFieldType.STRING)
-//                )
             )
         );
   }
@@ -165,12 +150,13 @@ public class CommentControllerTest {
   @DisplayName("게시글별 댓글 목록")
   @Test
   void viewComment() throws Exception {
-    String commentId = "62beae1c80dc941dd609cdb9";
+    String postingId = "62bea9f0fb954b34b82cfd36";
 
     ResultActions result = mockMvc.perform(
-        get("/comment/{commentId}", commentId)
+        get("/comments/" + postingId)
             .contentType(MediaType.APPLICATION_JSON)
             .characterEncoding("UTF-8")
+            .accept(MediaType.APPLICATION_JSON)
     );
     result
         .andExpect(status().isOk())
@@ -179,15 +165,11 @@ public class CommentControllerTest {
             document("viewComment",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint()),
-                pathParameters(
-                    parameterWithName("commentId").description("ID")
+                responseFields(
+                    fieldWithPath("[].contents").description("내용").type(JsonFieldType.STRING),
+                    fieldWithPath("[].postingId").description("게시글 ID").type(JsonFieldType.STRING),
+                    fieldWithPath("[].updatedDateTime").description("마지막 댓글 수정 시간").type(JsonFieldType.STRING)
                 )
-//                , responseFields(
-//                    subsectionWithPath("response").description("응답"),
-//                    fieldWithPath("response.[].contents").description("내용").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].postingId").description("게시글 ID").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].updatedDateTime").description("마지막 댓글 수정 시간").type(JsonFieldType.STRING)
-//                )
             )
         );
   }
@@ -198,9 +180,10 @@ public class CommentControllerTest {
     String userId = "c0da61d6-f259-412b-b6d6-2c0a890c7744";
 
     ResultActions result = mockMvc.perform(
-        get("/comments/my/{userId}", userId)
+        get("/comments/my/" + userId)
             .contentType(MediaType.APPLICATION_JSON)
             .characterEncoding("UTF-8")
+            .accept(MediaType.APPLICATION_JSON)
     );
     result
         .andExpect(status().isOk())
@@ -209,15 +192,11 @@ public class CommentControllerTest {
             document("commentListByUserId",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint()),
-                pathParameters(
-                    parameterWithName("userId").description("작성자 ID")
+                responseFields(
+                    fieldWithPath("[].contents").description("내용").type(JsonFieldType.STRING),
+                    fieldWithPath("[].postingId").description("게시글 ID").type(JsonFieldType.STRING),
+                    fieldWithPath("[].updatedDateTime").description("마지막 댓글 수정 시간").type(JsonFieldType.STRING)
                 )
-//                , responseFields(
-//                    subsectionWithPath("response").description("응답"),
-//                    fieldWithPath("response.[].contents").description("내용").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].postingId").description("게시글 ID").type(JsonFieldType.STRING),
-//                    fieldWithPath("response.[].updatedDateTime").description("마지막 댓글 수정 시간").type(JsonFieldType.STRING)
-//                )
             )
         );
   }

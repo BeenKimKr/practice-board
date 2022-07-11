@@ -10,8 +10,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
@@ -27,8 +25,6 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -44,9 +40,6 @@ public class PostingControllerTest {
 
   @InjectMocks
   private PostingController postingController;
-
-  @MockBean
-  private MappingMongoConverter mappingMongoConverter;
 
   @BeforeEach
   public void setUp(WebApplicationContext webApplicationContext,
@@ -71,6 +64,7 @@ public class PostingControllerTest {
         post("/posting")
             .contentType(MediaType.APPLICATION_JSON)
             .characterEncoding("UTF-8")
+            .accept(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(posting))
     );
     result
@@ -85,8 +79,8 @@ public class PostingControllerTest {
                     fieldWithPath("contents").description("내용").type(JsonFieldType.STRING),
                     fieldWithPath("authorId").description("작성자 ID").type(JsonFieldType.STRING),
                     fieldWithPath("boardId").description("게시판 ID").type(JsonFieldType.STRING)
-                )
-                , responseFields(
+                ),
+                responseFields(
                     fieldWithPath("title").description("ID").type(JsonFieldType.STRING),
                     fieldWithPath("contents").description("내용").type(JsonFieldType.STRING),
                     fieldWithPath("authorId").description("작성자 ID").type(JsonFieldType.STRING),
@@ -99,12 +93,13 @@ public class PostingControllerTest {
   @DisplayName("게시믈 조회")
   @Test
   void viewPosting() throws Exception {
-    String postingId = "62be722927bc640846e4a62b";
+    String postingId = "62bea9f0fb954b34b82cfd36";
 
     ResultActions result = mockMvc.perform(
-        post("/posting/{postingId}", postingId)
+        get("/posting/" + postingId)
             .contentType(MediaType.APPLICATION_JSON)
             .characterEncoding("UTF-8")
+            .accept(MediaType.APPLICATION_JSON)
     );
     result
         .andExpect(status().isOk())
@@ -113,11 +108,7 @@ public class PostingControllerTest {
             document("viewPosting",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint()),
-                pathParameters(
-                    parameterWithName("postingId").description("ID")
-                )
-                , responseFields(
-                    subsectionWithPath("response").description("응답"),
+                responseFields(
                     fieldWithPath("title").description("ID").type(JsonFieldType.STRING),
                     fieldWithPath("contents").description("내용").type(JsonFieldType.STRING),
                     fieldWithPath("authorId").description("작성자 ID").type(JsonFieldType.STRING),
@@ -131,7 +122,7 @@ public class PostingControllerTest {
   @DisplayName("게시물 수정")
   @Test
   void editPosting() throws Exception {
-    String postingId = "62be722927bc640846e4a62b";
+    String postingId = "62bea9f0fb954b34b82cfd36";
 
     PostingCreateDto posting = PostingCreateDto.builder()
         .title("테스트 수정된 제목입니다.")
@@ -139,9 +130,10 @@ public class PostingControllerTest {
         .build();
 
     ResultActions result = mockMvc.perform(
-        patch("/posting/{postingId}", postingId)
+        patch("/posting/" + postingId)
             .contentType(MediaType.APPLICATION_JSON)
             .characterEncoding("UTF-8")
+            .accept(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(posting))
     );
     result
@@ -151,14 +143,11 @@ public class PostingControllerTest {
             document("editPosting",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint()),
-                pathParameters(
-                    parameterWithName("postingId").description("ID")
-                ),
                 requestFields(
                     fieldWithPath("title").description("제목").type(JsonFieldType.STRING),
                     fieldWithPath("contents").description("내용").type(JsonFieldType.STRING)
-                )
-                , responseFields(
+                ),
+                responseFields(
                     fieldWithPath("title").description("ID").type(JsonFieldType.STRING),
                     fieldWithPath("contents").description("내용").type(JsonFieldType.STRING),
                     fieldWithPath("authorId").description("작성자 ID").type(JsonFieldType.STRING),
@@ -176,6 +165,7 @@ public class PostingControllerTest {
         get("/postings")
             .contentType(MediaType.APPLICATION_JSON)
             .characterEncoding("UTF-8")
+            .accept(MediaType.APPLICATION_JSON)
     );
     result
         .andExpect(status().isOk())
@@ -183,12 +173,12 @@ public class PostingControllerTest {
         .andDo(
             document("listAllPosting",
                 preprocessRequest(prettyPrint()),
-                preprocessResponse(prettyPrint())
-                , responseFields(
-                    fieldWithPath("title").description("ID").type(JsonFieldType.STRING),
-                    fieldWithPath("contents").description("내용").type(JsonFieldType.STRING),
-                    fieldWithPath("authorId").description("작성자 ID").type(JsonFieldType.STRING),
-                    fieldWithPath("updatedDateTime").description("마지막 수정일시").type(JsonFieldType.STRING)
+                preprocessResponse(prettyPrint()),
+                responseFields(
+                    fieldWithPath("[].title").description("ID").type(JsonFieldType.STRING),
+                    fieldWithPath("[].contents").description("내용").type(JsonFieldType.STRING),
+                    fieldWithPath("[].authorId").description("작성자 ID").type(JsonFieldType.STRING),
+                    fieldWithPath("[].updatedDateTime").description("마지막 수정일시").type(JsonFieldType.STRING)
                 )
             )
         );
@@ -198,12 +188,13 @@ public class PostingControllerTest {
   @Test
   void listByKeyword() throws Exception {
     String criterion = "author";
-    String keyword = "noname";
+    String keyword = "tester";
 
     ResultActions result = mockMvc.perform(
-        get("/postings/{criterion}/{keyword}", criterion, keyword)
+        get("/postings/" + criterion + "/" + keyword)
             .contentType(MediaType.APPLICATION_JSON)
             .characterEncoding("UTF-8")
+            .accept(MediaType.APPLICATION_JSON)
     );
     result
         .andExpect(status().isOk())
@@ -212,15 +203,11 @@ public class PostingControllerTest {
             document("listByKeywords",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint()),
-                pathParameters(
-                    parameterWithName("criterion").description("검색 기준"),
-                    parameterWithName("keyword").description("검색 단어")
-                )
-                , responseFields(
-                    fieldWithPath("title").description("제목").type(JsonFieldType.STRING),
-                    fieldWithPath("contents").description("내용").type(JsonFieldType.STRING),
-                    fieldWithPath("authorId").description("작성자 ID").type(JsonFieldType.STRING),
-                    fieldWithPath("updatedDateTime").description("마지막 수정일시").type(JsonFieldType.STRING)
+                responseFields(
+                    fieldWithPath("[].title").description("제목").type(JsonFieldType.STRING),
+                    fieldWithPath("[].contents").description("내용").type(JsonFieldType.STRING),
+                    fieldWithPath("[].authorId").description("작성자 ID").type(JsonFieldType.STRING),
+                    fieldWithPath("[].updatedDateTime").description("마지막 수정일시").type(JsonFieldType.STRING)
                 )
             )
         );
@@ -232,7 +219,7 @@ public class PostingControllerTest {
     String postingId = "62be722927bc640846e4a62b";
 
     ResultActions result = mockMvc.perform(
-        delete("/boards/" + postingId)
+        delete("/posting/" + postingId)
             .contentType(MediaType.APPLICATION_JSON)
             .characterEncoding("UTF-8")
             .accept(MediaType.APPLICATION_JSON)
@@ -244,10 +231,7 @@ public class PostingControllerTest {
             document("deleteByIdPosting",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint()),
-                pathParameters(
-                    parameterWithName("postingId").description("ID")
-                )
-                , responseFields(
+                responseFields(
                     fieldWithPath("message").description("메시지").type(JsonFieldType.STRING)
                 )
             )
@@ -260,7 +244,7 @@ public class PostingControllerTest {
     String boardId = "62be6f64eb2cb135300b0728";
 
     ResultActions result = mockMvc.perform(
-        get("board/{boardId}/postings", boardId)
+        get("/board/" + boardId + "/postings")
             .contentType(MediaType.APPLICATION_JSON)
             .characterEncoding("UTF-8")
     );
@@ -271,14 +255,11 @@ public class PostingControllerTest {
             document("listByBoardId",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint()),
-                pathParameters(
-                    parameterWithName("boardId").description("게시판 ID")
-                )
-                , responseFields(
-                    fieldWithPath("title").description("게시판 이름").type(JsonFieldType.STRING),
-                    fieldWithPath("contents").description("게시판 태그").type(JsonFieldType.ARRAY),
-                    fieldWithPath("authorId").description("작성자 ID").type(JsonFieldType.STRING),
-                    fieldWithPath("updatedDateTime").description("마지막 수정일시").type(JsonFieldType.STRING)
+                responseFields(
+                    fieldWithPath("[].title").description("제목").type(JsonFieldType.STRING),
+                    fieldWithPath("[].contents").description("내용").type(JsonFieldType.STRING),
+                    fieldWithPath("[].authorId").description("작성자 ID").type(JsonFieldType.STRING),
+                    fieldWithPath("[].updatedDateTime").description("마지막 수정일시").type(JsonFieldType.STRING)
                 )
             )
         );

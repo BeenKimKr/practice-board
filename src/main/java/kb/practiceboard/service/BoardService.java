@@ -1,6 +1,7 @@
 package kb.practiceboard.service;
 
 import kb.practiceboard.domain.BoardEntity;
+import kb.practiceboard.dto.board.BoardCreateDto;
 import kb.practiceboard.dto.board.BoardDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -57,7 +58,7 @@ public class BoardService {
   }
 
   @Transactional
-  public BoardEntity createBoard(BoardDto boardCreateDto) {
+  public BoardEntity createBoard(BoardCreateDto boardCreateDto) {
     String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
     BoardEntity newBoard = BoardEntity.builder()

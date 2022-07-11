@@ -1,6 +1,7 @@
 package kb.practiceboard.service;
 
 import kb.practiceboard.domain.FileEntity;
+import kb.practiceboard.dto.file.FileDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -50,9 +51,9 @@ public class FileService {
     return mongoTemplate.insert(newFile, "file");
   }
 
-  public List<FileEntity> findByPostingId(String postingId) {
+  public List<FileEntity> findByPostingId(FileDto fileDto) {
     Query query = new Query();
-    query.addCriteria(Criteria.where("postingId").is(postingId));
+    query.addCriteria(Criteria.where("postingId").is(fileDto.getPostingId()));
     return mongoTemplate.find(query, FileEntity.class, "file");
   }
 

@@ -1,6 +1,7 @@
 package kb.practiceboard.controller;
 
 import kb.practiceboard.domain.PostingEntity;
+import kb.practiceboard.dto.MessageDto;
 import kb.practiceboard.dto.posting.PostingCreateDto;
 import kb.practiceboard.dto.posting.PostingGetDto;
 import kb.practiceboard.service.CommentService;
@@ -104,8 +105,11 @@ public class PostingController {
   }
 
   @DeleteMapping("/posting/{postingId}")
-  public String deleteByIdPosting(@PathVariable String postingId) {
-    return postingService.deleteOne(postingId);
+  public MessageDto deleteByIdPosting(@PathVariable String postingId) {
+    MessageDto message = MessageDto.builder()
+        .message(postingService.deleteOne(postingId))
+        .build();
+    return message;
   }
 
   @GetMapping("/board/{boardId}/postings")
