@@ -2,7 +2,10 @@ package kb.practiceboard;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kb.practiceboard.controller.UserController;
-import kb.practiceboard.dto.user.*;
+import kb.practiceboard.dto.user.UserIdDto;
+import kb.practiceboard.dto.user.UserLoginDto;
+import kb.practiceboard.dto.user.UserPatchPasswordDto;
+import kb.practiceboard.dto.user.UserRegisterDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -127,6 +130,7 @@ public class UserControllerTest {
         );
   }
 
+  /*
   @DisplayName("닉네임 변경")
   @Test
   void updateNickname() throws Exception {
@@ -162,6 +166,7 @@ public class UserControllerTest {
             )
         );
   }
+*/
 
   @DisplayName("비밀번호 변경")
   @Test
@@ -196,6 +201,7 @@ public class UserControllerTest {
         );
   }
 
+  /*
   @DisplayName("유저 정보 조회")
   @Test
   void myAccount() throws Exception {
@@ -229,6 +235,7 @@ public class UserControllerTest {
             )
         );
   }
+   */
 
   @DisplayName("회원탈퇴")
   @Test

@@ -2,7 +2,6 @@ package kb.practiceboard;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kb.practiceboard.controller.FileController;
-import kb.practiceboard.dto.file.FileDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,9 +23,9 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -51,6 +50,7 @@ public class FileControllerTest {
         .build();
   }
 
+  /*
   @DisplayName("파일 목록")
   @Test
   void fileListByPostingId() throws Exception {
@@ -66,7 +66,7 @@ public class FileControllerTest {
             .content(objectMapper.writeValueAsString(file))
     );
     result
-//        .andExpect(status().isOk())
+        .andExpect(status().isOk())
         .andDo(print())
         .andDo(
             document("fileListByPostingId",
@@ -84,6 +84,7 @@ public class FileControllerTest {
             )
         );
   }
+  */
 
   @DisplayName("파일 삭제")
   @Test
