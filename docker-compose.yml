@@ -1,7 +1,7 @@
 version: "3"
 services:
   mongodb:
-    image: mongo:5.0.9
+    image: mongo
     environment:
       - MONGO_DATA_DIR=/data/db
       - MONGO_LOG_DIR=dev/null
@@ -10,10 +10,14 @@ services:
     command: mongod --smallfiles --logpath=/dev/null
     container_name: "mongodb"
     ports:
-      - 27017:27017
+      - "27017:27017"
   app:
     image: practice-board
     ports:
-      - 5000:5000
+      - "8080:8080"
     links:
       - mongodb
+#  prometheus:
+#    image: prom/prometheus:latest
+#    ports:
+#      - "9090:9090"
