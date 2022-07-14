@@ -3,6 +3,8 @@
 !gradle/wrapper/gradle-wrapper.jar
 /out
 application.yml
+/src/main/resources/data/
+.DS_store
 
 ### STS ###
 .apt_generated
