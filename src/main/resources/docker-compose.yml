@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+
+  mongodb:
+    image: mongo:4.0
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=dev/null
+    volumes:
+      - ./data/db:/data/db
+    command: mongod --smallfiles --logpath=/dev/null
+    container_name: "mongodb"
+    ports:
+      - "27017:27017"
+
+  app:
+    image: practice-board
+    ports:
+      - "8080:8080"
+    links:
+      - mongodb
+    container_name: practice-board
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+
+  grafana:
+    image: grafana/grafana
+    depends_on:
+      - prometheus
+    container_name: grafana
+    ports:
+      - "3000:3000"
