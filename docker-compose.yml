@@ -1,0 +1,58 @@
+version: "3"
+
+services:
+
+  mongodb:
+    image: mongo:4.0
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=dev/null
+    volumes:
+      - ./data/db:/data/db
+    command: mongod --smallfiles --logpath=/dev/null
+    ports:
+      - "27017:27017"
+    networks:
+      - my-net
+
+  app:
+    image: app
+    #    deploy:
+    #      resources:
+    #        limits:
+    #          cpus: "0.25"
+    #          memory: 1024M
+    #        reservations:
+    #          cpus: "0.10"
+    #          memory: 512M
+    ports:
+      - "8080:8080"
+    networks:
+      - my-net
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./src/main/resources/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus_data:/prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - my-net
+
+
+  grafana:
+    image: grafana/grafana
+    depends_on:
+      - prometheus
+    ports:
+      - "3000:3000"
+    networks:
+      - my-net
+
+networks:
+  my-net:
+    external: true
+    driver: overlay
