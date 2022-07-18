@@ -33,7 +33,7 @@ services:
   prometheus:
     image: prom/prometheus
     volumes:
-      - ./src/main/resources/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
       - ./prometheus_data:/prometheus
     command:
       - --config.file=/etc/prometheus/prometheus.yml
