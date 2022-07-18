@@ -29,8 +29,8 @@ jobs:
           paths:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
-      #      - run: gradle test
-      - run: ./gradlew build
+      #      - run: ./gradlew test
+      #      - run: ./gradlew build
       - store_artifacts:
           path: build/libs
       - setup_remote_docker
