@@ -3,7 +3,8 @@
 !gradle/wrapper/gradle-wrapper.jar
 /out
 application.yml
-/src/main/resources/data/
+/data
+/prometheus_data
 .DS_store
 
 ### STS ###
