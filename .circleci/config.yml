@@ -35,7 +35,7 @@ jobs:
           path: build/libs
       - setup_remote_docker:
           version: 20.10.14
-      - run: docker build --build-arg JAR_FILE=build/libs/practice-board-0.0.1-SNAPSHOT.jar -t app .
+      - run: docker build --build-arg JAR_FILE=build/libs/app.jar -t app .
       - run: docker login -u beenkim -p $DOCKER_HUB_PASSWORD
       - run: docker push beenkim/springbootcicdtest
       - run: sudo apt-get update
