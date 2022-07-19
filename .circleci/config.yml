@@ -47,7 +47,6 @@ workflows:
   main-branch-workflow:
     jobs:
       - gradle-build:
-          context: org-global
           filters: &filters-main
             branches:
               only: main
@@ -56,14 +55,12 @@ workflows:
   tag-workflow:
     jobs:
       - gradle-build:
-          context: org-global
           filters: &filters-ops
             branches:
               ignore: /.*/
             tags:
               only: /^v.*/
       - docker-build:
-          context: org-global
           requires:
             - gradle-build
           filters:
