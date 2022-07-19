@@ -37,10 +37,11 @@ jobs:
           at: .
       - setup_remote_docker:
           version: 20.10.14
-      - run: docker login -u beenkim -p $DOCKER_HUB_PASSWORD
-      - run: docker build --build-arg JAR_FILE=build/libs/app-0.0.1-SNAPSHOT.jar --tag beenkim/build-image .
-      - run: docker push beenkim/springbootcicdtest
-      - run: sudo apt-get update
+      - run:
+          command: |
+            docker build -t beenkim/springbootcicdtest .
+            docker login -u beenkim -p $DOCKER_HUB_PASSWORD
+            docker push beenkim/springbootcicdtest
 
 workflows:
   main-branch-workflow:
