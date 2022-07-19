@@ -27,6 +27,8 @@ jobs:
           root: .
           paths:
             - .
+      - store_artifacts:
+          path: build/libs
   docker-build:
     executor: java
     steps:
