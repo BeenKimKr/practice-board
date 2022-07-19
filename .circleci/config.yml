@@ -1,24 +1,19 @@
-# Java Gradle CircleCI 2.0 configuration file
-version: 2
+version: 2.1
+executors:
+  java:
+    docker:
+      - image: cimg/openjdk:11.0.13
+    resource_class: medium
 
 jobs:
-  build:
-    docker:
-      - image: cimg/openjdk:11.0
-
-    # Specify service dependencies here if necessary
-    # CircleCI maintains a library of pre-built images
+  gradle-build:
+    executor: java
     working_directory: ~/repo
-
     environment:
-      # Customize the JVM maximum heap limit
       JVM_OPTS: -Xmx3200m
       TERM: dumb
-    # Add steps to the job
-
     steps:
       - checkout
-      # Download and cache dependencies
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "build.gradle" }}
@@ -29,13 +24,40 @@ jobs:
           paths:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
-      #      - run: ./gradlew test
-      #      - run: ./gradlew build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
       - store_artifacts:
           path: build/libs
+  docker-build:
+    executor: java
+    steps:
+      - attach_workspace:
+          at: .
       - setup_remote_docker:
           version: 20.10.14
-      - run: docker build -t app .
-      - run: docker login -u beenkim -p $DOCKER_HUB_PASSWORD
-      - run: docker push beenkim/springbootcicdtest
-      - run: sudo apt-get update
+      - run:
+          name: build images and push to registry
+          command: |
+            docker build -t app .
+            docker login -u beenkim -p $DOKER_HUB_PASSWORD
+            docker push beenkim/springbootcicdtest
+            sudo apt-get update
+
+workflows:
+  main-branch-workflow:
+    jobs:
+      - gradle-build:
+          context: org-global
+          filters: &filters-ops
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+      - docker-build:
+          context: org-global
+          requires:
+            - gradle-build
+          filters:
+            <<: *filters-ops
