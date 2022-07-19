@@ -47,6 +47,15 @@ workflows:
     jobs:
       - gradle-build:
           context: org-global
+          filters: &filters-main
+            branches:
+              only: main
+            tags:
+              ignore: /.*/
+  tag-workflow:
+    jobs:
+      - gradle-build:
+          context: org-global
           filters: &filters-ops
             branches:
               ignore: /.*/
