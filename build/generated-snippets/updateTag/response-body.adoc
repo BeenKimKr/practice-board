@@ -1,0 +1,6 @@
+[source,options="nowrap"]
+----
+{
+  "tag" : [ "t", "e", "s" ]
+}
+----

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kb.practiceboard.BoardControllerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-07-18T07:44:19" hostname="gimgyeongbins-iMac.local" time="0.705">
+  <properties/>
+  <testcase name="게시판 태그 수정" classname="kb.practiceboard.BoardControllerTest" time="0.543"/>
+  <testcase name="게시판 생성" classname="kb.practiceboard.BoardControllerTest" time="0.059"/>
+  <testcase name="게시판 전체 목록" classname="kb.practiceboard.BoardControllerTest" time="0.05"/>
+  <testcase name="검색 기준별 목록" classname="kb.practiceboard.BoardControllerTest" time="0.049"/>
+  <system-out><![CDATA[16:44:16.288 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+16:44:16.298 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+16:44:16.325 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [kb.practiceboard.BoardControllerTest] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+16:44:16.333 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [kb.practiceboard.BoardControllerTest], using SpringBootContextLoader
+16:44:16.336 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [kb.practiceboard.BoardControllerTest]: class path resource [kb/practiceboard/BoardControllerTest-context.xml] does not exist
+16:44:16.337 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [kb.practiceboard.BoardControllerTest]: class path resource [kb/practiceboard/BoardControllerTestContext.groovy] does not exist
+16:44:16.337 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [kb.practiceboard.BoardControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+16:44:16.337 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [kb.practiceboard.BoardControllerTest]: BoardControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+16:44:16.390 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [kb.practiceboard.BoardControllerTest]
+16:44:16.436 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [/Users/kyungbeen/Desktop/kyungbeen/practice-board/build/classes/java/main/kb/practiceboard/Application.class]
+16:44:16.437 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration kb.practiceboard.Application for test class kb.practiceboard.BoardControllerTest
+16:44:16.512 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [kb.practiceboard.BoardControllerTest]: using defaults.
+16:44:16.513 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+16:44:16.535 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@499b2a5c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@596df867, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@c1fca1e, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@241a53ef, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@344344fa, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2db2cd5, org.springframework.test.context.transaction.TransactionalTestExecutionListener@70e659aa, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@615f972, org.springframework.test.context.event.EventPublishingTestExecutionListener@285f09de, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@73393584, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@31500940, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@1827a871, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@48e64352, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@7249dadf, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@4362d7df]
+16:44:16.538 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@5ed190be testClass = BoardControllerTest, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@402f80f5 testClass = BoardControllerTest, locations = '{}', classes = '{class kb.practiceboard.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@62f68dff, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@7c541c15, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@3b2c0e88, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@476b0ae6, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@7516e4e5, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@16612a51], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true]], class annotated with @DirtiesContext [false] with mode [null].
+16:44:16.561 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.5.5)
+
+2022-07-18 16:44:16.818  INFO 31733 --- [    Test worker] kb.practiceboard.BoardControllerTest     : Starting BoardControllerTest using Java 11.0.15 on KyungBeens-iMac.local with PID 31733 (started by kyungbeen in /Users/kyungbeen/Desktop/kyungbeen/practice-board)
+2022-07-18 16:44:16.820  INFO 31733 --- [    Test worker] kb.practiceboard.BoardControllerTest     : No active profile set, falling back to default profiles: default
+2022-07-18 16:44:17.577  INFO 31733 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2022-07-18 16:44:17.589  INFO 31733 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 MongoDB repository interfaces.
+2022-07-18 16:44:18.083  INFO 31733 --- [    Test worker] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[127.0.0.1:27017], srvHost=kb.hxqadrl.mongodb.net, mode=MULTIPLE, requiredClusterType=REPLICA_SET, serverSelectionTimeout='30000 ms', requiredReplicaSetName='atlas-ms0xp6-shard-0'}
+2022-07-18 16:44:18.108  INFO 31733 --- [drl.mongodb.net] org.mongodb.driver.cluster               : Adding discovered server ac-hjyejin-shard-00-01.hxqadrl.mongodb.net:27017 to client view of cluster
+2022-07-18 16:44:18.149  INFO 31733 --- [drl.mongodb.net] org.mongodb.driver.cluster               : Adding discovered server ac-hjyejin-shard-00-02.hxqadrl.mongodb.net:27017 to client view of cluster
+2022-07-18 16:44:18.151  INFO 31733 --- [drl.mongodb.net] org.mongodb.driver.cluster               : Adding discovered server ac-hjyejin-shard-00-00.hxqadrl.mongodb.net:27017 to client view of cluster
+2022-07-18 16:44:18.669  INFO 31733 --- [ngodb.net:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:4, serverValue:284797}] to ac-hjyejin-shard-00-02.hxqadrl.mongodb.net:27017
+2022-07-18 16:44:18.670  INFO 31733 --- [ngodb.net:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:5, serverValue:281702}] to ac-hjyejin-shard-00-00.hxqadrl.mongodb.net:27017
+2022-07-18 16:44:18.670  INFO 31733 --- [ngodb.net:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:1, serverValue:281251}] to ac-hjyejin-shard-00-01.hxqadrl.mongodb.net:27017
+2022-07-18 16:44:18.670  INFO 31733 --- [ngodb.net:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:3, serverValue:284797}] to ac-hjyejin-shard-00-02.hxqadrl.mongodb.net:27017
+2022-07-18 16:44:18.670  INFO 31733 --- [ngodb.net:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:6, serverValue:281702}] to ac-hjyejin-shard-00-00.hxqadrl.mongodb.net:27017
+2022-07-18 16:44:18.674  INFO 31733 --- [ngodb.net:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:2, serverValue:281251}] to ac-hjyejin-shard-00-01.hxqadrl.mongodb.net:27017
+2022-07-18 16:44:18.680  INFO 31733 --- [ngodb.net:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=ac-hjyejin-shard-00-01.hxqadrl.mongodb.net:27017, type=REPLICA_SET_SECONDARY, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=13, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=362932061, setName='atlas-ms0xp6-shard-0', canonicalAddress=ac-hjyejin-shard-00-01.hxqadrl.mongodb.net:27017, hosts=[ac-hjyejin-shard-00-00.hxqadrl.mongodb.net:27017, ac-hjyejin-shard-00-01.hxqadrl.mongodb.net:27017, ac-hjyejin-shard-00-02.hxqadrl.mongodb.net:27017], passives=[], arbiters=[], primary='ac-hjyejin-shard-00-02.hxqadrl.mongodb.net:27017', tagSet=TagSet{[Tag{name='nodeType', value='ELECTABLE'}, Tag{name='provider', value='AWS'}, Tag{name='region', value='AP_NORTHEAST_2'}, Tag{name='workloadType', value='OPERATIONAL'}]}, electionId=null, setVersion=1, topologyVersion=TopologyVersion{processId=62caf9ce2b1a1f4762f10513, counter=3}, lastWriteDate=Mon Jul 18 16:44:18 KST 2022, lastUpdateTimeNanos=25480814230984}
+2022-07-18 16:44:18.681  INFO 31733 --- [ngodb.net:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=ac-hjyejin-shard-00-02.hxqadrl.mongodb.net:27017, type=REPLICA_SET_PRIMARY, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=13, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=360520263, setName='atlas-ms0xp6-shard-0', canonicalAddress=ac-hjyejin-shard-00-02.hxqadrl.mongodb.net:27017, hosts=[ac-hjyejin-shard-00-00.hxqadrl.mongodb.net:27017, ac-hjyejin-shard-00-01.hxqadrl.mongodb.net:27017, ac-hjyejin-shard-00-02.hxqadrl.mongodb.net:27017], passives=[], arbiters=[], primary='ac-hjyejin-shard-00-02.hxqadrl.mongodb.net:27017', tagSet=TagSet{[Tag{name='nodeType', value='ELECTABLE'}, Tag{name='provider', value='AWS'}, Tag{name='region', value='AP_NORTHEAST_2'}, Tag{name='workloadType', value='OPERATIONAL'}]}, electionId=7fffffff0000000000000005, setVersion=1, topologyVersion=TopologyVersion{processId=62caf92fd2eda364b4711804, counter=6}, lastWriteDate=Mon Jul 18 16:44:18 KST 2022, lastUpdateTimeNanos=25480813114824}
+2022-07-18 16:44:18.681  INFO 31733 --- [ngodb.net:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=ac-hjyejin-shard-00-00.hxqadrl.mongodb.net:27017, type=REPLICA_SET_SECONDARY, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=13, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=362240004, setName='atlas-ms0xp6-shard-0', canonicalAddress=ac-hjyejin-shard-00-00.hxqadrl.mongodb.net:27017, hosts=[ac-hjyejin-shard-00-00.hxqadrl.mongodb.net:27017, ac-hjyejin-shard-00-01.hxqadrl.mongodb.net:27017, ac-hjyejin-shard-00-02.hxqadrl.mongodb.net:27017], passives=[], arbiters=[], primary='ac-hjyejin-shard-00-02.hxqadrl.mongodb.net:27017', tagSet=TagSet{[Tag{name='nodeType', value='ELECTABLE'}, Tag{name='provider', value='AWS'}, Tag{name='region', value='AP_NORTHEAST_2'}, Tag{name='workloadType', value='OPERATIONAL'}]}, electionId=null, setVersion=1, topologyVersion=TopologyVersion{processId=62caf88e24d8d2ba399b492b, counter=4}, lastWriteDate=Mon Jul 18 16:44:18 KST 2022, lastUpdateTimeNanos=25480813894899}
+2022-07-18 16:44:18.682  INFO 31733 --- [ngodb.net:27017] org.mongodb.driver.cluster               : Setting max election id to 7fffffff0000000000000005 from replica set primary ac-hjyejin-shard-00-02.hxqadrl.mongodb.net:27017
+2022-07-18 16:44:18.682  INFO 31733 --- [ngodb.net:27017] org.mongodb.driver.cluster               : Setting max set version to 1 from replica set primary ac-hjyejin-shard-00-02.hxqadrl.mongodb.net:27017
+2022-07-18 16:44:18.682  INFO 31733 --- [ngodb.net:27017] org.mongodb.driver.cluster               : Discovered replica set primary ac-hjyejin-shard-00-02.hxqadrl.mongodb.net:27017
+2022-07-18 16:44:19.116  INFO 31733 --- [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2022-07-18 16:44:19.467  INFO 31733 --- [    Test worker] kb.practiceboard.BoardControllerTest     : Started BoardControllerTest in 2.899 seconds (JVM running for 4.047)
+2022-07-18 16:44:19.822  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:19.822  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:19.823  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2022-07-18 16:44:20.128  INFO 31733 --- [    Test worker] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:7, serverValue:284826}] to ac-hjyejin-shard-00-02.hxqadrl.mongodb.net:27017
+
+MockHttpServletRequest:
+      HTTP Method = PATCH
+      Request URI = /board
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json", Content-Length:"51"]
+             Body = {"boardName":"자유게시판","tag":["t","e","s"]}
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.BoardController
+           Method = kb.practiceboard.controller.BoardController#updateTag(BoardDto)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"tag":["t","e","s"]}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-07-18 16:44:20.322  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:20.322  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:20.323  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /board
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"48"]
+             Body = {"boardName":"자유게시판","tag":["자유"]}
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.BoardController
+           Method = kb.practiceboard.controller.BoardController#createBoard(BoardCreateDto)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-18 16:44:20"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-07-18 16:44:20.383  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:20.383  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:20.384  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /boards
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.BoardController
+           Method = kb.practiceboard.controller.BoardController#allBoardList()
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = [{"boardName":"자유게시판","tag":["t","e","s"],"lastPostingDateTime":"2022-06-30 20:19:18"},{"boardName":"테크게시판","tag":["테크","tech","technology"],"lastPostingDateTime":"2022-07-01 12:52:04"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-01 13:14:13"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-11 17:29:06"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-11 17:29:27"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-11 17:30:03"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-11 17:30:59"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 10:23:57"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 10:42:29"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 10:43:04"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 10:43:55"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 10:44:21"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 10:47:26"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 10:54:17"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 11:01:19"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 11:01:44"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 11:02:07"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 11:03:50"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 11:04:54"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 11:51:11"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 15:23:00"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-13 10:14:52"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-13 10:46:19"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-13 10:55:43"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-13 12:07:52"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-13 15:31:29"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-13 15:47:04"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-13 16:07:58"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-13 07:25:42"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-14 10:35:59"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-14 10:36:33"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-14 10:38:04"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-14 10:38:24"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-14 10:39:09"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-14 01:47:47"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-14 02:06:26"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-14 02:52:35"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-14 05:43:07"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-14 14:53:56"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-14 06:03:59"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-14 06:04:00"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-14 06:22:28"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-14 06:22:29"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-14 06:22:29"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-14 15:54:35"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-14 09:00:08"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-15 00:43:15"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-15 08:04:57"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-15 17:39:07"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-15 08:46:46"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-15 09:02:30"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-15 09:32:00"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-15 09:32:01"},{"boardName":"재테크게시판","tag":["재테크","돈복사","money","투자"],"lastPostingDateTime":"2022-07-15 09:32:03"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-15 18:34:28"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-18 10:59:14"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-18 13:24:17"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-18 13:31:39"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-18 16:34:01"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-18 16:41:43"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-18 16:44:07"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-18 16:44:20"}]
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-07-18 16:44:20.434  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:20.434  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:20.435  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /boards/boardName/%EC%9E%90%EC%9C%A0%EA%B2%8C%EC%8B%9C%ED%8C%90
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.BoardController
+           Method = kb.practiceboard.controller.BoardController#listByKeywords(String, String)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = [{"boardName":"자유게시판","tag":["t","e","s"],"lastPostingDateTime":"2022-06-30 20:19:18"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-11 17:29:27"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-11 17:30:03"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-11 17:30:59"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 10:23:57"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 10:42:29"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 10:43:04"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 10:43:55"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 10:44:21"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 10:47:26"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 10:54:17"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 11:01:19"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 11:01:44"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 11:02:07"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 11:03:50"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 11:04:54"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 11:51:11"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-12 15:23:00"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-13 10:14:52"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-13 10:46:19"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-13 10:55:43"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-13 12:07:52"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-13 15:31:29"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-13 15:47:04"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-13 16:07:58"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-14 14:53:56"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-14 15:54:35"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-15 17:39:07"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-15 18:34:28"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-18 10:59:14"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-18 13:24:17"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-18 13:31:39"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-18 16:34:01"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-18 16:41:43"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-18 16:44:07"},{"boardName":"자유게시판게시판","tag":["자유"],"lastPostingDateTime":"2022-07-18 16:44:20"}]
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

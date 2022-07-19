@@ -1,0 +1,9 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/comment/62c3ef21dd53f328381bea21' -i -X PATCH \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Accept: application/json' \
+    -d '{
+  "contents" : "댓글 수정 테스트입니다."
+}'
+----

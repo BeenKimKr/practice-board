@@ -1,0 +1,9 @@
+[source,options="nowrap"]
+----
+{
+  "writerId" : "c0da61d6-f259-412b-b6d6-2c0a890c7744",
+  "contents" : "댓글 테스트입니다.",
+  "postingId" : "62bea9f0fb954b34b82cfd36",
+  "updatedDateTime" : "2022-07-18 16:44:20"
+}
+----

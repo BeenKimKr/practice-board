@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kb.practiceboard.UserControllerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-07-18T07:44:21" hostname="gimgyeongbins-iMac.local" time="0.216">
+  <properties/>
+  <testcase name="로그인" classname="kb.practiceboard.UserControllerTest" time="0.106"/>
+  <testcase name="회원가입" classname="kb.practiceboard.UserControllerTest" time="0.038"/>
+  <testcase name="비밀번호 변경" classname="kb.practiceboard.UserControllerTest" time="0.028"/>
+  <testcase name="회원탈퇴" classname="kb.practiceboard.UserControllerTest" time="0.042"/>
+  <system-out><![CDATA[2022-07-18 16:44:21.082  INFO 31733 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [kb.practiceboard.UserControllerTest], using SpringBootContextLoader
+2022-07-18 16:44:21.084  INFO 31733 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [kb.practiceboard.UserControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2022-07-18 16:44:21.084  INFO 31733 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kb.practiceboard.UserControllerTest]: UserControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2022-07-18 16:44:21.085  INFO 31733 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kb.practiceboard.Application for test class kb.practiceboard.UserControllerTest
+2022-07-18 16:44:21.086  INFO 31733 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2022-07-18 16:44:21.086  INFO 31733 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@47fc9ce, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1b5d1d9, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@703a2bc9, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@790d629a, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@346e5cc, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2cd2c764, org.springframework.test.context.transaction.TransactionalTestExecutionListener@d17d554, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@1f1c7fde, org.springframework.test.context.event.EventPublishingTestExecutionListener@2b409174, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@11939a9f, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@229d508c, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@5e83298e, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@7167d81b, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@7cadf3ca, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@34fcc5e3]
+2022-07-18 16:44:21.090  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:21.090  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:21.090  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+
+MockHttpServletRequest:
+      HTTP Method = PATCH
+      Request URI = /user/login
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json", Content-Length:"49"]
+             Body = {"email":"aaa@test1.com","password":"aaa12345!!"}
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.UserController
+           Method = kb.practiceboard.controller.UserController#loginUser(UserLoginDto)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"userId":"4c369a3c-0f79-4255-9113-c5fd7dfbd6e5","nickname":"","updatePasswordRequired":false}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-07-18 16:44:21.196  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:21.196  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:21.197  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /user
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json", Content-Length:"72"]
+             Body = {"email":"aaa@test1.com","userName":"aaaaaaaaa","password":"aaa12345!!"}
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.UserController
+           Method = kb.practiceboard.controller.UserController#registerUser(UserRegisterDto)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"email":"aaa@test1.com"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-07-18 16:44:21.235  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:21.235  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:21.235  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+
+MockHttpServletRequest:
+      HTTP Method = PATCH
+      Request URI = /user/pwd
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json", Content-Length:"74"]
+             Body = {"userId":"fc187b2f-0c34-4eea-8587-bd3b1f23dd05","password":"aaa123123!!"}
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.UserController
+           Method = kb.practiceboard.controller.UserController#updatePasswordUser(UserPatchPasswordDto)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"message":"비밀번호가 변경되었습니다."}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-07-18 16:44:21.264  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:21.264  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:21.264  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+
+MockHttpServletRequest:
+      HTTP Method = DELETE
+      Request URI = /user
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json", Content-Length:"49"]
+             Body = {"userId":"fc187b2f-0c34-4eea-8587-bd3b1f23dd05"}
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.UserController
+           Method = kb.practiceboard.controller.UserController#deleteUser(UserIdDto)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"message":"회원 탈퇴가 완료되었습니다."}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

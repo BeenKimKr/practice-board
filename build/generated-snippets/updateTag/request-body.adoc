@@ -1,0 +1,7 @@
+[source,options="nowrap"]
+----
+{
+  "boardName" : "자유게시판",
+  "tag" : [ "t", "e", "s" ]
+}
+----

@@ -1,0 +1,11 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/comment' -i -X POST \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Accept: application/json' \
+    -d '{
+  "writerId" : "c0da61d6-f259-412b-b6d6-2c0a890c7744",
+  "contents" : "댓글 테스트입니다.",
+  "postingId" : "62bea9f0fb954b34b82cfd36"
+}'
+----

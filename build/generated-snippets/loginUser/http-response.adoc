@@ -1,0 +1,12 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 110
+
+{
+  "userId" : "4c369a3c-0f79-4255-9113-c5fd7dfbd6e5",
+  "nickname" : "",
+  "updatePasswordRequired" : false
+}
+----

@@ -1,0 +1,12 @@
+[source,http,options="nowrap"]
+----
+DELETE /user HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Accept: application/json
+Content-Length: 55
+Host: localhost:8080
+
+{
+  "userId" : "fc187b2f-0c34-4eea-8587-bd3b1f23dd05"
+}
+----

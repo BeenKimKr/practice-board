@@ -1,0 +1,12 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/posting' -i -X POST \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Accept: application/json' \
+    -d '{
+  "title" : "테스트 제목입니다.",
+  "contents" : "테스트 내용입니다.",
+  "authorId" : "c0da61d6-f259-412b-b6d6-2c0a890c7744",
+  "boardId" : "62be6f64eb2cb135300b0728"
+}'
+----

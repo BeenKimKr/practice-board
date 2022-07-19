@@ -1,0 +1,9 @@
+[source,bash]
+----
+$ echo '{
+  "email" : "aaa@test1.com",
+  "password" : "aaa12345!!"
+}' | http PATCH 'http://localhost:8080/user/login' \
+    'Content-Type:application/json;charset=UTF-8' \
+    'Accept:application/json'
+----

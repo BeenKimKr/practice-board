@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kb.practiceboard.FileControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-07-18T07:44:20" hostname="gimgyeongbins-iMac.local" time="0.033">
+  <properties/>
+  <testcase name="파일 삭제" classname="kb.practiceboard.FileControllerTest" time="0.033"/>
+  <system-out><![CDATA[2022-07-18 16:44:20.712  INFO 31733 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [kb.practiceboard.FileControllerTest], using SpringBootContextLoader
+2022-07-18 16:44:20.713  INFO 31733 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [kb.practiceboard.FileControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2022-07-18 16:44:20.713  INFO 31733 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kb.practiceboard.FileControllerTest]: FileControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2022-07-18 16:44:20.715  INFO 31733 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kb.practiceboard.Application for test class kb.practiceboard.FileControllerTest
+2022-07-18 16:44:20.716  INFO 31733 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2022-07-18 16:44:20.717  INFO 31733 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@206b959c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@74026b18, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@1cc81ea1, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@5cf1bbd3, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@204a02a4, org.springframework.test.context.support.DirtiesContextTestExecutionListener@4777f71e, org.springframework.test.context.transaction.TransactionalTestExecutionListener@1b96d447, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@4a68cbc5, org.springframework.test.context.event.EventPublishingTestExecutionListener@3a47bf0e, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@4270705f, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@6f69b0ba, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@63537871, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@64eb14da, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@25587290, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@716eae1]
+2022-07-18 16:44:20.720  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:20.720  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:20.721  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+
+MockHttpServletRequest:
+      HTTP Method = DELETE
+      Request URI = /file
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json", Content-Length:"38"]
+             Body = "442fb8e9-5850-4d16-81be-e2d1e260ff78"
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.FileController
+           Method = kb.practiceboard.controller.FileController#deleteFile(String)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"message":"파일이 삭제되었습니다."}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

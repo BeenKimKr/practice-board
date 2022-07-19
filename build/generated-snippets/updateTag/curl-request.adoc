@@ -1,0 +1,10 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/board' -i -X PATCH \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Accept: application/json' \
+    -d '{
+  "boardName" : "자유게시판",
+  "tag" : [ "t", "e", "s" ]
+}'
+----

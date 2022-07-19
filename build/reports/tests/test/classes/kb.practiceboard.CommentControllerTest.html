@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - CommentControllerTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>CommentControllerTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/kb.practiceboard.html">kb.practiceboard</a> &gt; CommentControllerTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">5</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.213s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Method name</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">내가 쓴 댓글 목록</td>
+<td class="success">commentListByUserId()</td>
+<td class="success">0.037s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">댓글 생성</td>
+<td class="success">createComment()</td>
+<td class="success">0.046s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">댓글 삭제</td>
+<td class="success">deleteComment()</td>
+<td class="success">0.034s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">댓글 수정</td>
+<td class="success">modifyComment()</td>
+<td class="success">0.055s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">게시글별 댓글 목록</td>
+<td class="success">viewComment()</td>
+<td class="success">0.041s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2022-07-18 16:44:20.485  INFO 31733 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [kb.practiceboard.CommentControllerTest], using SpringBootContextLoader
+2022-07-18 16:44:20.486  INFO 31733 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [kb.practiceboard.CommentControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2022-07-18 16:44:20.486  INFO 31733 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kb.practiceboard.CommentControllerTest]: CommentControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2022-07-18 16:44:20.487  INFO 31733 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kb.practiceboard.Application for test class kb.practiceboard.CommentControllerTest
+2022-07-18 16:44:20.488  INFO 31733 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2022-07-18 16:44:20.489  INFO 31733 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@2f9236d8, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@4536a09a, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@603faaad, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@16cbba0f, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@28d16af8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@58932d08, org.springframework.test.context.transaction.TransactionalTestExecutionListener@45648e75, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@e344f14, org.springframework.test.context.event.EventPublishingTestExecutionListener@2d117280, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@6c2be147, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@dddcd91, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@21bd6fd1, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@79e9c14, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@340c7479, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@575e862c]
+2022-07-18 16:44:20.494  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:20.494  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:20.494  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /comment
+       Parameters = {}
+          Headers = [Content-Type:&quot;application/json;charset=UTF-8&quot;, Accept:&quot;application/json&quot;, Content-Length:&quot;130&quot;]
+             Body = {&quot;writerId&quot;:&quot;c0da61d6-f259-412b-b6d6-2c0a890c7744&quot;,&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;}
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.CommentController
+           Method = kb.practiceboard.controller.CommentController#createComment(CommentDto)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:&quot;application/json;charset=UTF-8&quot;]
+     Content type = application/json;charset=UTF-8
+             Body = {&quot;writerId&quot;:&quot;c0da61d6-f259-412b-b6d6-2c0a890c7744&quot;,&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-18 16:44:20&quot;}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-07-18 16:44:20.540  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:20.541  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:20.541  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+
+MockHttpServletRequest:
+      HTTP Method = PATCH
+      Request URI = /comment/62c3ef21dd53f328381bea21
+       Parameters = {}
+          Headers = [Content-Type:&quot;application/json;charset=UTF-8&quot;, Accept:&quot;application/json&quot;, Content-Length:&quot;48&quot;]
+             Body = {&quot;contents&quot;:&quot;댓글 수정 테스트입니다.&quot;}
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.CommentController
+           Method = kb.practiceboard.controller.CommentController#modifyComment(String, CommentDto)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:&quot;application/json;charset=UTF-8&quot;]
+     Content type = application/json;charset=UTF-8
+             Body = {&quot;contents&quot;:&quot;댓글 수정 테스트입니다.&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-18 16:44:20&quot;}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-07-18 16:44:20.597  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:20.597  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:20.598  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+
+MockHttpServletRequest:
+      HTTP Method = DELETE
+      Request URI = /comment/62c3eec9bfcc5225c248ddaf
+       Parameters = {}
+          Headers = [Content-Type:&quot;application/json;charset=UTF-8&quot;, Accept:&quot;application/json&quot;]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.CommentController
+           Method = kb.practiceboard.controller.CommentController#deleteComment(String)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:&quot;application/json;charset=UTF-8&quot;]
+     Content type = application/json;charset=UTF-8
+             Body = {&quot;message&quot;:&quot;댓글이 삭제되었습니다.&quot;}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-07-18 16:44:20.632  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:20.632  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:20.633  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /comments/62bea9f0fb954b34b82cfd36
+       Parameters = {}
+          Headers = [Content-Type:&quot;application/json;charset=UTF-8&quot;, Accept:&quot;application/json&quot;]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.CommentController
+           Method = kb.practiceboard.controller.CommentController#viewComment(String)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:&quot;application/json;charset=UTF-8&quot;]
+     Content type = application/json;charset=UTF-8
+             Body = [{&quot;contents&quot;:&quot;댓글 수정 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-18 16:44:20&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-11 18:03:26&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-11 18:03:51&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-11 18:06:37&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-11 18:08:45&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-11 18:10:20&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-11 18:11:31&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-11 18:12:41&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 10:23:56&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 10:42:30&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 10:43:05&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 10:43:56&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 10:44:21&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 10:47:26&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 10:54:17&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 11:01:19&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 11:01:44&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 11:02:06&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 11:03:49&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 11:04:54&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 11:51:10&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 15:23:00&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-13 10:14:53&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-13 10:46:19&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-13 10:55:43&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-13 12:07:53&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-13 15:31:30&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-13 15:47:04&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-13 16:07:58&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-14 14:53:57&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-14 06:03:04&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-14 06:22:59&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-14 06:23:00&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-14 06:23:00&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-14 06:23:00&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-14 06:23:01&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-14 06:23:02&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-14 15:54:35&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-14 06:58:15&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-15 00:43:03&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-15 08:05:48&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-15 17:39:07&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-15 18:34:29&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-15 10:38:45&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-18 10:59:14&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-18 13:24:17&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-18 13:31:39&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-18 16:34:02&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-18 16:41:43&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-18 16:44:07&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-18 16:44:20&quot;}]
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-07-18 16:44:20.674  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:20.674  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:20.675  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /comments/my/c0da61d6-f259-412b-b6d6-2c0a890c7744
+       Parameters = {}
+          Headers = [Content-Type:&quot;application/json;charset=UTF-8&quot;, Accept:&quot;application/json&quot;]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.CommentController
+           Method = kb.practiceboard.controller.CommentController#commentListByUserId(String)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:&quot;application/json;charset=UTF-8&quot;]
+     Content type = application/json;charset=UTF-8
+             Body = [{&quot;contents&quot;:&quot;댓글 수정 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-18 16:44:20&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-11 18:03:26&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-11 18:03:51&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-11 18:06:37&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-11 18:08:45&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-11 18:10:20&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-11 18:11:31&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-11 18:12:41&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 10:23:56&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 10:42:30&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 10:43:05&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 10:43:56&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 10:44:21&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 10:47:26&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 10:54:17&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 11:01:19&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 11:01:44&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 11:02:06&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 11:03:49&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 11:04:54&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 11:51:10&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-12 15:23:00&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-13 10:14:53&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-13 10:46:19&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-13 10:55:43&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-13 12:07:53&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-13 15:31:30&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-13 15:47:04&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-13 16:07:58&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-14 14:53:57&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-14 06:03:04&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-14 06:22:59&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-14 06:23:00&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-14 06:23:00&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-14 06:23:00&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-14 06:23:01&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-14 06:23:02&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-14 15:54:35&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-14 06:58:15&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-15 00:43:03&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-15 08:05:48&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-15 17:39:07&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-15 18:34:29&quot;},{&quot;contents&quot;:&quot;sdhioqwioqhodidnlkasnd&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-15 10:38:45&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-18 10:59:14&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-18 13:24:17&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-18 13:31:39&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-18 16:34:02&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-18 16:41:43&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-18 16:44:07&quot;},{&quot;contents&quot;:&quot;댓글 테스트입니다.&quot;,&quot;postingId&quot;:&quot;62bea9f0fb954b34b82cfd36&quot;,&quot;updatedDateTime&quot;:&quot;2022-07-18 16:44:20&quot;}]
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 7.4.1</a> at 2022. 7. 18. 오후 4:44:21</p>
+</div>
+</div>
+</body>
+</html>

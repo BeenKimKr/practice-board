@@ -1,0 +1,8 @@
+[source,options="nowrap"]
+----
+{
+  "boardName" : "자유게시판게시판",
+  "tag" : [ "자유" ],
+  "lastPostingDateTime" : "2022-07-18 16:44:20"
+}
+----

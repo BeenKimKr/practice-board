@@ -1,0 +1,8 @@
+[source,options="nowrap"]
+----
+{
+  "userId" : "4c369a3c-0f79-4255-9113-c5fd7dfbd6e5",
+  "nickname" : "",
+  "updatePasswordRequired" : false
+}
+----

@@ -1,0 +1,12 @@
+|===
+|Path|Type|Description
+
+|`+boardName+`
+|`+String+`
+|게시판 이름
+
+|`+tag+`
+|`+Array+`
+|게시판 태그
+
+|===

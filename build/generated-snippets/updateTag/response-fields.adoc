@@ -1,0 +1,8 @@
+|===
+|Path|Type|Description
+
+|`+tag+`
+|`+Array+`
+|게시판 태그
+
+|===

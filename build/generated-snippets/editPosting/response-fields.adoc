@@ -1,0 +1,24 @@
+|===
+|Path|Type|Description
+
+|`+title+`
+|`+String+`
+|ID
+
+|`+contents+`
+|`+String+`
+|내용
+
+|`+authorId+`
+|`+String+`
+|작성자 ID
+
+|`+updatedDateTime+`
+|`+String+`
+|마지막 수정일시
+
+|`+fileId+`
+|`+Array+`
+|첨부파일 목록
+
+|===

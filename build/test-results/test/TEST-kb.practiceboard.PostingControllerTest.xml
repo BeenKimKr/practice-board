@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kb.practiceboard.PostingControllerTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-07-18T07:44:20" hostname="gimgyeongbins-iMac.local" time="0.32">
+  <properties/>
+  <testcase name="게시물 삭제" classname="kb.practiceboard.PostingControllerTest" time="0.044"/>
+  <testcase name="게시글 전체 목록" classname="kb.practiceboard.PostingControllerTest" time="0.048"/>
+  <testcase name="검색 기준별 목록" classname="kb.practiceboard.PostingControllerTest" time="0.041"/>
+  <testcase name="게시믈 조회" classname="kb.practiceboard.PostingControllerTest" time="0.027"/>
+  <testcase name="게시판판별 게시글 목록" classname="kb.practiceboard.PostingControllerTest" time="0.04"/>
+  <testcase name="게시물 수정" classname="kb.practiceboard.PostingControllerTest" time="0.06"/>
+  <testcase name="게시믈 생성" classname="kb.practiceboard.PostingControllerTest" time="0.051"/>
+  <system-out><![CDATA[2022-07-18 16:44:20.753  INFO 31733 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [kb.practiceboard.PostingControllerTest], using SpringBootContextLoader
+2022-07-18 16:44:20.754  INFO 31733 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [kb.practiceboard.PostingControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2022-07-18 16:44:20.754  INFO 31733 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kb.practiceboard.PostingControllerTest]: PostingControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2022-07-18 16:44:20.754  INFO 31733 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kb.practiceboard.Application for test class kb.practiceboard.PostingControllerTest
+2022-07-18 16:44:20.755  INFO 31733 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2022-07-18 16:44:20.755  INFO 31733 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@48697181, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@7282f7b1, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@7263b0c4, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@361c4981, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@35fac3ba, org.springframework.test.context.support.DirtiesContextTestExecutionListener@50a095cb, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3f2afa8b, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@6b2efcae, org.springframework.test.context.event.EventPublishingTestExecutionListener@8aa1562, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@5c70c771, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@346690d6, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@2831c178, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@70e8c019, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@2a79da3a, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@2a191f83]
+2022-07-18 16:44:20.758  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:20.758  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:20.761  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+
+MockHttpServletRequest:
+      HTTP Method = DELETE
+      Request URI = /posting/62be722927bc640846e4a62b
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json"]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.PostingController
+           Method = kb.practiceboard.controller.PostingController#deleteByIdPosting(String)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"message":"게시글 삭제가 완료되었습니다."}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-07-18 16:44:20.805  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:20.805  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:20.806  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /postings
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json"]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.PostingController
+           Method = kb.practiceboard.controller.PostingController#listAllPosting()
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = [{"title":"테스트 수정된 제목입니다.","contents":"테스트 수정된 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-18 16:44:07"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-05 16:39:38"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-05 16:39:56"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 16:35:20"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 17:37:25"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 17:45:55"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 17:47:41"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 17:48:21"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 17:49:01"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 17:49:41"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 17:52:12"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 17:54:16"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 17:55:24"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 18:00:31"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 18:01:38"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 18:02:14"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 18:02:39"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 10:23:57"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 10:42:30"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 10:43:05"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 10:43:56"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 10:44:22"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 10:47:27"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 10:54:18"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 11:01:19"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 11:01:44"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 11:02:07"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 11:03:50"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 11:04:55"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 11:51:11"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 15:23:01"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-13 10:14:58"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-13 10:46:19"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-13 10:55:43"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-13 12:07:53"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-13 15:31:30"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-13 15:47:05"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-13 16:07:59"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-13 07:26:01"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-13 07:26:02"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 14:53:58"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 06:02:50"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 06:02:50"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 06:02:51"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 06:03:47"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 06:03:47"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 06:03:48"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 06:03:48"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 06:03:48"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 15:54:36"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 06:57:54"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-15 00:43:08"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-15 08:05:22"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-15 17:39:08"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-15 18:34:29"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-15 10:38:32"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-18 10:59:15"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-18 13:24:18"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-18 13:31:40"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-18 16:34:03"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-18 16:41:44"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-18 16:44:07"}]
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-07-18 16:44:20.853  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:20.853  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:20.857  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 4 ms
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /postings/author/tester
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json"]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.PostingController
+           Method = kb.practiceboard.controller.PostingController#listByKeyword(String, String)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = [{"title":"테스트 수정된 제목입니다.","contents":"테스트 수정된 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-18 16:44:07"}]
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-07-18 16:44:20.896  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:20.896  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:20.896  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /posting/62bea9f0fb954b34b82cfd36
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json"]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.PostingController
+           Method = kb.practiceboard.controller.PostingController#viewPosting(String)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"title":"테스트 수정된 제목입니다.","contents":"테스트 수정된 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-18 16:44:07","fileId":["442fb8e9-5850-4d16-81be-e2d1e260ff78"]}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-07-18 16:44:20.924  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:20.924  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:20.925  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /board/62be6f64eb2cb135300b0728/postings
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.PostingController
+           Method = kb.practiceboard.controller.PostingController#listByBoardId(String)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = [{"title":"테스트 수정된 제목입니다.","contents":"테스트 수정된 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-18 16:44:07"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-05 16:39:38"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-05 16:39:56"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 16:35:20"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 17:37:25"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 17:45:55"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 17:47:41"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 17:48:21"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 17:49:01"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 17:49:41"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 17:52:12"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 17:54:16"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 17:55:24"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 18:00:31"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 18:01:38"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 18:02:14"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-11 18:02:39"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 10:23:57"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 10:42:30"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 10:43:05"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 10:43:56"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 10:44:22"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 10:47:27"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 10:54:18"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 11:01:19"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 11:01:44"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 11:02:07"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 11:03:50"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 11:04:55"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 11:51:11"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-12 15:23:01"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-13 10:14:58"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-13 10:46:19"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-13 10:55:43"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-13 12:07:53"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-13 15:31:30"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-13 15:47:05"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-13 16:07:59"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-13 07:26:01"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-13 07:26:02"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 14:53:58"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 06:02:50"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 06:02:50"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 06:02:51"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 06:03:47"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 06:03:47"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 06:03:48"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 06:03:48"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 06:03:48"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 15:54:36"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-14 06:57:54"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-15 00:43:08"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-15 08:05:22"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-15 17:39:08"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-15 18:34:29"},{"title":"2차 테스트입니다@@@","contents":"2차 테스트입니다. 안녕하세요.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-15 10:38:32"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-18 10:59:15"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-18 13:24:18"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-18 13:31:40"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-18 16:34:03"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-18 16:41:44"},{"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-18 16:44:07"}]
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-07-18 16:44:20.968  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:20.969  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:20.969  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+
+MockHttpServletRequest:
+      HTTP Method = PATCH
+      Request URI = /posting/62bea9f0fb954b34b82cfd36
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json", Content-Length:"98"]
+             Body = {"title":"테스트 수정된 제목입니다.","contents":"테스트 수정된 내용입니다."}
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.PostingController
+           Method = kb.practiceboard.controller.PostingController#editPosting(String, PostingGetDto)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"title":"테스트 수정된 제목입니다.","contents":"테스트 수정된 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-18 16:44:20","fileId":["442fb8e9-5850-4d16-81be-e2d1e260ff78"]}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-07-18 16:44:21.027  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:21.027  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:21.028  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /posting
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json", Content-Length:"165"]
+             Body = {"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","boardId":"62be6f64eb2cb135300b0728"}
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.PostingController
+           Method = kb.practiceboard.controller.PostingController#createPosting(PostingCreateDto)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"title":"테스트 제목입니다.","contents":"테스트 내용입니다.","authorId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","updatedDateTime":"2022-07-18 16:44:21"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

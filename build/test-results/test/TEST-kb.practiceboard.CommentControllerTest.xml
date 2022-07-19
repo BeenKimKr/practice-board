@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kb.practiceboard.CommentControllerTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-07-18T07:44:20" hostname="gimgyeongbins-iMac.local" time="0.217">
+  <properties/>
+  <testcase name="댓글 생성" classname="kb.practiceboard.CommentControllerTest" time="0.046"/>
+  <testcase name="댓글 수정" classname="kb.practiceboard.CommentControllerTest" time="0.055"/>
+  <testcase name="댓글 삭제" classname="kb.practiceboard.CommentControllerTest" time="0.034"/>
+  <testcase name="게시글별 댓글 목록" classname="kb.practiceboard.CommentControllerTest" time="0.041"/>
+  <testcase name="내가 쓴 댓글 목록" classname="kb.practiceboard.CommentControllerTest" time="0.037"/>
+  <system-out><![CDATA[2022-07-18 16:44:20.485  INFO 31733 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [kb.practiceboard.CommentControllerTest], using SpringBootContextLoader
+2022-07-18 16:44:20.486  INFO 31733 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [kb.practiceboard.CommentControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2022-07-18 16:44:20.486  INFO 31733 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kb.practiceboard.CommentControllerTest]: CommentControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2022-07-18 16:44:20.487  INFO 31733 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kb.practiceboard.Application for test class kb.practiceboard.CommentControllerTest
+2022-07-18 16:44:20.488  INFO 31733 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2022-07-18 16:44:20.489  INFO 31733 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@2f9236d8, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@4536a09a, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@603faaad, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@16cbba0f, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@28d16af8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@58932d08, org.springframework.test.context.transaction.TransactionalTestExecutionListener@45648e75, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@e344f14, org.springframework.test.context.event.EventPublishingTestExecutionListener@2d117280, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@6c2be147, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@dddcd91, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@21bd6fd1, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@79e9c14, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@340c7479, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@575e862c]
+2022-07-18 16:44:20.494  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:20.494  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:20.494  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /comment
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json", Content-Length:"130"]
+             Body = {"writerId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36"}
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.CommentController
+           Method = kb.practiceboard.controller.CommentController#createComment(CommentDto)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"writerId":"c0da61d6-f259-412b-b6d6-2c0a890c7744","contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-18 16:44:20"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-07-18 16:44:20.540  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:20.541  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:20.541  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+
+MockHttpServletRequest:
+      HTTP Method = PATCH
+      Request URI = /comment/62c3ef21dd53f328381bea21
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json", Content-Length:"48"]
+             Body = {"contents":"댓글 수정 테스트입니다."}
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.CommentController
+           Method = kb.practiceboard.controller.CommentController#modifyComment(String, CommentDto)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"contents":"댓글 수정 테스트입니다.","updatedDateTime":"2022-07-18 16:44:20"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-07-18 16:44:20.597  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:20.597  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:20.598  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+
+MockHttpServletRequest:
+      HTTP Method = DELETE
+      Request URI = /comment/62c3eec9bfcc5225c248ddaf
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json"]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.CommentController
+           Method = kb.practiceboard.controller.CommentController#deleteComment(String)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"message":"댓글이 삭제되었습니다."}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-07-18 16:44:20.632  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:20.632  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:20.633  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /comments/62bea9f0fb954b34b82cfd36
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json"]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.CommentController
+           Method = kb.practiceboard.controller.CommentController#viewComment(String)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = [{"contents":"댓글 수정 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-18 16:44:20"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-11 18:03:26"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-11 18:03:51"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-11 18:06:37"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-11 18:08:45"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-11 18:10:20"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-11 18:11:31"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-11 18:12:41"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 10:23:56"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 10:42:30"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 10:43:05"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 10:43:56"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 10:44:21"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 10:47:26"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 10:54:17"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 11:01:19"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 11:01:44"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 11:02:06"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 11:03:49"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 11:04:54"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 11:51:10"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 15:23:00"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-13 10:14:53"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-13 10:46:19"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-13 10:55:43"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-13 12:07:53"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-13 15:31:30"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-13 15:47:04"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-13 16:07:58"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-14 14:53:57"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-14 06:03:04"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-14 06:22:59"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-14 06:23:00"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-14 06:23:00"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-14 06:23:00"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-14 06:23:01"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-14 06:23:02"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-14 15:54:35"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-14 06:58:15"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-15 00:43:03"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-15 08:05:48"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-15 17:39:07"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-15 18:34:29"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-15 10:38:45"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-18 10:59:14"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-18 13:24:17"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-18 13:31:39"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-18 16:34:02"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-18 16:41:43"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-18 16:44:07"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-18 16:44:20"}]
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-07-18 16:44:20.674  INFO 31733 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-07-18 16:44:20.674  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-07-18 16:44:20.675  INFO 31733 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /comments/my/c0da61d6-f259-412b-b6d6-2c0a890c7744
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json"]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = kb.practiceboard.controller.CommentController
+           Method = kb.practiceboard.controller.CommentController#commentListByUserId(String)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = [{"contents":"댓글 수정 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-18 16:44:20"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-11 18:03:26"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-11 18:03:51"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-11 18:06:37"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-11 18:08:45"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-11 18:10:20"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-11 18:11:31"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-11 18:12:41"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 10:23:56"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 10:42:30"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 10:43:05"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 10:43:56"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 10:44:21"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 10:47:26"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 10:54:17"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 11:01:19"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 11:01:44"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 11:02:06"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 11:03:49"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 11:04:54"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 11:51:10"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-12 15:23:00"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-13 10:14:53"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-13 10:46:19"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-13 10:55:43"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-13 12:07:53"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-13 15:31:30"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-13 15:47:04"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-13 16:07:58"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-14 14:53:57"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-14 06:03:04"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-14 06:22:59"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-14 06:23:00"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-14 06:23:00"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-14 06:23:00"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-14 06:23:01"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-14 06:23:02"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-14 15:54:35"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-14 06:58:15"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-15 00:43:03"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-15 08:05:48"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-15 17:39:07"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-15 18:34:29"},{"contents":"sdhioqwioqhodidnlkasnd","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-15 10:38:45"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-18 10:59:14"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-18 13:24:17"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-18 13:31:39"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-18 16:34:02"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-18 16:41:43"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-18 16:44:07"},{"contents":"댓글 테스트입니다.","postingId":"62bea9f0fb954b34b82cfd36","updatedDateTime":"2022-07-18 16:44:20"}]
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,6 @@
+[source,bash]
+----
+$ echo '"442fb8e9-5850-4d16-81be-e2d1e260ff78"' | http DELETE 'http://localhost:8080/file' \
+    'Content-Type:application/json;charset=UTF-8' \
+    'Accept:application/json'
+----

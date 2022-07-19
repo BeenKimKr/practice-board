@@ -1,0 +1,13 @@
+[source,http,options="nowrap"]
+----
+PATCH /user/login HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Accept: application/json
+Content-Length: 60
+Host: localhost:8080
+
+{
+  "email" : "aaa@test1.com",
+  "password" : "aaa12345!!"
+}
+----

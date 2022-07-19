@@ -1,0 +1,12 @@
+|===
+|Path|Type|Description
+
+|`+.contents+`
+|`+String+`
+|내용
+
+|`+updatedDateTime+`
+|`+String+`
+|마지막 댓글 수정 시간
+
+|===

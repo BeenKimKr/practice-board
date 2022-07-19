@@ -1,0 +1,12 @@
+[source,http,options="nowrap"]
+----
+PATCH /comment/62c3ef21dd53f328381bea21 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Accept: application/json
+Content-Length: 54
+Host: localhost:8080
+
+{
+  "contents" : "댓글 수정 테스트입니다."
+}
+----

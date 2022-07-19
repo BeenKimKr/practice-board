@@ -1,0 +1,20 @@
+|===
+|Path|Type|Description
+
+|`+[].title+`
+|`+String+`
+|제목
+
+|`+[].contents+`
+|`+String+`
+|내용
+
+|`+[].authorId+`
+|`+String+`
+|작성자 ID
+
+|`+[].updatedDateTime+`
+|`+String+`
+|마지막 수정일시
+
+|===

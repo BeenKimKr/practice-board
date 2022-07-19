@@ -1,0 +1,10 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/user/pwd' -i -X PATCH \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Accept: application/json' \
+    -d '{
+  "userId" : "fc187b2f-0c34-4eea-8587-bd3b1f23dd05",
+  "password" : "aaa123123!!"
+}'
+----

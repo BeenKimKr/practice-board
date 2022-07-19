@@ -1,0 +1,7 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/file' -i -X DELETE \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Accept: application/json' \
+    -d '"442fb8e9-5850-4d16-81be-e2d1e260ff78"'
+----

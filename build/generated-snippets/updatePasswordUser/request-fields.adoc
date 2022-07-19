@@ -1,0 +1,12 @@
+|===
+|Path|Type|Description
+
+|`+userId+`
+|`+String+`
+|ID
+
+|`+password+`
+|`+String+`
+|비밀번호
+
+|===

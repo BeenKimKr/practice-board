@@ -1,0 +1,7 @@
+[source,options="nowrap"]
+----
+{
+  "contents" : "댓글 수정 테스트입니다.",
+  "updatedDateTime" : "2022-07-18 16:44:20"
+}
+----

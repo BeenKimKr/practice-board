@@ -1,0 +1,9 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/board' -i -X POST \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -d '{
+  "boardName" : "자유게시판",
+  "tag" : [ "자유" ]
+}'
+----

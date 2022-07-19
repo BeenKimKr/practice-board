@@ -1,0 +1,8 @@
+[source,bash]
+----
+$ echo '{
+  "contents" : "댓글 수정 테스트입니다."
+}' | http PATCH 'http://localhost:8080/comment/62c3ef21dd53f328381bea21' \
+    'Content-Type:application/json;charset=UTF-8' \
+    'Accept:application/json'
+----

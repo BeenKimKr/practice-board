@@ -1,0 +1,6 @@
+[source,bash]
+----
+$ http DELETE 'http://localhost:8080/comment/62c3eec9bfcc5225c248ddaf' \
+    'Content-Type:application/json;charset=UTF-8' \
+    'Accept:application/json'
+----

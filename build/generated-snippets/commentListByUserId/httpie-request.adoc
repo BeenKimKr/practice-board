@@ -1,0 +1,6 @@
+[source,bash]
+----
+$ http GET 'http://localhost:8080/comments/my/c0da61d6-f259-412b-b6d6-2c0a890c7744' \
+    'Content-Type:application/json;charset=UTF-8' \
+    'Accept:application/json'
+----

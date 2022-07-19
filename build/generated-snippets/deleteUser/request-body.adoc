@@ -1,0 +1,6 @@
+[source,options="nowrap"]
+----
+{
+  "userId" : "fc187b2f-0c34-4eea-8587-bd3b1f23dd05"
+}
+----

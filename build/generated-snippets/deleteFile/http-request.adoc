@@ -1,0 +1,10 @@
+[source,http,options="nowrap"]
+----
+DELETE /file HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Accept: application/json
+Content-Length: 38
+Host: localhost:8080
+
+"442fb8e9-5850-4d16-81be-e2d1e260ff78"
+----

@@ -1,0 +1,8 @@
+[source,http,options="nowrap"]
+----
+DELETE /comment/62c3eec9bfcc5225c248ddaf HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Accept: application/json
+Host: localhost:8080
+
+----

@@ -1,0 +1,13 @@
+[source,http,options="nowrap"]
+----
+PATCH /posting/62bea9f0fb954b34b82cfd36 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Accept: application/json
+Content-Length: 109
+Host: localhost:8080
+
+{
+  "title" : "테스트 수정된 제목입니다.",
+  "contents" : "테스트 수정된 내용입니다."
+}
+----
