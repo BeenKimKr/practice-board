@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 executors:
   java:
     docker:
@@ -39,7 +39,30 @@ jobs:
           version: 20.10.14
       - run:
           command: |
-            docker build --build-arg JAR_FILE=build/libs/practice-board-0.0.1-SNAPSHOT.jar ---tag beenkim/springbootcicdtest .
+            docker build -t springbootcicdtest/build-image .
+            docker tag springbootcicdtest/build-image
             docker login -u beenkim -p $DOCKER_HUB_PASSWORD
             docker push beenkim/springbootcicdtest
-            sudo apt-get update
+
+workflows:
+  main-branch-workflow:
+    jobs:
+      - gradle-build:
+          filters: &filters-main
+            branches:
+              only: main
+            tags:
+              ignore: /.*/
+  tag-workflow:
+    jobs:
+      - gradle-build:
+          filters: &filters-ops
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+      - docker-build:
+          requires:
+            - gradle-build
+          filters:
+            <<: *filters-ops
