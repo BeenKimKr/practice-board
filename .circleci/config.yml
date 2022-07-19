@@ -1,4 +1,4 @@
-version: 2.1
+version: 2
 executors:
   java:
     docker:
@@ -27,6 +27,8 @@ jobs:
           root: .
           paths:
             - .
+      - store_artifacts:
+          path: build/libs
   docker-build:
     executor: java
     steps:
@@ -35,11 +37,10 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: false
           version: 20.10.14
-      - run:
-          command: |
-            docker build -t beenkim/springbootcicdtest .
-            docker login -u beenkim -p $DOCKER_HUB_PASSWORD
-            docker push beenkim/springbootcicdtest
+      - run: docker build -t beenkim/springbootcicdtest .
+      - run: docker login -u beenkim -p $DOCKER_HUB_PASSWORD
+      - run: docker push beenkim/springbootcicdtest
+      - run: sudo apt-get update
 
 workflows:
   main-branch-workflow:
