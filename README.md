@@ -1,3 +1,3 @@
-# Spring Boot 게시판 예제
+# Spring Boot 게시판
 
 <hr />
