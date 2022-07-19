@@ -8,7 +8,7 @@ executors:
 jobs:
   gradle-build:
     executor: java
-    working_directory: ~/repo
+    working_directory: ~/
     environment:
       JVM_OPTS: -Xmx3200m
       TERM: dumb
@@ -28,7 +28,7 @@ jobs:
           paths:
             - .
       - store_artifacts:
-          path: repo/build/libs
+          path: build/libs
   docker-build:
     executor: java
     steps:
