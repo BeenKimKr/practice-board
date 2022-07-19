@@ -23,25 +23,17 @@ jobs:
           paths:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
-      #      - run: gradle test
-      #      - run: gradle build
       - store_artifacts:
           path: build/libs
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
   docker-build:
     executor: java
     steps:
-      - attach_workspace:
-          at: .
       - setup_remote_docker:
           docker_layer_caching: false
           version: 20.10.14
-      - run: docker build -t beenkim/springbootcicd .
-      - run: docker login -u beenkim -p $DOCKER_HUB_PASSWORD
-      - run: docker push beenkim/springbootcicd
+      - run: docker build -t $MY_REPO .
+      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - run: docker push $MY_REPO
 
 workflows:
   main-branch-workflow:
@@ -53,6 +45,7 @@ workflows:
             tags:
               ignore: /.*/
       - docker-build:
+          context: user-info
           requires:
             - gradle-build
           filters: &filters-main
