@@ -41,7 +41,7 @@ jobs:
           command: |
             docker build -t beenkim/springbootcicdtest .
             docker login -u beenkim -p $DOCKER_HUB_PASSWORD
-            docker push beenkim/springbootcicdtest
+            docker push
 
 workflows:
   main-branch-workflow:
