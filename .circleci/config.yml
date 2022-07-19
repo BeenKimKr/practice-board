@@ -28,7 +28,7 @@ jobs:
           paths:
             - .
       - store_artifacts:
-          path: build/libs
+          path: repo/build/libs
   docker-build:
     executor: java
     steps:
@@ -41,7 +41,7 @@ jobs:
           command: |
             docker build -t beenkim/springbootcicdtest .
             docker login -u beenkim -p $DOCKER_HUB_PASSWORD
-            docker push
+            docker push beenkim/springbootcicdtest
 
 workflows:
   main-branch-workflow:
