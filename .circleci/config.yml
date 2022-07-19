@@ -43,25 +43,25 @@ jobs:
             docker login -u beenkim -p $DOCKER_HUB_PASSWORD
             docker push beenkim/springbootcicdtest
 
-workflows:
-  main-branch-workflow:
-    jobs:
-      - gradle-build:
-          filters: &filters-main
-            branches:
-              only: main
-            tags:
-              ignore: /.*/
-  tag-workflow:
-    jobs:
-      - gradle-build:
-          filters: &filters-ops
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v.*/
-      - docker-build:
-          requires:
-            - gradle-build
-          filters:
-            <<: *filters-ops
+#workflows:
+#  main-branch-workflow:
+#    jobs:
+#      - gradle-build:
+#          filters: &filters-main
+#            branches:
+#              only: main
+#            tags:
+#              ignore: /.*/
+#  tag-workflow:
+#    jobs:
+#      - gradle-build:
+#          filters: &filters-ops
+#            branches:
+#              ignore: /.*/
+#            tags:
+#              only: /^v.*/
+#      - docker-build:
+#          requires:
+#            - gradle-build
+#          filters:
+#            <<: *filters-ops
