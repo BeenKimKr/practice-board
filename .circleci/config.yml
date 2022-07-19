@@ -27,15 +27,13 @@ jobs:
           root: .
           paths:
             - .
-      - store_artifacts:
-          path: build/libs
   docker-build:
     executor: java
     steps:
       - attach_workspace:
           at: .
       - setup_remote_docker:
-          docker_layer_caching: true
+          docker_layer_caching: false
           version: 20.10.14
       - run:
           command: |
