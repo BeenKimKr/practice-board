@@ -40,7 +40,7 @@ jobs:
       - run: docker login -u beenkim -p $DOCKER_HUB_PASSWORD
       - run: docker build -t springbootcicdtest/build-image .
       - run: docker tag springbootcicdtest/build-image .
-      - run: docker push
+      - run: docker push beenkim/springbootcicdtest
       - run: sudo apt-get update
 
 workflows:
