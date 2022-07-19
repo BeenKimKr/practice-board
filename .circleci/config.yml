@@ -37,13 +37,10 @@ jobs:
           at: .
       - setup_remote_docker:
           version: 20.10.14
-      - run:
-          name: build images and push to registry
-          command: |
-            docker build -t app .
-            docker login -u beenkim -p $DOKER_HUB_PASSWORD
-            docker push beenkim/springbootcicdtest
-            sudo apt-get update
+      - run: docker build -t app .
+      - run: docker login -u beenkim -p $DOCKER_HUB_PASSWORD
+      - run: docker push beenkim/springbootcicdtest
+      - run: sudo apt-get update
 
 workflows:
   main-branch-workflow:
