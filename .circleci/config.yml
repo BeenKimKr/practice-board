@@ -31,9 +31,9 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: false
           version: 20.10.14
-      - run: docker build -t $MY_REPO .
+      - run: docker build -t ${MY_REPO} .
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      - run: docker push $MY_REPO
+      - run: docker push ${MY_REPO}
 
 workflows:
   main-branch-workflow:
