@@ -48,14 +48,11 @@ workflows:
               only: main
             tags:
               ignore: /.*/
-  tag-workflow:
-    jobs:
-      - gradle-build:
-          filters: &filters-ops
-            branches:
-              ignore: /.*/
       - docker-build:
           requires:
             - gradle-build
-          filters:
-            <<: *filters-ops
+          filters: &filters-main
+            branches:
+              only: main
+            tags:
+              ignore: /.*/
