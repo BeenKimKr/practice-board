@@ -35,9 +35,9 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: false
           version: 20.10.14
-      - run: docker build -t beenkim/springbootcicdtest .
+      - run: docker build -t springbootcicd/build-image .
       - run: docker login -u beenkim -p $DOCKER_HUB_PASSWORD
-      - run: docker push beenkim/springbootcicdtest
+      - run: docker push beenkim/springbootcicd
 
 workflows:
   main-branch-workflow:
