@@ -31,7 +31,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: false
           version: 20.10.14
-      - run: docker build -t $DOCKER_USERNAME/springbootcicd .
+      - run: docker build -t beenkim/springbootcicd .
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       - run: docker push $DOCKER_USERNAME/springbootcicd
 
