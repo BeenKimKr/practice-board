@@ -23,6 +23,7 @@ jobs:
           paths:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
+      - run: gradle clean build
       - persist_to_workspace:
           root: .
           paths:
