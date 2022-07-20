@@ -41,6 +41,7 @@ jobs:
           command: |
             TAG=$(git log -1 --pretty=%h)
             docker build -t app .
+            docker network create -d=overlay --attachable my-net
             docker-compose up --build -d
 
       - run:
