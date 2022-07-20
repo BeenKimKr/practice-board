@@ -40,7 +40,7 @@ jobs:
           name: Install Docker Compose
           command: |
             sudo apt-get update
-            sudo apt-get install docker-compose-plugin=2.7.0
+            sudo apt-get install docker-compose
       - run:
           name: Start container and verify
           command: |
