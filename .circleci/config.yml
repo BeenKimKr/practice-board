@@ -34,10 +34,10 @@ jobs:
           version: 20.10.14
       - run:
           command: |
-            TAG=$(git log -1 --pretty=%h) \
-            docker build -t $REPO_NAME:$TAG . \
-            docker login -u $DOCKER_USER -p $DOCKER_PASS \
-            docker push $REPO_NAME:$TAG \
+            TAG=$(git log -1 --pretty=%h)
+            docker build -t $REPO_NAME:$TAG .
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker push $REPO_NAME:$TAG
 
 workflows:
   main-branch-workflow:
