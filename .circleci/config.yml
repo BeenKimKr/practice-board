@@ -33,7 +33,7 @@ jobs:
           docker_layer_caching: false
           version: 20.10.14
       - run:
-          command: \
+          command: |
             TAG=$(git log -1 --pretty=%h) \
             docker build -t $REPO_NAME:$TAG . \
             docker login -u $DOCKER_USER -p $DOCKER_PASS \
