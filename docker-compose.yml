@@ -17,28 +17,28 @@ services:
     networks:
       - my-net
 
-  prometheus:
-    image: prom/prometheus
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-      - ./prometheus_data:/prometheus
-    command:
-      - --config.file=/etc/prometheus/prometheus.yml
-    ports:
-      - "9090:9090"
-    networks:
-      - my-net
-
-  grafana:
-    image: grafana/grafana
-    depends_on:
-      - prometheus
-    ports:
-      - "3000:3000"
-    networks:
-      - my-net
+#  prometheus:
+#    image: prom/prometheus
+#    volumes:
+#      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+#      - ./prometheus_data:/prometheus
+#    command:
+#      - --config.file=/etc/prometheus/prometheus.yml
+#    ports:
+#      - "9090:9090"
+#    networks:
+#      - my-net
+#
+#  grafana:
+#    image: grafana/grafana
+#    depends_on:
+#      - prometheus
+#    ports:
+#      - "3000:3000"
+#    networks:
+#      - my-net
 
 networks:
   my-net:
     external: true
-#    driver: overlay
+    driver: overlay
