@@ -32,9 +32,10 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: false
           version: 20.10.14
-      - run: docker build -t $REPO_NAME:0.0.2 .
-      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      - run: docker push $REPO_NAME:0.0.2
+      - run: TAG=$(git log -1 --pretty=%h)
+      - run: docker build -t $REPO_NAME:$TAG .
+      - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run: docker push $REPO_NAME:TAG
 
 workflows:
   main-branch-workflow:
