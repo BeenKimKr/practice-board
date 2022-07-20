@@ -39,13 +39,13 @@ jobs:
       - run:
           name: Start container and verify
           command: |
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker network create -d=overlay --attachable my-net
             docker-compose up --build -d
       - run:
           name: Deploy docker image to docker hub
           command: |
             TAG=$(git log -1 --pretty=%h)
-            docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker tag app $REPO_NAME:$TAG
             docker push $REPO_NAME:$TAG
 
