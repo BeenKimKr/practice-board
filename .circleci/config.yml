@@ -32,9 +32,9 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: false
           version: 20.10.14
-      - run: docker build -t $MY_REPO .
+      - run: docker build -t $REPO_NAME .
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      - run: docker push $MY_REPO
+      - run: docker push "${REPO_NAME}:0.0.1"
 
 workflows:
   main-branch-workflow:
@@ -54,3 +54,8 @@ workflows:
               only: main
             tags:
               ignore: /.*/
+#  tag-workflows:
+#    jobs:
+#      - gradle-build:
+#
+#      - docker-build:
