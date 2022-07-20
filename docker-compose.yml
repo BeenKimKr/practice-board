@@ -41,4 +41,4 @@ services:
 networks:
   my-net:
     external: true
-    driver: overlay
+    driver: bridge

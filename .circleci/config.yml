@@ -37,11 +37,6 @@ jobs:
           command: |
             docker build -t app .
       - run:
-          name: Install Docker Compose
-          command: |
-            sudo apt-get update
-            sudo apt-get install docker-compose
-      - run:
           name: Start container and verify
           command: |
             docker network create -d=overlay --attachable my-net
