@@ -32,23 +32,28 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: false
           version: 20.10.14
-      #      - run:
-      #          name: Install Docker Compose
-      #          command: |
-
-      - run:
-          name: Start container and verify
-          command: |
-            TAG=$(git log -1 --pretty=%h)
-            docker build -t app .
-            docker network create -d=overlay --attachable my-net
-            docker-compose up --build -d
-
       - run:
           name: Build docker image
           command: |
+            docker build -t app .
+      - run:
+          name: Install Docker Compose
+          command: |
+            set -x
+            curl -L https://github.com/docker/compose/releases/download/2.7.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+            chmod +x /usr/local/bin/docker-compose
+      - run:
+          name: Start container and verify
+          command: |
+            docker network create -d=overlay --attachable my-net
+            docker-compose up --build -d
+      - run:
+          name: Deploy docker image to docker hub
+          command: |
+            TAG=$(git log -1 --pretty=%h)
             docker login -u $DOCKER_USER -p $DOCKER_PASS
-            docker push app $REPO_NAME:$TAG
+            docker tag app $REPO_NAME:$TAG
+            docker push $REPO_NAME:$TAG
 
 workflows:
   main-branch-workflow:
