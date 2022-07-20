@@ -32,33 +32,29 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: false
           version: 20.10.14
+      #      - run:
+      #          name: Install Docker Compose
+      #          command: |
+
       - run:
+          name: Start container and verify
           command: |
-            echo "Build docker image"
+            docker-compose up --build -d
+      - run:
+          name: Build docker image
+          command: |
             TAG=$(git log -1 --pretty=%h)
             docker build -t $REPO_NAME:$TAG .
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker push $REPO_NAME:$TAG
-#      - run:
-#          command: |
-#            echo "Build image of service declared in docker-compose"
-#            docker-compose up --build -d
 
 workflows:
   main-branch-workflow:
     jobs:
       - gradle-build:
-          filters: &filters-main
-            branches:
-              only: main
-            tags:
-              ignore: /.*/
-  tag-workflow:
-    jobs:
-      - gradle-build:
           filters: &filters-ops
             branches:
-              ignore: /.*/
+              only: main
             tags:
               only: /^v.*/
       - docker-build:

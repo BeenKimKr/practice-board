@@ -29,7 +29,6 @@ services:
     networks:
       - my-net
 
-
   grafana:
     image: grafana/grafana
     depends_on:
