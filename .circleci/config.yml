@@ -35,7 +35,7 @@ jobs:
       - run:
           command: |
             echo "Build docker image"
-            TAG=$(git log -1 --pretty=%h)
+            TAG=$TAG_FROM_LOG
             docker build -t $REPO_NAME:$TAG .
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker push $REPO_NAME:$TAG
