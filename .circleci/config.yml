@@ -35,10 +35,14 @@ jobs:
       - run:
           command: |
             echo "Build docker image"
-            TAG=$TAG_FROM_LOG
+            TAG=$(git log -1 --pretty=%h)
             docker build -t $REPO_NAME:$TAG .
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker push $REPO_NAME:$TAG
+#      - run:
+#          command: |
+#            echo "Build image of service declared in docker-compose"
+#            docker-compose up --build -d
 
 workflows:
   main-branch-workflow:
@@ -49,17 +53,17 @@ workflows:
               only: main
             tags:
               ignore: /.*/
+  tag-workflow:
+    jobs:
+      - gradle-build:
+          filters: &filters-ops
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
       - docker-build:
           context: user-info
           requires:
             - gradle-build
-          filters: &filters-main
-            branches:
-              only: main
-            tags:
-              ignore: /.*/
-#  tag-workflows:
-#    jobs:
-#      - gradle-build:
-#
-#      - docker-build:
+          filters:
+            <<: *filters-ops
