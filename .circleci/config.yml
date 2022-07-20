@@ -33,7 +33,7 @@ jobs:
           docker_layer_caching: false
           version: 20.10.14
       - run: TAG=$(git log -1 --pretty=%h)
-      - run: docker build -t beenkim/springbootcicd:$TAG .
+      - run: docker build -t beenkim/springbootcicd:${TAG} .
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run: docker push beenkim/springbootcicd:${TAG}
 
