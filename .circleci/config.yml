@@ -39,14 +39,15 @@ jobs:
       - run:
           name: Start container and verify
           command: |
+            TAG=$(git log -1 --pretty=%h)
+            docker build -t app .
             docker-compose up --build -d
+
       - run:
           name: Build docker image
           command: |
-            TAG=$(git log -1 --pretty=%h)
-            docker build -t $REPO_NAME:$TAG .
             docker login -u $DOCKER_USER -p $DOCKER_PASS
-            docker push $REPO_NAME:$TAG
+            docker push app $REPO_NAME:$TAG
 
 workflows:
   main-branch-workflow:
