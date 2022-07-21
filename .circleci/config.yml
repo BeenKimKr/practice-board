@@ -47,7 +47,9 @@ jobs:
           command: |
             TAG=$(git log -1 --pretty=%h)
             docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker tag app $REPO_NAME:latest
             docker tag app $REPO_NAME:$TAG
+            docker push $REPO_NAME:latest
             docker push $REPO_NAME:$TAG
 
 workflows:
