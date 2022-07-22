@@ -50,7 +50,7 @@ jobs:
       - run:
           name: Update .env for compose
           command: |
-            rm ec2-prod.env
+            rm -f ./ec2-prod.env
             vi ec2-prod.env
             i
             APP_VERSION=$TAG
@@ -60,7 +60,7 @@ jobs:
       - run:
           name: Set ketpair to access ec2 instance
           command: |
-            rm gw-test-keypair.pem
+            rm -f ./gw-test-keypair.pem
             vi gw-test-keypair.pem
             i
             -----BEGIN RSA PRIVATE KEY-----
