@@ -53,7 +53,7 @@ jobs:
       - run:
           name: Version for images
           command: |
-            APP_VERSION=$($TAG)
+            APP_VERSION=$TAG
             PROM_VERSION=$(v2.37.0)
             GRAF_VERSION=$(9.0.4)
       - run:
