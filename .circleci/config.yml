@@ -36,21 +36,19 @@ jobs:
           name: Build docker image
           command: |
             docker build -t app .
-      - run:
-          name: Start container and verify
-          command: |
-            docker swarm init
-            docker network create -d=overlay --attachable my-net
-            docker-compose up --build -d
+      #      - run:
+      #          name: Make Network and Start container
+      #          command: |
+      #            docker swarm init
+      #            docker network create -d=overlay --attachable my-net
+      #            docker-compose up --build -d
       - run:
           name: Deploy docker image to docker hub
           command: |
             TAG=$(git log -1 --pretty=%h)
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker tag app $REPO_NAME:$TAG
-            docker tag app $REPO_NAME:latest
             docker push $REPO_NAME:$TAG
-            docker push $REPO_NAME:latest
 
 workflows:
   main-branch-workflow:
