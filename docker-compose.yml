@@ -3,7 +3,9 @@ version: "3"
 services:
 
   app:
-    image: app
+    env_file:
+      - ec2-prod.env
+    image: app:${APP_VERSION}
     #    deploy:
     #      resources:
     #        limits:
@@ -17,26 +19,30 @@ services:
     networks:
       - my-net
 
-#  prometheus:
-#    image: prom/prometheus
-#    volumes:
-#      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-#      - ./prometheus_data:/prometheus
-#    command:
-#      - --config.file=/etc/prometheus/prometheus.yml
-#    ports:
-#      - "9090:9090"
-#    networks:
-#      - my-net
-#
-#  grafana:
-#    image: grafana/grafana
-#    depends_on:
-#      - prometheus
-#    ports:
-#      - "3000:3000"
-#    networks:
-#      - my-net
+  prometheus:
+    env_file:
+      - ec2-prod.env
+    image: prom/prometheus:${PROM_VERSION}
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus_data:/prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - my-net
+
+  grafana:
+    env_file:
+      - ec2-prod.env
+    image: grafana/grafana:${GRAF_VERSION}
+    depends_on:
+      - prometheus
+    ports:
+      - "3000:3000"
+    networks:
+      - my-net
 
 networks:
   my-net:

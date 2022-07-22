@@ -5,6 +5,7 @@ application.yml
 /data
 /prometheus_data
 .DS_store
+.env
 
 ### STS ###
 .apt_generated

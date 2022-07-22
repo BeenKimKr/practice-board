@@ -27,28 +27,65 @@ jobs:
   docker-build:
     executor: java
     steps:
+      - checkout
       - attach_workspace:
           at: .
       - setup_remote_docker:
           docker_layer_caching: false
           version: 20.10.14
       - run:
-          name: Build docker image
+          name: Build docker image and push to docker hub
           command: |
             docker build -t app .
-      #      - run:
-      #          name: Make Network and Start container
-      #          command: |
-      #            docker swarm init
-      #            docker network create -d=overlay --attachable my-net
-      #            docker-compose up --build -d
-      - run:
-          name: Deploy docker image to docker hub
-          command: |
             TAG=$(git log -1 --pretty=%h)
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker tag app $REPO_NAME:$TAG
             docker push $REPO_NAME:$TAG
+  deploy-ec2:
+    executor: java
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: Update .env for compose
+          command: |
+            rm ec2-prod.env
+            vi ec2-prod.env
+            i
+            APP_VERSION=$TAG
+            PROM_VERSION=v2.37.0
+            GRAF_VERSION=9.0.4
+            <ESC> :wq!
+      - run:
+          name: Set ketpair to access ec2 instance
+          command: |
+            rm gw-test-keypair.pem
+            vi gw-test-keypair.pem
+            i
+            -----BEGIN RSA PRIVATE KEY-----
+            ${AWS_EC2_KEYPAIR_PRIVATE}
+            -----END RSA PRIVATE KEY-----
+            <ESC> :wq!
+      - run:
+          name: Deploy to ec2 instance
+          command: |
+            scp -i gw-test-keypair.pem docker-compose.yml ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:~/
+            scp -i gw-test-keypair.pem ec2-prod.env ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:~/
+  compose-run:
+    executor: java
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - setup_remote_docker:
+          docker_layer_caching: false
+          version: 20.10.14
+      - run:
+          name: Run docker-compose
+          command: |
+            ssh -i gw-test-keypair.pem ec2-user@ec2-15-165-50-82.ap-northeast-2.compute.amazonaws.com
+            docker-compose up --build -d
 
 workflows:
   main-branch-workflow:
@@ -60,8 +97,10 @@ workflows:
             tags:
               only: /^v.*/
       - docker-build:
-          context: user-info
+          context: docker-info
           requires:
             - gradle-build
           filters:
             <<: *filters-ops
+  tag-workflow:
+
