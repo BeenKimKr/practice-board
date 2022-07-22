@@ -56,7 +56,6 @@ jobs:
             APP_VERSION=${TAG}
             PROM_VERSION=v2.37.0
             GRAF_VERSION=9.0.4
-            <ESC> :wq!
       - run:
           name: Set ketpair to access ec2 instance
           command: |
@@ -66,7 +65,6 @@ jobs:
             -----BEGIN RSA PRIVATE KEY-----
             ${AWS_EC2_KEYPAIR_PRIVATE}
             -----END RSA PRIVATE KEY-----
-            <ESC> :wq!
       - run:
           name: Deploy to ec2 instance
           command: |
