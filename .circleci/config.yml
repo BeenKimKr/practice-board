@@ -61,8 +61,9 @@ jobs:
       - run:
           name: Deploy to ec2 instance
           command: |
-            ssh-keyscan "ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com" >> ~/.ssh/known_hosts
+            ssh-keyscan -H [${AWS_EC2_USER_NAME}, ${AWS_EC2_IP}] >> ~/.ssh/known_host
             ssh ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com
+            echo " StrictHostKeyChecking no" >> ~/.ssh/config
             exit
             # rsync -ah -e "ssh -o StrictHostKeyChecking=no" docker-compose.yml ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:/spring-app/
             # ssh ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com "cd spring-app; docker-compose up --build -d"
