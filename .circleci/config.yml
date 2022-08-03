@@ -59,26 +59,10 @@ jobs:
       - run:
           name: Deploy to ec2 instance
           command: |
-            ln -s ~/.ssh/id_rsa_83f6* ~/.ssh/id_rsa_temp
-            cp ~/.ssh/id_rsa_* ~/.ssh/id_rsa
-            ssh -i .ssh/id_rsa -o StrictHostKeyChecking=no ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com
-            rsync -arvc ./docker-compose.yml ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:/spring-app/
-
-  compose-run:
-    executor: java
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - setup_remote_docker:
-          docker_layer_caching: false
-          version: 20.10.14
-      - run:
-          name: Run docker-compose
-          command: |
-            ssh ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com
+            rsync -arvc ./docker-compose.yml"ssh -o StrictHostKeyChecking=no" ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:/spring-app/ \<<'ENDSSH'
             cd spring-app
             docker-compose up --build -d
+            ENDSSH
 
 workflows:
   main-branch-workflow:
