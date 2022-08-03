@@ -85,10 +85,4 @@ workflows:
             - docker-build
           filters:
             <<: *filters-ops
-      - compose-run:
-          context: aws-ec2
-          requires:
-            - deploy-ec2
-          filters:
-            <<: *filters-ops
 
