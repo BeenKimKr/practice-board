@@ -59,8 +59,8 @@ jobs:
       - run:
           name: Deploy to ec2 instance
           command: |
-            scp docker-compose.yml ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:~/
-            scp ec2-prod.env ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:~/
+            scp -i ${AWS_EC2_KEYPAIR_PRIVATE} docker-compose.yml ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:~/
+            scp -i ${AWS_EC2_KEYPAIR_PRIVATE} ec2-prod.env ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:~/
   compose-run:
     executor: java
     steps:
