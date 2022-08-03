@@ -59,8 +59,8 @@ jobs:
       - run:
           name: Deploy to ec2 instance
           command: |
-            scp docker-compose.yml ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:~/spring-app/
-            scp ec2-prod.env ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:~/spring-app/
+            rsync -ah -e "ssh -o StrictHostKeyChecking=no" docker-compose.yml ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:~/spring-app/
+
   compose-run:
     executor: java
     steps:
