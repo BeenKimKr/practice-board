@@ -55,51 +55,34 @@ jobs:
             GRAF_VERSION="9.0.4"
       - add_ssh_keys:
           fingerprints:
-            - "83:f6:df:5a:a7:d7:0a:6c:fb:ad:e0:55:4c:c0:be:37"
-      - run:
-          name: Deploy to ec2 instance
-          command: |
-            scp -o StrictHostKeyChecking=no docker-compose.yml ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:/spring-app/
-            ssh ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com "cd spring-app; docker-compose up --build -d"
-
-  deploy-test:
-    executor: java
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - add_ssh_keys:
-          fingerprints:
             - "3f:43:2e:cc:27:1e:c9:d3:8e:8b:a9:5e:52:34:e7:52"
       - run:
           name: Deploy to ec2 instance
           command: |
-            echo ssh ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com
-            ssh -o StrictHostKeyChecking=no -t ec2-user@ec2-15-165-50-82.ap-northeast-2.compute.amazonaws.com "ls"
+            scp -o StrictHostKeyChecking=no docker-compose.yml ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:/spring-app/
+            ssh -o StrictHostKeyChecking=no ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com "cd spring-app; docker-compose up --build -d"
 
 workflows:
   main-branch-workflow:
     jobs:
-      #      - gradle-build:
-      #          filters: &filters-ops
-      #            branches:
-      #              only: main
-      #            tags:
-      #              only: /^v.*/
-      #      - docker-build:
-      #          context: docker-info
-      #          requires:
-      #            - gradle-build
-      #          filters:
-      #            <<: *filters-ops
-      #      - deploy-ec2:
-      #          context: aws-ec2
-      #          requires:
-      #            - docker-build
-      #          filters:
-      #            <<: *filters-ops
-      - deploy-test:
+      - gradle-build:
+          filters: &filters-ops
+            branches:
+              only: main
+            tags:
+              only: /^v.*/
+      - docker-build:
+          context: docker-info
+          requires:
+            - gradle-build
+          filters:
+            <<: *filters-ops
+      - deploy-ec2:
           context: aws-ec2
+          requires:
+            - docker-build
+          filters:
+            <<: *filters-ops
 
 
 
