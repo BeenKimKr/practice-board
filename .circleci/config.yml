@@ -48,18 +48,16 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: Version for images
+          name: Version of images
           command: |
-            APP_VERSION=$LAST_TAG
-            PROM_VERSION="v2.37.0"
-            GRAF_VERSION="9.0.4"
+            echo -e APP_VERSION=$LAST_TAG\\nPROM_VERSION="v2.37.0"\\nGRAF_VERSION="9.0.4" > ec2-prod.env
       - add_ssh_keys:
           fingerprints:
             - "3f:43:2e:cc:27:1e:c9:d3:8e:8b:a9:5e:52:34:e7:52"
       - run:
           name: Deploy to ec2 instance
           command: |
-            scp -o StrictHostKeyChecking=no docker-compose.yml ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:/spring-app/docker-compose.yml
+            scp -o StrictHostKeyChecking=no docker-compose.yml ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:~/spring-app/docker-compose.yml
             ssh -o StrictHostKeyChecking=no ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com "cd spring-app; docker-compose up --build -d"
 
 workflows:
