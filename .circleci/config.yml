@@ -98,6 +98,6 @@ workflows:
       #            - docker-build
       #          filters:
       #            <<: *filters-ops
-      - deploy-test:
+      - deploy-test
 
 
