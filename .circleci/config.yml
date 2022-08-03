@@ -43,6 +43,8 @@ jobs:
             docker push $REPO_NAME:$LAST_TAG
   deploy-ec2:
     executor: java
+    machine:
+      enable: true
     steps:
       - checkout
       - attach_workspace:
@@ -53,9 +55,9 @@ jobs:
             APP_VERSION=$LAST_TAG
             PROM_VERSION="v2.37.0"
             GRAF_VERSION="9.0.4"
-      #      - add_ssh_keys:
-      #          fingerprints:
-      #            - "83:f6:df:5a:a7:d7:0a:6c:fb:ad:e0:55:4c:c0:be:37"
+      - add_ssh_keys:
+          fingerprints:
+            - "83:f6:df:5a:a7:d7:0a:6c:fb:ad:e0:55:4c:c0:be:37"
       - run:
           name: Deploy to ec2 instance
           command: |
