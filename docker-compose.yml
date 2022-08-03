@@ -20,7 +20,7 @@ services:
       - my-net
 
   prometheus:
-    environment:
+    env_file:
       - ./ec2-prod.env
     image: prom/prometheus:${PROM_VERSION}
     volumes:
@@ -34,7 +34,7 @@ services:
       - my-net
 
   grafana:
-    environment:
+    env_file:
       - ./ec2-prod.env
     image: grafana/grafana:${GRAF_VERSION}
     depends_on:
