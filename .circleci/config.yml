@@ -43,8 +43,6 @@ jobs:
             docker push $REPO_NAME:$LAST_TAG
   deploy-ec2:
     executor: java
-    machine:
-      enable: true
     steps:
       - checkout
       - attach_workspace:
