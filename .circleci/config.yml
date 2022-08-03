@@ -60,7 +60,7 @@ jobs:
           name: Deploy to ec2 instance
           command: |
             scp -o StrictHostKeyChecking=no docker-compose.yml ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:/spring-app/
-            ssh gw-test-keypair.pem ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com "cd spring-app; docker-compose up --build -d"
+            ssh ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com "cd spring-app; docker-compose up --build -d"
 
 workflows:
   main-branch-workflow:
