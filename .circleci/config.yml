@@ -61,7 +61,7 @@ jobs:
       - run:
           name: Deploy to ec2 instance
           command: |
-            ssh-keyscan -t rsa deploy >> ~/.ssh/known_host
+            ssh-keyscan -t rsa ${AWS_EC2_USER_NAME}@deploy >> ~/.ssh/known_host
             echo " StrictHostKeyChecking no" >> ~/.ssh/config
             mkdir ~/spring-app/test
             exit
