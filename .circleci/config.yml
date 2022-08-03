@@ -47,19 +47,21 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - add_ssh_keys:
-          fingerprints:
-            - "83:f6:df:5a:a7:d7:0a:6c:fb:ad:e0:55:4c:c0:be:37"
       - run:
           name: Version for images
           command: |
             APP_VERSION=$LAST_TAG
             PROM_VERSION="v2.37.0"
             GRAF_VERSION="9.0.4"
+      - add_ssh_keys:
+          fingerprints:
+            - "83:f6:df:5a:a7:d7:0a:6c:fb:ad:e0:55:4c:c0:be:37"
       - run:
           name: Deploy to ec2 instance
           command: |
-            ssh -o StrictHostKeyChecking=no ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com
+            ln -s ~/.ssh/id_rsa_83f6* ~/.ssh/id_rsa_temp
+            cp ~/.ssh/id_rsa_* ~/.ssh/id_rsa
+            ssh -i .ssh/id_rsa -o StrictHostKeyChecking=no ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com
             rsync -arvc ./docker-compose.yml ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:/spring-app/
 
   compose-run:
