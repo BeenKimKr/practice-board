@@ -41,6 +41,7 @@ jobs:
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker tag app $REPO_NAME:$LAST_TAG
             docker push $REPO_NAME:$LAST_TAG
+
   deploy-ec2:
     executor: java
     steps:
@@ -58,6 +59,7 @@ jobs:
           name: Deploy to ec2 instance
           command: |
             scp -o StrictHostKeyChecking=no docker-compose.yml ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:~/spring-app/docker-compose.yml
+            scp -o StrictHostKeyChecking=no ec2-prod.env ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:~/spring-app/ec2-prod.env
             ssh -o StrictHostKeyChecking=no ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com "cd spring-app; docker-compose up --build -d"
 
 workflows:
