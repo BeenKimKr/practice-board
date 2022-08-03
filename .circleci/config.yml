@@ -59,7 +59,7 @@ jobs:
       - run:
           name: Deploy to ec2 instance
           command: |
-            rsync -ah -e "ssh -o StrictHostKeyChecking=no" docker-compose.yml ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:/spring-app/
+            rsync --rsync-path=/bin/rsync -ah -e "ssh -o StrictHostKeyChecking=no" docker-compose.yml ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:/spring-app/
             ssh ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com "cd spring-app; docker-compose up --build -d"
 
 workflows:
