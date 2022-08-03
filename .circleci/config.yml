@@ -74,6 +74,7 @@ jobs:
       - run:
           name: Deploy to ec2 instance
           command: |
+            echo ssh ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com
             ssh ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com
             ls
 
@@ -98,6 +99,8 @@ workflows:
       #            - docker-build
       #          filters:
       #            <<: *filters-ops
-      - deploy-test
+      - deploy-test:
+          context: aws-ec2
+
 
 
