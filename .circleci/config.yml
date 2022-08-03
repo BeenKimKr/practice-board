@@ -59,9 +59,7 @@ jobs:
       - run:
           name: Deploy to ec2 instance
           command: |
-            ssh -o "StrictHostKeyChecking no" ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com \<<'ENDSSH'
-            rsync -ah -e docker-compose.yml ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:~/spring-app/
-            ENDSSH
+            rsync -e "ssh -o StrictHostKeyChecking=no" -arvc ./docker-compose.yml ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:/spring-app/
 
   compose-run:
     executor: java
