@@ -75,7 +75,7 @@ jobs:
           name: Deploy to ec2 instance
           command: |
             echo ssh ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com
-            ssh -t ec2-user@ec2-15-165-50-82.ap-northeast-2.compute.amazonaws.com "ls"
+            ssh -o StrictHostKeyChecking=no -t ec2-user@ec2-15-165-50-82.ap-northeast-2.compute.amazonaws.com "ls"
 
 workflows:
   main-branch-workflow:
