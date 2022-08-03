@@ -21,7 +21,7 @@ services:
 
   prometheus:
     environment:
-      - ec2-prod.env
+      - ./ec2-prod.env
     image: prom/prometheus:${PROM_VERSION}
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
@@ -35,7 +35,7 @@ services:
 
   grafana:
     environment:
-      - ec2-prod.env
+      - ./ec2-prod.env
     image: grafana/grafana:${GRAF_VERSION}
     depends_on:
       - prometheus
