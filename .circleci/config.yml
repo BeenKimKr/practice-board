@@ -60,6 +60,9 @@ jobs:
           name: Deploy to ec2 instance
           command: |
             echo -e -----BEGIN RSA PRIVATE KEY-----\\n${AWS_EC2_PRIVATE}\\n-----END RSA PRIVATE KEY----- > gw-test-keypair.pem
+      - run:
+          name: Deploy to ec2 instance
+          command: |
             scp -i gw-test-keypair.pem -o StrictHostKeyChecking=no docker-compose.yml ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:/spring-app/
             ssh -i gw-test-keypair.pem ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com "cd spring-app; docker-compose up --build -d"
             exit
