@@ -51,6 +51,7 @@ jobs:
       - run:
           name: Version of images
           command: |
+            LAST_TAG=$(git log -1 --pretty=%h)
             echo -e APP_VERSION=${LAST_TAG}\\nPROM_VERSION="v2.37.0"\\nGRAF_VERSION="9.0.4" > ec2-prod.env
       - add_ssh_keys:
           fingerprints:
