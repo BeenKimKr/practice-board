@@ -49,7 +49,7 @@ jobs:
           at: .
       - add_ssh_keys:
           fingerprints:
-            - 83:f6:df:5a:a7:d7:0a:6c:fb:ad:e0:55:4c:c0:be:37
+            - "83:f6:df:5a:a7:d7:0a:6c:fb:ad:e0:55:4c:c0:be:37"
       - run:
           name: Version for images
           command: |
