@@ -21,7 +21,7 @@ services:
     image: prom/prometheus:${PROM_VERSION}
     volumes:
       - /Prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-      - /Pprometheus/data:/prometheus
+      - /Prometheus/data:/prometheus
       - /Prometheus/etc:/etc/prometheus
     command:
       - --config.file=/etc/prometheus/prometheus.yml
@@ -38,6 +38,8 @@ services:
       - "3000:3000"
     networks:
       - my-net
+    environment:
+      - TZ=Asia/Seoul
 
 networks:
   my-net:
