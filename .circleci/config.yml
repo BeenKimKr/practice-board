@@ -61,7 +61,7 @@ jobs:
           command: |
             scp -o StrictHostKeyChecking=no docker-compose.yml ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:~/spring-app/docker-compose.yml
             scp -o StrictHostKeyChecking=no ec2-prod.env ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:~/spring-app/.env
-            ssh -o StrictHostKeyChecking=no ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com "cd spring-app; docker login -u $DOCKER_USER -p $DOCKER_PASS; docker network create my-net; docker-compose up --build -d"
+            ssh -o StrictHostKeyChecking=no ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com "cd spring-app; docker login -u $DOCKER_USER -p $DOCKER_PASS; docker network create --driver overlay my-net || true; docker-compose up --build -d"
 
 workflows:
   main-branch-workflow:
