@@ -52,7 +52,10 @@ jobs:
           name: Version of images
           command: |
             LAST_TAG=$(git log -1 --pretty=%h)
-            echo -e REPO_NAME=${REPO_NAME}\\nAPP_VERSION=${LAST_TAG}\\nPROM_VERSION="v2.37.0"\\nGRAF_VERSION="9.0.4" > ec2-prod.env
+            echo -e REPO_NAME=${REPO_NAME}\\n\
+                    APP_VERSION=${LAST_TAG}\\n\
+                    PROM_VERSION="v2.37.0"\\n\
+                    GRAF_VERSION="9.0.4" > ec2-prod.env
       - add_ssh_keys:
           fingerprints:
             - "3f:43:2e:cc:27:1e:c9:d3:8e:8b:a9:5e:52:34:e7:52"
