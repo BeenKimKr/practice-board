@@ -68,7 +68,7 @@ jobs:
             scp -o StrictHostKeyChecking=no ec2-prod.env ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com:~/spring-app/.env
             ssh -o StrictHostKeyChecking=no ${AWS_EC2_USER_NAME}@ec2-${AWS_EC2_IP}.${AWS_EC2_REGION}.compute.amazonaws.com "
               cd spring-app;
-              echo -e source .env\\n\export LAST_VERSION=$LAST_TAG > tag_script.sh;
+              echo -e source ./.env\\n\export LAST_VERSION=$LAST_TAG > tag_script.sh;
               chmod +x tag_script.sh;
               ./tag_script.sh;
               docker login -u $DOCKER_USER -p $DOCKER_PASS;
