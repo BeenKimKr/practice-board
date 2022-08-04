@@ -53,6 +53,7 @@ jobs:
           command: |
             PAST_TAG=$LAST_TAG
             LAST_TAG=$(git log -1 --pretty=%h)
+            cat ec2-prod.env
             echo -e REPO_NAME=${REPO_NAME}\\n\
                     APP_VERSION=${LAST_TAG}\\n\
                     PAST_VERSION=${PAST_TAG}\\n\
