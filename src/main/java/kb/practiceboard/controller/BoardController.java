@@ -23,7 +23,7 @@ public class BoardController {
   }
 
   @PostMapping("/board")
-  @ResponseStatus(code = HttpStatus.CREATED)
+  @ResponseStatus(HttpStatus.CREATED)
   public BoardDto createBoard(@RequestBody @Valid BoardCreateDto boardCreateDto) {
     BoardEntity newBoard = boardService.createBoard(boardCreateDto);
     BoardDto board = BoardDto.builder()

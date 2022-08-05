@@ -23,7 +23,7 @@ public class FileController {
   }
 
   @PostMapping(value = "/file", consumes = {"multipart/form-data"})
-  @ResponseStatus(code = HttpStatus.CREATED)
+  @ResponseStatus(HttpStatus.CREATED)
   public FileDto uploadFile(@RequestPart("files") MultipartFile files) {
     FileEntity newFile = fileService.upload(files);
     FileDto file = FileDto.builder()

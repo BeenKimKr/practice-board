@@ -22,7 +22,7 @@ public class CommentController {
   }
 
   @PostMapping("/comment")
-  @ResponseStatus(code = HttpStatus.CREATED)
+  @ResponseStatus(HttpStatus.CREATED)
   public CommentDto createComment(@RequestBody @Valid CommentDto commentDto) {
     CommentEntity newComment = commentService.create(commentDto);
     CommentDto comment = CommentDto.builder()

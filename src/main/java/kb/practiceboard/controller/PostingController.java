@@ -27,7 +27,7 @@ public class PostingController {
   }
 
   @PostMapping("/posting")
-  @ResponseStatus(code = HttpStatus.CREATED)
+  @ResponseStatus(HttpStatus.CREATED)
   public PostingGetDto createPosting(@RequestBody @Valid PostingCreateDto postingCreateDto) {
     PostingEntity newPosting = postingService.create(postingCreateDto);
     PostingGetDto posting = PostingGetDto.builder()
