@@ -7,6 +7,7 @@ import kb.practiceboard.dto.posting.PostingGetDto;
 import kb.practiceboard.service.CommentService;
 import kb.practiceboard.service.PostingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,6 +27,7 @@ public class PostingController {
   }
 
   @PostMapping("/posting")
+  @ResponseStatus(code = HttpStatus.CREATED)
   public PostingGetDto createPosting(@RequestBody @Valid PostingCreateDto postingCreateDto) {
     PostingEntity newPosting = postingService.create(postingCreateDto);
     PostingGetDto posting = PostingGetDto.builder()

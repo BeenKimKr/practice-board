@@ -70,7 +70,7 @@ public class UserControllerTest {
             .content(objectMapper.writeValueAsString(user))
     );
     result
-        .andExpect(status().isOk())
+        .andExpect(status().isCreated())
         .andDo(print())
         .andDo(
             document("registerUser",

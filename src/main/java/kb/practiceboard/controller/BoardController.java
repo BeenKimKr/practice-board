@@ -5,6 +5,7 @@ import kb.practiceboard.dto.board.BoardCreateDto;
 import kb.practiceboard.dto.board.BoardDto;
 import kb.practiceboard.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,6 +23,7 @@ public class BoardController {
   }
 
   @PostMapping("/board")
+  @ResponseStatus(code = HttpStatus.CREATED)
   public BoardDto createBoard(@RequestBody @Valid BoardCreateDto boardCreateDto) {
     BoardEntity newBoard = boardService.createBoard(boardCreateDto);
     BoardDto board = BoardDto.builder()

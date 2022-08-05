@@ -6,6 +6,7 @@ import kb.practiceboard.dto.user.*;
 import kb.practiceboard.service.CommentService;
 import kb.practiceboard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,6 +24,7 @@ public class UserController {
   }
 
   @PostMapping("/user")
+  @ResponseStatus(code = HttpStatus.CREATED)
   public UserResponseDto registerUser(@RequestBody @Valid UserRegisterDto userRegisterDto) {
     UserEntity newUser = userService.create(userRegisterDto);
     UserResponseDto user = UserResponseDto.builder()

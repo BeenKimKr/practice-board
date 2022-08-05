@@ -5,6 +5,7 @@ import kb.practiceboard.dto.MessageDto;
 import kb.practiceboard.dto.file.FileDto;
 import kb.practiceboard.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,6 +23,7 @@ public class FileController {
   }
 
   @PostMapping(value = "/file", consumes = {"multipart/form-data"})
+  @ResponseStatus(code = HttpStatus.CREATED)
   public FileDto uploadFile(@RequestPart("files") MultipartFile files) {
     FileEntity newFile = fileService.upload(files);
     FileDto file = FileDto.builder()

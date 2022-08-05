@@ -1,9 +1,11 @@
+/out
+/data
+/bin
+/prometheus_data
+/k6_test
 .gradle
 !gradle/wrapper/gradle-wrapper.jar
-/out
 application.yml
-/data
-/prometheus_data
 .DS_store
 .env
 

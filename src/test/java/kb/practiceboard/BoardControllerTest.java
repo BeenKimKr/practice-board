@@ -77,7 +77,7 @@ public class BoardControllerTest {
             .content(objectMapper.writeValueAsString(board))
     );
     result
-        .andExpect(status().isOk())
+        .andExpect(status().isCreated())
         .andDo(print())
         .andDo(
             document("createBoard",

@@ -68,7 +68,7 @@ public class PostingControllerTest {
             .content(objectMapper.writeValueAsString(posting))
     );
     result
-        .andExpect(status().isOk())
+        .andExpect(status().isCreated())
         .andDo(print())
         .andDo(
             document("createPosting",

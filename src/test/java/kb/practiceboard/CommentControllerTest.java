@@ -68,7 +68,7 @@ public class CommentControllerTest {
             .content(objectMapper.writeValueAsString(comment))
     );
     result
-        .andExpect(status().isOk())
+        .andExpect(status().isCreated())
         .andDo(print())
         .andDo(
             document("createComment",

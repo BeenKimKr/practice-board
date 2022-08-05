@@ -5,6 +5,7 @@ import kb.practiceboard.dto.MessageDto;
 import kb.practiceboard.dto.comment.CommentDto;
 import kb.practiceboard.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -21,6 +22,7 @@ public class CommentController {
   }
 
   @PostMapping("/comment")
+  @ResponseStatus(code = HttpStatus.CREATED)
   public CommentDto createComment(@RequestBody @Valid CommentDto commentDto) {
     CommentEntity newComment = commentService.create(commentDto);
     CommentDto comment = CommentDto.builder()
